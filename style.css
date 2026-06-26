@@ -1448,3 +1448,138 @@ body {
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   DISEÑO DEL MENÚ: COMPORTAMIENTO UNIFICADO ESCRITORIO / MÓVIL
+   ========================================================================== */
+
+/* --- 1. ESTILOS BASE PARA ESCRITORIO (Monitores grandes) --- */
+.mobile-socials { 
+  display: none; 
+}
+.menu-toggle { 
+  display: none; 
+}
+.social-icons-desktop { 
+  display: flex; 
+  gap: 15px; 
+}
+
+/* Forzamos a que en escritorio los links se alineen horizontalmente */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px; /* Distancia horizontal entre Inicio, Nosotros, etc. */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff; /* Ajusta al color de tu texto original */
+  font-family: 'Futura Local', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+
+/* --- 2. TRANSMUTACIÓN PARA VERSIONES MÓVILES (Pantallas chicas) --- */
+@media (max-width: 992px) {
+  /* Ocultamos las redes sociales sueltas del escritorio */
+  .social-icons-desktop {
+    display: none;
+  }
+
+  /* Activamos el botón hamburguesa */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    padding: 0;
+  }
+
+  .menu-toggle .line {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    transform-origin: left center;
+  }
+
+  /* Animación a "X" */
+  .menu-toggle.active .line:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  .menu-toggle.active .line:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+  }
+  .menu-toggle.active .line:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  /* Transformamos el menú en la capa de pantalla completa */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(45, 55, 72, 0.96); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Cambiamos la dirección a vertical SOLO en móvil */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    z-index: 90;
+    
+    /* Estado inicial oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Estado del menú móvil desplegado */
+  .nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Forzamos los enlaces verticales en móvil */
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-menu a {
+    font-size: 24px; 
+    font-weight: 500;
+  }
+
+  /* Redes sociales del móvil */
+  .mobile-socials {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 30px;
+    width: 60%;
+    justify-content: center;
+  }
+}
