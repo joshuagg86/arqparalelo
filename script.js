@@ -23,11 +23,21 @@ document.addEventListener("DOMContentLoaded", function() {
   let scrollLeft;
   let isMoving = false;
 
+  // CALIBRACIÓN DINÁMICA DE POSICIÓN (REPARADA PARA MÓVIL Y ESCRITORIO)
   function getPositionX(index) {
-    const cardWidth = originalCards[0].offsetWidth;
-    const gap = 40; 
+    const cardWidth = allCards[index].offsetWidth;
     const containerWidth = container.clientWidth;
-    return (index * (cardWidth + gap)) - (containerWidth / 2) + (cardWidth / 2) + 40;
+    
+    // Obtenemos dinámicamente los estilos reales configurados en tu CSS
+    const trackStyles = window.getComputedStyle(track);
+    const gap = parseInt(trackStyles.gap) || 40;
+    const paddingLeft = parseInt(trackStyles.paddingLeft) || 40;
+    
+    // Cálculo matemático basado en la posición física real del elemento en el riel
+    const totalCardOffset = (index * (cardWidth + gap)) + paddingLeft;
+    
+    // Forzamos el centro exacto restando la mitad de la pantalla
+    return totalCardOffset - (containerWidth / 2) + (cardWidth / 2);
   }
 
   function jumpToCard(index, smooth = true) {
@@ -44,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     currentIndex = index;
   }
 
-  // EVENTOS DEL MOUSE (Mover arrastrando)
+  // --- EVENTOS DE ESCRITORIO (MOUSE) ---
   container.addEventListener('mousedown', (e) => {
     isDown = true;
     isMoving = false;
@@ -74,7 +84,30 @@ document.addEventListener("DOMContentLoaded", function() {
     container.scrollLeft = scrollLeft - walk;
   });
 
-  // Reajuste automático al soltar el mouse
+  // --- NUEVOS EVENTOS NATIVOS PARA MÓVIL (PANTALLA TÁCTIL) ---
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    isMoving = false;
+    container.style.scrollBehavior = 'auto';
+    startX = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    if (!isDown) return;
+    isDown = false;
+    snapToNearest();
+  });
+
+  container.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 5) isMoving = true;
+    container.scrollLeft = scrollLeft - walk;
+  }, { passive: true });
+
+  // REAJUSTE AUTOMÁTICO AL SOLTAR EL DEDO O EL MOUSE
   function snapToNearest() {
     const containerCenter = container.scrollLeft + (container.clientWidth / 2);
     let closestIndex = 0;
@@ -108,15 +141,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // Inicio seguro centrado en el segundo proyecto real
+  // Inicio seguro centrado con retardo leve para que el móvil calcule el viewport
   setTimeout(() => {
     jumpToCard(originalCount + 1, false);
-  }, 200);
+  }, 300);
+
+  // Recalcular posición si el usuario llega a rotar la pantalla
+  window.addEventListener('resize', () => {
+    jumpToCard(currentIndex, false);
+  });
 });
 
-// AGREGAR AL FINAL DE TU ARCHIVO SCRIPT.JS EXISTENTE
+// FUNCIÓN PARA NOTAS DE WORDPRESS DESDE LA REST API
 function loadWordPressBlogs() {
-  // Reemplaza esta URL con el dominio real de tu WordPress en el hosting
   const wpApiUrl = "https://www.arqparalelo.com/wp-json/wp/v2/posts?_embed&per_page=4";
   const container = document.getElementById('blog-dynamic-container');
   
@@ -128,35 +165,28 @@ function loadWordPressBlogs() {
       return response.json();
     })
     .then(posts => {
-      // Limpiamos el mensaje de "Cargando..."
       container.innerHTML = "";
 
       posts.forEach(post => {
-        // 1. Intentamos extraer la imagen destacada de WordPress de forma segura
-        let imageUrl = "assets/img/fallback-blog.png"; // Imagen por si no subieron foto destacada
+        let imageUrl = "assets/img/fallback-blog.png";
         try {
           if (post._embedded && post._embedded['wp:featuredmedia']) {
             imageUrl = post._embedded['wp:featuredmedia'][0].source_url;
           }
         } catch (e) { console.log("Post sin imagen destacada"); }
 
-        // 2. Limpiamos las etiquetas HTML raras que WordPress mete en el extracto corto
         let excerptText = post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "");
         
-        // 3. Estructuramos e inyectamos la tarjeta con tus clases CSS exactas
         const cardHTML = `
-          <div class="blog-card" style="background-image: url('${imageUrl}');">
-            
+          <div class="blog-card " style="background-image: url('${imageUrl}');">
             <a href="${post.link}" class="blog-card-arrow" target="_blank">
               <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            
             <div class="blog-card-content">
               <h3 class="blog-card-title">${post.title.rendered}</h3>
               <p class="blog-card-excerpt">${excerptText}</p>
               <a href="${post.link}" class="btn-blog-read" target="_blank">Leer más</a>
             </div>
-
           </div>
         `;
         
@@ -169,7 +199,53 @@ function loadWordPressBlogs() {
     });
 }
 
-// Ejecutamos la carga en cuanto el DOM esté listo
+// Carga de blogs de WordPress al procesar el DOM
 document.addEventListener("DOMContentLoaded", () => {
   loadWordPressBlogs();
+});
+
+// CONTROL INTERACTIVO DEL MENÚ HAMBURGUESA EN MÓVIL
+const menuBtn = document.getElementById('mobile-menu-btn');
+const mainNav = document.getElementById('main-nav');
+
+if (menuBtn && mainNav) {
+  menuBtn.addEventListener('click', function() {
+    this.classList.toggle('active');
+    mainNav.classList.toggle('active');
+  });
+
+  const navLinks = mainNav.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuBtn.classList.remove('active');
+      mainNav.classList.remove('active');
+    });
+  });
+}
+
+// MOTOR DE ANIMACIONES NATIVO (INTERSECTION OBSERVER)
+document.addEventListener("DOMContentLoaded", function() {
+  const elementsToReveal = document.querySelectorAll('.reveal-anim');
+
+  const revealOptions = {
+    root: null,          // Usa el viewport del navegador
+    threshold: 0.12,     // Se activa cuando el 12% del elemento ya es visible
+    rootMargin: "0px 0px -50px 0px" // Se dispara un poquito antes de llegar para suavizar
+  };
+
+  const revealObserver = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Añadimos la clase que dispara la transición CSS
+        entry.target.classList.add('animated');
+        // Dejamos de vigilarlo para que la animación solo ocurra la primera vez
+        observer.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  // Ponemos a vigilar a todos los elementos marcados
+  elementsToReveal.forEach(element => {
+    revealObserver.observe(element);
+  });
 });

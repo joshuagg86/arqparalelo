@@ -71,7 +71,11 @@ body {
 
 .nav-menu {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 30px;
+  opacity: 1 !important;       /* <-- AGREGA ESTO: Asegura que se vea en monitor */
+  visibility: visible !important; /* <-- AGREGA ESTO: Asegura que responda en monitor */
 }
 
 .nav-menu a {
@@ -1450,7 +1454,7 @@ body {
 }
 
 /* ==========================================================================
-   DISEÑO DEL MENÚ: COMPORTAMIENTO UNIFICADO ESCRITORIO / MÓVIL
+   DISEÑO DEL MENÚ: COMPORTAMIENTO UNIFICADO ESCRITORIO / MÓVIL (CORREGIDO)
    ========================================================================== */
 
 /* --- 1. ESTILOS BASE PARA ESCRITORIO (Monitores grandes) --- */
@@ -1465,7 +1469,7 @@ body {
   gap: 15px; 
 }
 
-/* Forzamos a que en escritorio los links se alineen horizontalmente */
+/* En escritorio mantenemos sus propiedades nativas de visualización */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -1475,12 +1479,12 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 24px; /* Distancia horizontal entre Inicio, Nosotros, etc. */
+  gap: 24px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #ffffff; /* Ajusta al color de tu texto original */
+  color: #ffffff;
   font-family: 'Futura Local', sans-serif;
   font-size: 16px;
   transition: color 0.3s ease;
@@ -1489,12 +1493,11 @@ body {
 
 /* --- 2. TRANSMUTACIÓN PARA VERSIONES MÓVILES (Pantallas chicas) --- */
 @media (max-width: 992px) {
-  /* Ocultamos las redes sociales sueltas del escritorio */
   .social-icons-desktop {
     display: none;
   }
 
-  /* Activamos el botón hamburguesa */
+  /* Botón hamburguesa móvil */
   .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -1535,32 +1538,33 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(45, 55, 72, 0.96); 
+    
+    /* CAMBIADO: Usamos tu verde corporativo con opacidad traslúcida */
+    background: rgba(83, 108, 94, 0.96); 
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px);
     
-    /* Cambiamos la dirección a vertical SOLO en móvil */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 40px;
     z-index: 90;
     
-    /* Estado inicial oculto */
-    opacity: 0;
-    visibility: hidden;
+    /* CORREGIDO: Usamos !important aquí para ganarle al estado de escritorio solo en móvil */
+    opacity: 0 !important;
+    visibility: hidden !important;
     transform: translateY(-20px);
     transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
   }
 
-  /* Estado del menú móvil desplegado */
+  /* Estado del menú móvil desplegado activamente mediante JS */
   .nav-menu.active {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
     transform: translateY(0);
   }
 
-  /* Forzamos los enlaces verticales en móvil */
+  /* Enlaces verticales móviles */
   .nav-links {
     flex-direction: column;
     align-items: center;
@@ -1572,7 +1576,7 @@ body {
     font-weight: 500;
   }
 
-  /* Redes sociales del móvil */
+  /* Redes sociales del menú móvil */
   .mobile-socials {
     display: flex;
     gap: 20px;
@@ -1582,4 +1586,29 @@ body {
     width: 60%;
     justify-content: center;
   }
-}git
+}
+
+/* ==========================================================================
+   SISTEMA DE ANIMACIONES PREMIUM (SCROLL REVEAL)
+   ========================================================================== */
+
+/* Estado inicial: El elemento está oculto y 30px abajo */
+.reveal-anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity; /* Optimiza el renderizado de la tarjeta gráfica */
+}
+
+/* Estado activo: Se activa mediante JavaScript cuando entra en pantalla */
+.reveal-anim.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efecto de retraso (Delay) para elementos en cuadrícula (Rejillas o Columnas) */
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+.delay-4 { transition-delay: 0.6s; }
