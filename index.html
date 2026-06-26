@@ -8,12 +8,21 @@
   <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<header class="main-header">
+<body>
+<div id="custom-preloader" class="preloader-overlay">
+  <div class="preloader-video-wrapper">
+    <video id="preloader-video" muted playsinline autoplay>
+      <source src="assets/img/preloader.mp4" type="video/mp4">
+      Tu navegador no soporta videos.
+    </video>
+  </div>
+</div>
+<header class="main-header" id="navbar">
   <div class="header-container">
     <div class="logo">
-      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo">
+      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo" class="logo-light">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo" class="logo-dark">
     </div>
     
     <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
@@ -33,16 +42,16 @@
       </div>
       
       <div class="mobile-socials">
-        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link">f</a>
-        <a href="https://www.instagram.com/arqenparalelo" class="social-link">i</a>
-        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link">in</a>
+        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+        <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
       </div>
     </nav>
     
     <div class="social-icons-desktop">
-      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link">f</a>
-      <a href="https://www.instagram.com/arqenparalelo" class="social-link">i</a>
-      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link">in</a>
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
     </div>
   </div>
 </header>

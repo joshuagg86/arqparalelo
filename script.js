@@ -249,3 +249,57 @@ document.addEventListener("DOMContentLoaded", function() {
     revealObserver.observe(element);
   });
 });
+
+// DETECTOR DE SCROLL PARA CAMBIO DE COLOR EN NAVBAR
+window.addEventListener('scroll', function() {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 20) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// CONTROL INTELIGENTE DEL PRELOADER CON SINCRONIZACIÓN DE VIDEO HERO
+document.addEventListener("DOMContentLoaded", function() {
+  const preloader = document.getElementById('custom-preloader');
+  const videoPreloader = document.getElementById('preloader-video');
+  const videoHero = document.getElementById('hero-bg-video'); // Capturamos el video del fondo
+
+  if (!preloader || !videoPreloader) return;
+
+  // Si el usuario ya vio la animación en esta sesión, liberamos el sitio de inmediato
+  if (sessionStorage.getItem('preloaderVisto') === 'true') {
+    preloader.style.display = 'none';
+    if (videoHero) videoHero.play(); // Si no hay preloader, el video del fondo corre directo
+    return;
+  }
+
+  // Si es la primera vez, reproducimos el preloader
+  videoPreloader.play().catch(error => {
+    console.log("Play automático del preloader bloqueado, saltando al fade-out.");
+    ejecutarSalida();
+  });
+
+  // Cuando el video del preloader termina de forma natural...
+  videoPreloader.addEventListener('ended', function() {
+    ejecutarSalida();
+  });
+
+  // Candado de seguridad (4 segundos máximo por si se traba el archivo)
+  setTimeout(() => {
+    if (!preloader.classList.contains('fade-out')) {
+      ejecutarSalida();
+    }
+  }, 4000);
+
+  function ejecutarSalida() {
+    preloader.classList.add('fade-out');
+    sessionStorage.setItem('preloaderVisto', 'true');
+    
+    // ACCIÓN MÁGICA: Encendemos el video del Hero justo cuando la pantalla blanca se disuelve
+    if (videoHero) {
+      videoHero.play().catch(err => console.log("El navegador bloqueó el play del hero de forma automática."));
+    }
+  }
+});

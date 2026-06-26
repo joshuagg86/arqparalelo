@@ -290,7 +290,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(83, 108, 94, 0.15); /* Bajada a 0.45 para dar solo un sutil tinte verde */
+  background: rgba(83, 108, 94, 0.0); /* Bajada a 0.45 para dar solo un sutil tinte verde */
   z-index: 1;
 }
 
@@ -1457,19 +1457,36 @@ body {
    DISEÑO DEL MENÚ: COMPORTAMIENTO UNIFICADO ESCRITORIO / MÓVIL (CORREGIDO)
    ========================================================================== */
 
-/* --- 1. ESTILOS BASE PARA ESCRITORIO (Monitores grandes) --- */
-.mobile-socials { 
-  display: none; 
-}
-.menu-toggle { 
-  display: none; 
-}
-.social-icons-desktop { 
-  display: flex; 
-  gap: 15px; 
+/* --- 1. ESTILOS BASE PARA ESCRITORIO --- */
+.mobile-socials { display: none; }
+.menu-toggle { display: none; }
+.social-icons-desktop { display: flex; gap: 15px; }
+
+/* Control de visibilidad de logos cruzados */
+.logo .logo-dark { display: none; }
+.logo .logo-light { display: inline-block; }
+
+/* Header fijo por defecto con transición suave */
+.main-header {
+  position: fixed; /* Ahora se mantiene estática en la pantalla siempre */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Asegura estar por encima del carrusel y los blogs */
+  padding: 25px 4vw;
+  background-color: transparent;
+  transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* En escritorio mantenemos sus propiedades nativas de visualización */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
@@ -1484,10 +1501,73 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #ffffff;
+  color: #ffffff; /* Letras blancas iniciales */
   font-family: 'Futura Local', sans-serif;
   font-size: 16px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.85;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* Círculos sociales transparentes iniciales */
+.social-link {
+  color: #ffffff;
+  text-decoration: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #ffffff;
+  color: #536c5e;
+}
+
+
+/* --- ESTADO INVERTIDO (.scrolled) AL BAJAR LA PANTALLA --- */
+.main-header.scrolled {
+  background-color: #ffffff; /* Fondo blanco rígido */
+  padding: 15px 4vw; /* Se comprime un poco para verse más estilizada */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra sutil inferior */
+}
+
+/* Intercambio de logos */
+.main-header.scrolled .logo .logo-light { display: none; }
+.main-header.scrolled .logo .logo-dark { display: inline-block; }
+
+/* Letras cambian a tu verde corporativo */
+.main-header.scrolled .nav-links a {
+  color: #536c5e;
+  opacity: 1;
+}
+.main-header.scrolled .nav-links a:hover {
+  color: #3b4d43; /* Un tono más oscuro al pasar el cursor */
+}
+
+/* Modificación de los círculos sociales a verde */
+.main-header.scrolled .social-link {
+  color: #536c5e;
+  border-color: rgba(83, 108, 94, 0.4);
+}
+.main-header.scrolled .social-link:hover {
+  background: #536c5e;
+  color: #ffffff;
+  border-color: #536c5e;
+}
+
+/* Ajuste estético para las tres líneas de la hamburguesa móvil en fondo blanco */
+.main-header.scrolled .menu-toggle .line {
+  background-color: #536c5e;
 }
 
 
@@ -1612,3 +1692,48 @@ body {
 .delay-2 { transition-delay: 0.3s; }
 .delay-3 { transition-delay: 0.45s; }
 .delay-4 { transition-delay: 0.6s; }
+
+/* ==========================================================================
+   SISTEMA DE PRELOADER RESPONSIVO DE ALTA GAMA (FONDO BLANCO Y LENTO)
+   ========================================================================== */
+.preloader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* Fondo blanco puro */
+  z-index: 99999; /* Por encima de todo el sitio */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  /* Transición lenta de 1.5 segundos para la desaparición */
+  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), 
+              visibility 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity;
+}
+
+/* Contenedor que evita que el video se deforme o estire de más */
+.preloader-video-wrapper {
+  width: 90%;
+  max-width: 600px; 
+  aspect-ratio: 16 / 9; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Encaja el video perfectamente en cualquier pantalla */
+  background-color: #ffffff; 
+}
+
+/* Clase de salida lenta que activará JavaScript */
+.preloader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
