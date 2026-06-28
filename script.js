@@ -145,6 +145,38 @@ document.addEventListener("DOMContentLoaded", function() {
   setTimeout(() => {
     jumpToCard(originalCount + 1, false);
   }, 300);
+  
+// --- NUEVO EVENTO PARA TRACKPAD Y RUEDA DEL MOUSE ---
+  let wheelCooldown = false;
+
+  container.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > 4 || Math.abs(e.deltaY) > 4) {
+      e.preventDefault(); 
+
+      if (wheelCooldown) return; 
+
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+
+      if (Math.abs(delta) > 15) { 
+        wheelCooldown = true;
+        
+        if (delta > 0) {
+          jumpToCard(currentIndex + 1, true);
+        } else {
+          jumpToCard(currentIndex - 1, true);
+        }
+
+        setTimeout(() => {
+          if (currentIndex < originalCount) {
+            jumpToCard(currentIndex + originalCount, false);
+          } else if (currentIndex >= originalCount * 2) {
+            jumpToCard(currentIndex - originalCount, false);
+          }
+          wheelCooldown = false;
+        }, 800);
+      }
+    }
+  }, { passive: false });
 
   // Recalcular posición si el usuario llega a rotar la pantalla
   window.addEventListener('resize', () => {

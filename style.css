@@ -1133,17 +1133,16 @@ body {
 }
 
 /* ==========================================================================
-   16. SECCIÓN BLOGS DINÁMICOS (100vh)
+   16. SECCIÓN BLOGS DINÁMICOS (ALTURA CORREGIDA Y OPTIMIZADA)
    ========================================================================== */
 .blog-section {
   width: 100%;
-  height: 100vh; /* Fuerza el 100% de la altura de la pantalla */
-  min-height: 850px;
+  height: auto; /* CORREGIDO: Eliminado 100vh para que no obligue a estirar el contenido */
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 60px 4vw;
+  justify-content: flex-start; /* Alínea todo el bloque hacia arriba */
+  padding: 80px 4vw;
   box-sizing: border-box;
 }
 
@@ -1178,9 +1177,10 @@ body {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  flex-grow: 1;
-  margin-top: 40px;
-  align-items: stretch;
+  margin-top: 45px;
+  
+  /* CORREGIDO: Evita que la rejilla obligue a las tarjetas a estirarse verticalmente */
+  align-items: start; 
 }
 
 .blog-loading {
@@ -1206,6 +1206,9 @@ body {
   background-repeat: no-repeat;
   box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* CORREGIDO: Control estricto de altura para mantener la proporción arquitectónica */
+  height: 680px; 
 }
 
 .blog-card:hover {
@@ -1302,12 +1305,18 @@ body {
   .blog-section {
     height: auto;
   }
+  .blog-card {
+    height: 440px; /* Un poco más bajas en tablets para mantener estética */
+  }
 }
 
 @media (max-width: 768px) {
   .blog-grid {
     grid-template-columns: 1fr; /* 1 columna en móviles */
     gap: 20px;
+  }
+  .blog-card {
+    height: 460px; /* Altura ideal responsiva para lectura en celulares */
   }
 }
 
@@ -1536,36 +1545,38 @@ body {
 
 /* --- ESTADO INVERTIDO (.scrolled) AL BAJAR LA PANTALLA --- */
 .main-header.scrolled {
-  background-color: #ffffff; /* Fondo blanco rígido */
-  padding: 15px 4vw; /* Se comprime un poco para verse más estilizada */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra sutil inferior */
+  background-color: #ffffff !important; /* Fondo blanco de la barra */
+  padding: 15px 4vw; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
 }
 
-/* Intercambio de logos */
+/* Intercambio de logos (aplica a ambos) */
 .main-header.scrolled .logo .logo-light { display: none; }
 .main-header.scrolled .logo .logo-dark { display: inline-block; }
 
-/* Letras cambian a tu verde corporativo */
-.main-header.scrolled .nav-links a {
-  color: #536c5e;
-  opacity: 1;
-}
-.main-header.scrolled .nav-links a:hover {
-  color: #3b4d43; /* Un tono más oscuro al pasar el cursor */
+/* RESTRICCIÓN DE COLOR VERDE: Solo se activa si la pantalla es mayor a 992px (Escritorio) */
+@media (min-width: 993px) {
+  .main-header.scrolled .nav-links a {
+    color: #536c5e !important; /* Letras verdes sobre la barra blanca */
+    opacity: 1;
+  }
+  
+  .main-header.scrolled .nav-links a:hover {
+    color: #3b4d43 !important;
+  }
+
+  .main-header.scrolled .social-link {
+    color: #536c5e !important; /* Círculos sociales verdes sobre barra blanca */
+    border-color: rgba(83, 108, 94, 0.4) !important;
+  }
+
+  .main-header.scrolled .social-link:hover {
+    background: #536c5e !important;
+    color: #ffffff !important;
+  }
 }
 
-/* Modificación de los círculos sociales a verde */
-.main-header.scrolled .social-link {
-  color: #536c5e;
-  border-color: rgba(83, 108, 94, 0.4);
-}
-.main-header.scrolled .social-link:hover {
-  background: #536c5e;
-  color: #ffffff;
-  border-color: #536c5e;
-}
-
-/* Ajuste estético para las tres líneas de la hamburguesa móvil en fondo blanco */
+/* Ajuste estético para las tres líneas de la hamburguesa móvil en fondo blanco (fuera del media de arriba) */
 .main-header.scrolled .menu-toggle .line {
   background-color: #536c5e;
 }
@@ -1578,6 +1589,7 @@ body {
   }
 
   /* Botón hamburguesa móvil */
+ /* Botón hamburguesa móvil (Posición fija corregida) */
   .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -1587,8 +1599,11 @@ body {
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 100;
+    z-index: 2000; /* Forzamos a que esté por encima de la capa verde (.nav-menu tiene 90) */
     padding: 0;
+    position: fixed; /* Mantiene la X fija en pantalla aunque hagan scroll con el menú abierto */
+    right: 6vw; /* Lo alineamos perfectamente con el margen del contenedor */
+    top: 30px; /* Separación fija desde el techo del teléfono */
   }
 
   .menu-toggle .line {
@@ -1609,6 +1624,11 @@ body {
   }
   .menu-toggle.active .line:nth-child(3) {
     transform: rotate(-45deg);
+  }
+
+  /* CONTROL CROMÁTICO: Forzamos a que las líneas de la X sean blancas al abrirse */
+  .menu-toggle.active .line {
+    background-color: #ffffff !important;
   }
 
   /* Transformamos el menú en la capa de pantalla completa */
