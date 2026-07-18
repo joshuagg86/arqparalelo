@@ -19,15 +19,17 @@ document.addEventListener("DOMContentLoaded", function() {
   const allCards = track.querySelectorAll('.proyecto-card');
   const originalCount = originalCards.length;
   
-  let currentIndex = originalCount + 1; 
+  // CORRECCIÓN: Ajustado el índice base al inicio real de la cuadrícula
+  let currentIndex = originalCount; 
   let isDown = false;
   let startX;
   let scrollLeft;
   let isMoving = false;
+  let isScrollJumping = false; 
   
   // VARIABLES PARA EL SISTEMA AUTO-PLAY
   let autoplayInterval;
-  const autoplaySpeed = 2300; // 1 Segundo de intervalo por tarjeta
+  const autoplaySpeed = 4000; 
 
   function getPositionX(index) {
     const cardWidth = allCards[index].offsetWidth;
@@ -41,7 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function jumpToCard(index, smooth = true) {
+    if (index < 0 || index >= allCards.length) return;
+    
+    currentIndex = index;
     const targetX = getPositionX(index);
+    
     container.style.scrollBehavior = smooth ? 'smooth' : 'auto';
     container.scrollLeft = targetX;
     
@@ -50,24 +56,40 @@ document.addEventListener("DOMContentLoaded", function() {
     
     dots.forEach(d => d.classList.remove('active'));
     if (dots[dotIndex]) dots[dotIndex].classList.add('active');
-    
-    currentIndex = index;
   }
+
+  // --- ESCUCHADOR MAESTRO DE SCROLL (CORREGIDO DE RAÍZ) ---
+  container.addEventListener('scroll', () => {
+    if (isDown || isScrollJumping) return;
+
+    const currentScroll = container.scrollLeft;
+    // Límites matemáticos basados en índices reales comenzando desde 0
+    const startLimit = getPositionX(originalCount - 1);
+    const endLimit = getPositionX(originalCount * 2 - 1);
+
+    // CORRECCIÓN: Si toca el extremo derecho, se regresa de forma invisible al Casa Umbral real (índice originalCount)
+    if (currentScroll >= endLimit + 10) {
+      isScrollJumping = true;
+      currentIndex = originalCount;
+      container.style.scrollBehavior = 'auto';
+      container.scrollLeft = getPositionX(originalCount);
+      requestAnimationFrame(() => { isScrollJumping = false; });
+    } 
+    // Si toca el extremo izquierdo, salta de forma invisible al clon del final
+    else if (currentScroll <= startLimit - 10) {
+      isScrollJumping = true;
+      currentIndex = (originalCount * 2) - 1;
+      container.style.scrollBehavior = 'auto';
+      container.scrollLeft = getPositionX(currentIndex);
+      requestAnimationFrame(() => { isScrollJumping = false; });
+    }
+  });
 
   // --- MOTOR DE CONTROL AUTOMÁTICO (AUTOPLAY) ---
   function startAutoplay() {
     stopAutoplay();
     autoplayInterval = setInterval(() => {
-      let targetIndex = currentIndex + 1;
-      
-      if (targetIndex >= originalCount * 2) {
-        jumpToCard(targetIndex - originalCount, false);
-        setTimeout(() => {
-          jumpToCard(currentIndex + 1, true);
-        }, 50);
-      } else {
-        jumpToCard(targetIndex, true);
-      }
+      jumpToCard(currentIndex + 1, true);
     }, autoplaySpeed);
   }
 
@@ -79,13 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (btnNext) {
     btnNext.addEventListener('click', () => {
       stopAutoplay();
-      let targetIndex = currentIndex + 1;
-      if (targetIndex >= originalCount * 2) {
-        jumpToCard(targetIndex - originalCount, false);
-        setTimeout(() => jumpToCard(currentIndex + 1, true), 50);
-      } else {
-        jumpToCard(targetIndex, true);
-      }
+      jumpToCard(currentIndex + 1, true);
       startAutoplay();
     });
   }
@@ -93,18 +109,11 @@ document.addEventListener("DOMContentLoaded", function() {
   if (btnPrev) {
     btnPrev.addEventListener('click', () => {
       stopAutoplay();
-      let targetIndex = currentIndex - 1;
-      if (targetIndex < originalCount) {
-        jumpToCard(targetIndex + originalCount, false);
-        setTimeout(() => jumpToCard(currentIndex - 1, true), 50);
-      } else {
-        jumpToCard(targetIndex, true);
-      }
+      jumpToCard(currentIndex - 1, true);
       startAutoplay();
     });
   }
 
-  // PAUSAR AL ENTRAR CON EL RATÓN, REANUDAR AL SALIR
   container.addEventListener('mouseenter', stopAutoplay);
   container.addEventListener('mouseleave', () => {
     if (!isDown) startAutoplay();
@@ -170,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function snapToNearest() {
     const containerCenter = container.scrollLeft + (container.clientWidth / 2);
-    let closestIndex = 0;
+    let closestIndex = originalCount;
     let minDistance = Infinity;
 
     allCards.forEach((card, idx) => {
@@ -182,13 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    if (closestIndex < originalCount) {
-      jumpToCard(closestIndex + originalCount, false);
-    } else if (closestIndex >= originalCount * 2) {
-      jumpToCard(closestIndex - originalCount, false);
-    } else {
-      jumpToCard(closestIndex, true);
-    }
+    jumpToCard(closestIndex, true);
   }
 
   // EVENTO PARA LOS DOTS
@@ -202,11 +205,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // Inicialización controlada
+  // CORRECCIÓN: Inicialización limpia centrando la tarjeta 0 real (Casa Umbral)
   setTimeout(() => {
-    jumpToCard(originalCount + 1, false);
+    jumpToCard(originalCount, false);
     startAutoplay(); 
-  }, 300);
+  }, 200);
   
   // EVENTO RUEDA / TRACKPAD
   let wheelCooldown = false;
@@ -227,14 +230,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         setTimeout(() => {
-          if (currentIndex < originalCount) {
-            jumpToCard(currentIndex + originalCount, false);
-          } else if (currentIndex >= originalCount * 2) {
-            jumpToCard(currentIndex - originalCount, false);
-          }
           wheelCooldown = false;
           startAutoplay();
-        }, 800);
+        }, 600);
       }
     }
   }, { passive: false });
@@ -393,51 +391,9 @@ window.addEventListener('scroll', function() {
   const btnScroll = document.querySelector('.btn-scroll-top');
   if (!btnScroll) return;
 
-  // Si el usuario baja más de 400px (pasando la sección Hero), el botón se desvanece hacia adentro
   if (window.scrollY > 400) {
     btnScroll.classList.add('visible');
   } else {
     btnScroll.classList.remove('visible');
   }
 });
-
-/* ==========================================================================
-   LÓGICA INTERACTIVA PARA EL ACORDEÓN Y CARRUSELES DE SERVICIOS
-   ========================================================================== */
-
-// 1. Manejo del Despliegue Colapsable (Slide Up / Down)
-function toggleServicio(boton) {
-  const bloquePadre = boton.closest('.servicio-item-bloque');
-  const panelDetalle = bloquePadre.querySelector('.servicio-panel-detalle');
-  
-  // Si ya está activo, lo cerramos
-  if (bloquePadre.classList.contains('active')) {
-    bloquePadre.classList.remove('active');
-    panelDetalle.style.maxHeight = null;
-  } else {
-    // Cerramos cualquier otro panel abierto para mantener orden
-    document.querySelectorAll('.servicio-item-bloque').forEach(item => {
-      item.classList.remove('active');
-      item.querySelector('.servicio-panel-detalle').style.maxHeight = null;
-    });
-    
-    // Abrimos el panel actual calculando su altura matemática exacta en tiempo real
-    bloquePadre.classList.add('active');
-    panelDetalle.style.maxHeight = panelDetalle.scrollHeight + "px";
-  }
-}
-
-// 2. Control de los Carruseles Internos de los Paneles
-function cambiarSlide(dotSelector, indexDestino) {
-  const contenedorCarrusel = dotSelector.closest('.panel-carrusel-contenedor');
-  const slides = contenedorCarrusel.querySelectorAll('.slide-img');
-  const dots = contenedorCarrusel.querySelectorAll('.dot');
-  
-  // Removemos clases activas previas
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
-  
-  // Encendemos el slide y el punto seleccionado
-  slides[indexDestino].classList.add('active');
-  dotSelector.classList.add('active');
-}
