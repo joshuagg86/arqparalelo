@@ -397,3 +397,39 @@ window.addEventListener('scroll', function() {
     btnScroll.classList.remove('visible');
   }
 });
+
+// ==========================================================================
+// CONTROL SIMPLIFICADO DE ACORDEÓN (VERSIÓN BLINDADA PARA LA JUNTA)
+// ==========================================================================
+function toggleServicio(button) {
+  // Localizamos únicamente el bloque donde se hizo click
+  const bloque = button.closest('.servicio-item-bloque');
+  const detalle = bloque.querySelector('.servicio-panel-detalle');
+  
+  if (!bloque || !detalle) return;
+
+  // Si está abierto, lo cerramos
+  if (bloque.classList.contains('active')) {
+    bloque.classList.remove('active');
+    detalle.style.maxHeight = '0px';
+  } else {
+    // Si está cerrado, lo abrimos calculando su altura exacta
+    bloque.classList.add('active');
+    detalle.style.maxHeight = detalle.scrollHeight + "px";
+  }
+}
+
+// CONTROL DE CAMBIO DE Renders INTERNOS
+function cambiarSlide(dot, indexSlide) {
+  const contenedor = dot.closest('.panel-carrusel-contenedor');
+  if (!contenedor) return;
+  
+  const slides = contenedor.querySelectorAll('.slide-img');
+  const dots = contenedor.querySelectorAll('.dot');
+  
+  slides.forEach(img => img.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  
+  if (slides[indexSlide]) slides[indexSlide].classList.add('active');
+  dot.classList.add('active');
+}

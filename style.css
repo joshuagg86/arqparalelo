@@ -2147,6 +2147,7 @@ body {
   background-color: #ffffff;
   padding: 60px 0 120px 0;
   box-sizing: border-box;
+  scroll-margin-top: 100px; 
 }
 
 /* Barra superior centrada con la píldora indicadora */
