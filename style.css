@@ -1922,3 +1922,1005 @@ body {
     padding: 6px 12px;
   }
 }
+
+/* ==========================================================================
+   SECCIÓN HERO NOSOTROS - FIX ANCHO COMPLETO Y ESTRUCTURA PRECISAS
+   ========================================================================== */
+.nosotros-hero-section {
+  position: relative;
+  width: 100vw;       /* Forzamos el ancho completo del viewport */
+  height: 100vh;      /* Forzamos el alto completo del viewport */
+  display: flex;
+  
+  /* CAMBIO AQUÍ: Centramos verticalmente todo el bloque de contenidos */
+  align-items: center; 
+  
+  justify-content: flex-start;
+  padding: 0 6vw;     /* Dejamos el colchón lateral idéntico al resto de tu web */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Forzamos a la imagen a cubrir la pantalla al 100% de fondo */
+.nosotros-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Fondo base */
+}
+
+.nosotros-hero-background img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Mantiene la proporción perfecta en monitores anchos */
+}
+
+/* Capa oscura translúcida para aislar y contrastar textos */
+.nosotros-hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Filtro para rescatar los copies blancos */
+  z-index: 2;
+}
+
+/* El contenedor del texto flotando perfectamente encima */
+.nosotros-hero-content {
+  position: relative;
+  z-index: 10; /* Por encima de la capa oscura */
+  color: #ffffff;
+  max-width: 650px;
+  text-align: left;
+}
+
+.nosotros-hero-title {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  letter-spacing: 1px;
+  margin: 0 0 10px 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.nosotros-hero-subtitle {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.4;
+  margin-bottom: 30px;
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Botón estilo pastilla verde corporativo */
+.btn-nosotros-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #536c5e;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 14px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-nosotros-hero svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-nosotros-hero:hover {
+  background-color: #42594d;
+  transform: translateY(-2px);
+}
+
+.btn-nosotros-hero:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* RESPONSIVO: Adaptación y centrado total para pantallas móviles */
+@media (max-width: 768px) {
+  .nosotros-hero-section {
+    padding: 0 6vw;
+    /* Centramos el contenedor interno en el eje horizontal */
+    justify-content: center; 
+  }
+  
+  .nosotros-hero-content {
+    max-width: 100%;
+    /* Centramos los textos (Título y Subtítulo) */
+    text-align: center; 
+    /* Forzamos a que el contenedor use flexbox para alinear su propio botón al centro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-nosotros-hero {
+    width: 100%; /* Mantiene el ancho completo tipo pastilla que es más cómodo en celulares */
+    max-width: 320px; /* Le ponemos un tope elegante para que no se estire de más */
+    justify-content: center;
+  }
+
+}
+
+/* ==========================================================================
+   SECCIÓN DETALLE NOSOTROS (DOS COLUMNAS ASIMÉTRICAS)
+   ========================================================================== */
+.nosotros-detalle-section {
+  width: 100%;
+  background-color: #ffffff; /* Fondo blanco para contraste limpio */
+  padding: 120px 0;          /* Colchón amplio para que respire la composición arquitectónica */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nosotros-detalle-container {
+  width: 90vw;
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* La columna de la imagen es ligeramente más ancha */
+  gap: 6vw;                         /* Separación fluida entre columnas */
+  align-items: center;
+  padding: 0 4vw;
+  box-sizing: border-box;
+}
+
+/* --- COLUMNA DE LA IMAGEN --- */
+.nosotros-col-imagen {
+  width: 100%;
+}
+
+.nosotros-col-imagen img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 35px; /* Bordes redondeados idénticos a la captura original */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Sutil volumen sin saturar */
+}
+
+/* --- COLUMNA DE TEXTOS --- */
+.nosotros-col-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nosotros-detalle-title {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;          /* Forzamos Futura PT Bold */
+  color: #536c5e;            /* Tu verde institucional característico */
+  font-size: clamp(2rem, 3.5vw, 3.2rem); /* Escalable de celular a monitor de 27" */
+  line-height: 1.2;
+  margin-bottom: 35px;
+  letter-spacing: -0.5px;
+}
+
+.nosotros-detalle-paragraph {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;          /* Futura Book */
+  color: #4a5568;            /* Gris oscuro suave legible */
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  line-height: 1.6;          /* Interlineado amplio e institucional */
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
+
+.nosotros-detalle-paragraph:last-child {
+  margin-bottom: 0;          /* Removemos margen al último párrafo */
+}
+
+/* --- OPTIMIZACIÓN RESPONSIVA (TABLETS Y MÓVILES) --- */
+@media (max-width: 992px) {
+  .nosotros-detalle-section {
+    padding: 80px 0;
+  }
+  
+  .nosotros-detalle-container {
+    grid-template-columns: 1fr; /* Se apilan en una sola columna vertical */
+    gap: 45px;
+  }
+  
+  .nosotros-col-imagen img {
+    border-radius: 25px; /* Suavizamos un poco el radio en pantallas más compactas */
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN DIRECCIÓN Y TARJETAS CON EFECTO DESLIZANTE DE CV
+   ========================================================================== */
+.direccion-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 60px 0 120px 0;
+  box-sizing: border-box;
+}
+
+/* Barra superior centrada con la píldora indicadora */
+.direccion-top-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.btn-direccion-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(83, 108, 94, 0.4);
+  background: transparent;
+  color: #536c5e; /* Tu verde institucional */
+  padding: 12px 36px;
+  border-radius: 14px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* Rejilla para alinear las dos tarjetas simétricamente */
+.grid-direccion {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 90vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- LA TARJETA PRINCIPAL --- */
+.tarjeta-perfil {
+  background-color: #536c5e; /* Fondo verde para la sección inferior del texto */
+  border-radius: 45px;       /* Curvatura premium continua */
+  overflow: hidden;          /* Mantiene todo dentro de los bordes redondeados */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Contenedor seguro para la imagen y la animación de la cortina */
+.perfil-imagen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 480px;             /* Altura fija ideal para las fotografías de perfil */
+  overflow: hidden;          /* Esconde el CV que está abajo esperando */
+  background-color: #e2e8f0;
+}
+
+.perfil-imagen-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- LA CORTINA VERDE DEL CV (ANIMACIÓN SLIDE UP) --- */
+.perfil-overlay-cv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(83, 108, 94, 0.95); /* Tu verde con leve transparencia */
+  backdrop-filter: blur(4px);
+  z-index: 5;
+  
+  /* Posicionamiento inicial: 100% abajo (completamente invisible) */
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Disparador del Hover: Al tocar la foto, la cortina sube a su lugar original */
+.tarjeta-perfil:hover .perfil-overlay-cv {
+  transform: translateY(0);
+}
+
+/* Estilos para el texto del CV dentro de la capa verde */
+.cv-content {
+  color: #ffffff;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  text-align: left;
+}
+
+.cv-content p {
+  margin-bottom: 16px;
+}
+
+.cv-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- BLOQUE DE TEXTO INFERIOR DE LA TARJETA --- */
+.perfil-info {
+  padding: 35px 40px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.perfil-info h3 {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0;
+}
+
+.perfil-info .p-puesto {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+/* Círculos blancos para las redes sociales del perfil */
+.perfil-redes {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link-in {
+  color: #536c5e;
+  background-color: #ffffff;
+  text-decoration: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Futura Local', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-link-in:hover {
+  transform: scale(1.1);
+  background-color: #2d3748;
+  color: #ffffff;
+}
+
+/* --- RESPONSIVO PARA MÓVILES Y TABLETS --- */
+@media (max-width: 992px) {
+  .grid-direccion {
+    grid-template-columns: 1fr; /* Una sola tarjeta por fila en móviles */
+    gap: 40px;
+    padding: 0 20px;
+  }
+  
+  .perfil-imagen-wrapper {
+    height: 420px; /* Reducimos un poco la altura en celulares */
+  }
+
+  .cv-content {
+    font-size: 14px;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN ADICIONAL: CUADRÍCULA DE COLABORADORES Y EQUIPO (4 COLUMNAS)
+   ========================================================================== */
+.equipo-completo-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 0 120px 0;
+  box-sizing: border-box;
+}
+
+/* Rejilla optimizada para 4 tarjetas por fila */
+.grid-equipo-cuatro-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px; /* Un espacio ligeramente más compacto para balancear las 4 columnas */
+  width: 90vw;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Modificación de altura específica para las fotos de esta sección */
+.tarjeta-mini .perfil-imagen-wrapper {
+  height: 340px; /* Al ser columnas más delgadas, bajamos la altura para mantener la proporción */
+}
+
+/* Ajuste del bloque de texto inferior para un estilo minimalista de una sola línea */
+.perfil-info-mini {
+  padding: 20px 24px;
+  color: #ffffff;
+  text-align: center; /* Centramos el nombre para que luzca ordenado como en la captura */
+}
+
+.perfil-info-mini h3 {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500; /* Un grosor medium muy limpio */
+  font-size: 16px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Si el nombre es muy largo, se corta con estilo */
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 1200px) {
+  .grid-equipo-cuatro-cols {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 en pantallas medianas o tablets */
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-equipo-cuatro-cols {
+    grid-template-columns: 1fr; /* 1 sola columna en celulares */
+    padding: 0 10px;
+  }
+  
+  .tarjeta-mini .perfil-imagen-wrapper {
+    height: 380px; /* Recuperamos un poco de altura en móvil */
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN: BANNER HORIZONTAL CTA (NOSOTROS) - CORREGIDO
+   ========================================================================== */
+.nosotros-contacto-completa {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.nosotros-banner-cta {
+  position: relative;
+  width: 100%;
+  /* CAMBIO: Usamos una altura fija compacta para que actúe como una franja perfecta */
+  height: 380px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Forzamos a que la sección de contacto aquí sea flexible y no herede el 50vh rígido */
+.nosotros-contacto-completa .contact-section {
+  width: 100%;
+  height: auto !important;     /* Rompe el alto de 50vh para que se adapte al formulario */
+  min-height: auto !important;  /* Elimina restricciones previas */
+  padding: 80px 0;             /* Ajuste exacto arriba y abajo para que se vea equilibrado */
+  background-color: #ffffff;   /* Forzamos el fondo blanco de esta sección */
+  box-sizing: border-box;
+}
+
+/* El resto de sub-elementos internos se mantienen limpios */
+.banner-bg-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+}
+.banner-bg-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.banner-bg-img::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(83, 108, 94, 0.75);
+  z-index: 2;
+}
+.banner-cta-content {
+  position: relative; z-index: 3; color: #ffffff; text-align: center;
+  max-width: 850px; padding: 0 4vw; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; gap: 15px;
+}
+.banner-cta-content h2 {
+  font-family: 'Futura Local', sans-serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3.2vw, 3.4rem); line-height: 1.2; margin: 0;
+}
+.banner-cta-content p {
+  font-family: 'Futura Local', sans-serif; font-weight: 400;
+  font-size: clamp(1rem, 1.4vw, 1.35rem); line-height: 1.4; opacity: 0.95; margin-bottom: 10px;
+}
+.btn-banner-servicios {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid #ffffff; background-color: transparent; color: #ffffff;
+  text-decoration: none; padding: 12px 28px; border-radius: 14px;
+  font-family: 'Futura Local', sans-serif; font-weight: 500; font-size: 15px;
+  transition: all 0.3s ease; margin-top: 5px;
+}
+.btn-banner-servicios svg { transition: transform 0.3s ease; }
+.btn-banner-servicios:hover { background-color: #ffffff; color: #536c5e; }
+.btn-banner-servicios:hover svg { transform: translate(2px, -2px); }
+
+@media (max-width: 768px) {
+  .nosotros-banner-cta {
+    height: auto;
+    padding: 60px 0;
+  }
+  
+  /* CAMBIO AQUÍ: Evitamos que el botón se alargue al 100% */
+  .btn-banner-servicios {
+    width: auto; /* Se encoge automáticamente para abrazar solo al texto */
+    padding: 12px 32px; /* Mantiene un colchón interno cómodo y estético */
+  }
+}
+
+/* ==========================================================================
+   EXCEPCIÓN DE USABILIDAD: BORDES GRISES SOLO PARA EL FORMULARIO DE NOSOTROS
+   ========================================================================== */
+.nosotros-contacto-completa .main-form input[type="text"],
+.nosotros-contacto-completa .main-form input[type="email"],
+.nosotros-contacto-completa .main-form input[type="tel"],
+.nosotros-contacto-completa .main-form textarea,
+.nosotros-contacto-completa .main-form select {
+  border: 1px solid #cbd5e1 !important; /* Forzamos el contorno gris solo aquí */
+}
+
+/* Enfoque premium con tu verde corporativo solo para Nosotros */
+.nosotros-contacto-completa .main-form input:focus,
+.nosotros-contacto-completa .main-form textarea:focus,
+.nosotros-contacto-completa .main-form select:focus {
+  border-color: #536c5e !important;
+  box-shadow: 0 0 0 1px #536c5e !important;
+}
+
+/* ==========================================================================
+   SECCIÓN HERO SERVICIOS - DETALLES Y RESPONSIVO
+   ========================================================================== */
+.servicios-hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center; /* Centrado vertical perfecto como en la captura */
+  justify-content: flex-start;
+  padding: 0 6vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.servicios-hero-background {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.servicios-hero-background img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Capa oscura translúcida para aislar y contrastar textos */
+.servicios-hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* Filtro para proteger los textos claros */
+  z-index: 2;
+}
+
+.servicios-hero-content {
+  position: relative;
+  z-index: 10;
+  color: #ffffff;
+  max-width: 700px;
+  text-align: left;
+  margin-top: 60px; /* Margen por el header transparente */
+}
+
+.servicios-hero-title {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  letter-spacing: 1px;
+  margin: 0 0 15px 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.servicios-hero-subtitle {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.4;
+  margin-bottom: 35px;
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.btn-servicios-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #536c5e;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 14px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-servicios-hero svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-servicios-hero:hover {
+  background-color: #42594d;
+  transform: translateY(-2px);
+}
+
+.btn-servicios-hero:hover svg {
+  transform: translate(2px, 2px); /* Desplazamiento sutil hacia abajo a la izquierda en la flecha */
+}
+
+/* RESPONSIVO MÓVILES: Centrado exacto y compacto */
+@media (max-width: 768px) {
+  .servicios-hero-section {
+    padding: 0 6vw;
+    justify-content: center;
+  }
+  
+  .servicios-hero-content {
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-servicios-hero {
+    width: auto; /* Evita que se estire al 100% en pantallas celulares */
+    padding: 12px 32px;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN INTRODUCCIÓN DE SERVICIOS (FONDO VERDE ASIMÉTRICO)
+   ========================================================================== */
+.servicios-intro-section {
+  width: 100%;
+  background-color: #536c5e; /* Tu verde institucional unificado de fondo */
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Contenedor principal con las líneas blancas del diseño original */
+.servicios-intro-container {
+  position: relative;
+  width: 90vw;
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Columna derecha de texto ligeramente más ancha */
+  gap: 6vw;
+  padding: 60px 4vw;
+  box-sizing: border-box;
+  
+  /* Líneas horizontales blancas finas idénticas al diseño de equipo */
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* --- COLUMNA IZQUIERDA --- */
+.servicios-intro-col-left {
+  display: flex;
+  align-items: center;
+}
+
+.servicios-intro-main-title {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700; /* Forzamos Futura PT Bold */
+  color: #ffffff;
+  font-size: clamp(2.2rem, 4vw, 3.8rem); /* Tipografía fluida */
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* --- COLUMNA DERECHA --- */
+.servicios-intro-col-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px; /* Separación limpia entre los dos bloques de texto */
+  color: #ffffff;
+}
+
+.servicios-intro-paragraph {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400; /* Futura Book */
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  line-height: 1.5;
+  opacity: 0.95;
+  margin: 0;
+}
+
+/* Resalte de la primera frase de la captura */
+.servicios-intro-paragraph strong {
+  font-weight: 700; /* Mantiene la jerarquía visual del copy */
+}
+
+/* --- RESPONSIVO PARA TABLETS Y CELULARES --- */
+@media (max-width: 992px) {
+  .servicios-intro-section {
+    padding: 60px 0;
+  }
+  
+  .servicios-intro-container {
+    grid-template-columns: 1fr; /* Columna única en móviles */
+    gap: 35px;
+    padding: 40px 4vw;
+  }
+  
+  .servicios-intro-col-right {
+    gap: 20px;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN: ACORDEÓN DE SERVICIOS INTERACTIVOS - ANCHO Y ESPACIOS CORREGIDOS
+   ========================================================================== */
+.lista-servicios-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+.servicios-lista-container {
+  width: 90vw;
+  /* CAMBIO: Reducimos el ancho máximo global de los bloques para que no se estiren tanto */
+  max-width: 1200px; 
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.servicio-item-bloque {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TARJETA RESUMEN GRIS CLARO --- */
+.tarjeta-servicio-resumen {
+  background-color: #eef1f0;
+  border-radius: 35px;
+  padding: 35px 45px;
+  display: grid;
+  grid-template-columns: 140px 1.1fr 1.3fr;
+  align-items: center;
+  gap: 40px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.servicio-icono-caja {
+  background-color: #536c5e;
+  color: #ffffff;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicio-titulo-caja h3 {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  color: #536c5e;
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Caja de descripción y botón alineado */
+.servicio-desc-caja {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.servicio-desc-caja p {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  color: #4a5568;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* CAMBIO: Forzamos al botón a alinearse abajo a la derecha de su contenedor */
+.btn-saber-mas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #536c5e;
+  background-color: transparent;
+  color: #536c5e;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  /* Alineación exacta a la derecha */
+  align-self: flex-end; 
+}
+
+.btn-saber-mas svg {
+  transition: transform 0.3s ease;
+}
+
+.servicio-item-bloque.active .btn-saber-mas {
+  background-color: #536c5e;
+  color: #ffffff;
+}
+
+.servicio-item-bloque.active .btn-saber-mas svg {
+  transform: rotate(-135deg);
+}
+
+/* --- PANEL DETALLE COMPLETO (DESLIZABLE) --- */
+.servicio-panel-detalle {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+/* CAMBIO: Al estar activo el bloque, creamos una separación limpia con la tarjeta superior */
+.servicio-item-bloque.active .servicio-panel-detalle {
+  margin-top: 20px; 
+}
+
+/* La tarjeta verde ahora mantiene su propia estructura independiente y redondeada por completo */
+.panel-detalle-interno {
+  background-color: #536c5e;
+  border-radius: 35px; /* Bordes redondeados completos en las 4 esquinas */
+  padding: 45px;
+  box-sizing: border-box;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+/* --- INTERIOR DEL CARRUSEL --- */
+.panel-carrusel-contenedor {
+  position: relative;
+  width: 100%;
+  /* Removemos el overflow e height de aquí para permitir que los puntos salgan */
+}
+
+.panel-carrusel-slides {
+  width: 100%;
+  height: 340px; /* El alto fijo y el fondo ahora lo controla esta capa */
+  position: relative;
+  border-radius: 25px; /* El recorte redondeado se queda exclusivo en las fotos */
+  overflow: hidden; 
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.slide-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.slide-img.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.carrusel-dots {
+  position: relative;
+  margin-top: 16px; /* Separación exacta de la parte inferior de la foto */
+  display: flex;
+  justify-content: center; /* Centrados perfectamente debajo de la imagen */
+  gap: 10px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35); /* Color base translúcido sobre el verde */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #ffffff; /* Blanco sólido para el elemento activo */
+}
+
+/* --- TEXTOS INTERNOS --- */
+.panel-texto-content {
+  color: #ffffff;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.panel-texto-content p {
+  margin-bottom: 16px;
+}
+
+.panel-texto-content ul {
+  margin: 0 0 16px 20px;
+  padding: 0;
+}
+
+.panel-texto-content li {
+  margin-bottom: 10px;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 992px) {
+  .tarjeta-servicio-resumen {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 35px 25px;
+    gap: 20px;
+  }
+  
+  .servicio-icono-caja {
+    width: 120px;
+    margin: 0 auto;
+  }
+  
+  .btn-saber-mas {
+    align-self: center; /* Se centra en pantallas móviles */
+  }
+  
+  .panel-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .panel-carrusel-contenedor {
+    height: 260px;
+  }
+}

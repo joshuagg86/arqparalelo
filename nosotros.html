@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros | Arquitectura en Paralelo</title>
+  
+  <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- 2. NAVBAR FIJO ADAPTATIVO -->
+<header class="main-header" id="navbar">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo" class="logo-light">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo" class="logo-dark">
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+    
+    <nav class="nav-menu" id="main-nav">
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html" class="active">Nosotros</a>
+        <a href="#">Servicios</a>
+        <a href="#">Proyectos</a>
+        <a href="#">Cotizador</a>
+        <a href="#">Blog</a>
+      </div>
+      
+      <div class="mobile-socials">
+        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+        <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+      </div>
+    </nav>
+    
+    <div class="social-icons-desktop">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+    </div>
+  </div>
+</header>
+
+<!-- 3. NUEVA SECCIÓN HERO NOSOTROS (MAQUETA DE ALTO IMPACTO) -->
+<section class="nosotros-hero-section">
+  <div class="nosotros-hero-background">
+    <img src="assets/img/hero_nosotros.png" alt="Equipo de Arquitectura en Paralelo">
+  </div>
+  
+  <div class="nosotros-hero-content reveal-anim">
+    <h1 class="nosotros-hero-title">NOSOTROS</h1>
+    <p class="nosotros-hero-subtitle">Conoce al equipo que transforma ideas en arquitectura construible</p>
+    
+    <div class="nosotros-hero-buttons">
+      <a href="#" class="btn-nosotros-hero">
+        Conoce nuestro equipo
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN DETALLE NOSOTROS / EQUIPO -->
+<section class="nosotros-detalle-section">
+  <div class="nosotros-detalle-container">
+    
+    <!-- Columna Izquierda: Imagen con bordes premium -->
+    <div class="nosotros-col-imagen reveal-anim">
+      <img src="assets/img/nosotros.png" alt="Planificación y diseño en Arquitectura en Paralelo">
+    </div>
+    
+    <!-- Columna Derecha: Contenido y copies informativos -->
+    <div class="nosotros-col-texto">
+      <h2 class="nosotros-detalle-title reveal-anim">Conoce a nuestro equipo</h2>
+      
+      <p class="nosotros-detalle-paragraph reveal-anim delay-1">
+        Contamos con un equipo de profesionales altamente capacitados en diseño, planificación y ejecución de proyectos arquitectónicos.
+      </p>
+      
+      <p class="nosotros-detalle-paragraph reveal-anim delay-2">
+        No solo diseñamos espacios; guiamos cada proyecto para convertir una visión en una realidad.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN DIRECCIÓN Y PERFILES -->
+<section class="direccion-section">
+  
+  <div class="direccion-top-bar reveal-anim">
+    <span class="btn-direccion-top">
+      Dirección
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+  <div class="grid-direccion">
+
+    <!-- Tarjeta 1: Juan Carlos -->
+    <div class="tarjeta-perfil reveal-anim">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Juan Carlos Muñoz Vargas">
+        
+        <!-- Capa verde oculta abajo que se desliza hacia arriba al hacer hover -->
+        <div class="perfil-overlay-cv">
+          <div class="cv-content">
+            <p>Juan Carlos M. V. es un arquitecto egresado de la Universidad del Valle de México, con una especialidad en Arquitectura Sanitaria en la Universidad Autónoma de México, y un Máster en BIM Management y Nuevas Tecnologías por la Universidad Isabel I en España.</p>
+            <p>Cuenta con más de 10 años de experiencia en el desarrollo de proyectos arquitectónicos complejos, especializados en arquitectura hospitalaria, comercial e industrial.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="perfil-info">
+        <h3>Juan Carlos Muñoz Vargas</h3>
+        <p class="p-puesto">Socio Director</p>
+        <div class="perfil-redes">
+          <a href="#" class="social-link-in" target="_blank">in</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2: Abraham -->
+    <div class="tarjeta-perfil reveal-anim delay-1">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Abraham Hernández Márquez">
+        
+        <!-- Capa verde oculta abajo -->
+        <div class="perfil-overlay-cv">
+          <div class="cv-content">
+            <p>Abraham Hernández Márquez es Socio Director en Arquitectura en Paralelo, especialista en coordinación de proyectos ejecutivos y modelado inteligente bajo estándares de precisión técnica, garantizando optimización estructural de vanguardia.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="perfil-info">
+        <h3>Abraham Hernández Márquez</h3>
+        <p class="p-puesto">Socio Director</p>
+        <div class="perfil-redes">
+          <a href="#" class="social-link-in" target="_blank">in</a>
+          <a href="#" class="social-link-in" target="_blank">i</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN COLABORADORES Y EQUIPO DE TRABAJO -->
+<section class="equipo-completo-section">
+  
+  <!-- BLOQUE 1: COLABORADORES -->
+  <div class="direccion-top-bar reveal-anim">
+    <span class="btn-direccion-top">
+      Colaboradores
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+  <div class="grid-equipo-cuatro-cols">
+    <!-- Tarjeta Colaborador 1 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Colaborador">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Especialista en desarrollo conceptual y diseño arquitectónico avanzado.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Carlos Mendoza</h3></div>
+    </div>
+    <!-- Tarjeta Colaborador 2 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-1">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Colaborador">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Especialista en desarrollo conceptual y diseño arquitectónico avanzado.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Sofía Rincón</h3></div>
+    </div>
+    <!-- Tarjeta Colaborador 3 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-2">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Colaborador">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Especialista en desarrollo conceptual y diseño arquitectónico avanzado.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Daniela Silva</h3></div>
+    </div>
+    <!-- Tarjeta Colaborador 4 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-3">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Colaborador">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Especialista en desarrollo conceptual y diseño arquitectónico avanzado.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Andrés Villa</h3></div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2: EQUIPO DE TRABAJO -->
+  <div class="direccion-top-bar reveal-anim" style="margin-top: 80px;">
+    <span class="btn-direccion-top">
+      Equipo de trabajo
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+  <div class="grid-equipo-cuatro-cols">
+    <!-- Tarjeta Equipo 1 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Equipo">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Modelador BIM certificado experto en detección de interferencias estructurales.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Mateo Ochoa</h3></div>
+    </div>
+    <!-- Tarjeta Equipo 2 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-1">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Equipo">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Modelador BIM certificado experto en detección de interferencias estructurales.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Valeria Torres</h3></div>
+    </div>
+    <!-- Tarjeta Equipo 3 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-2">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Equipo">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Modelador BIM certificado experto en detección de interferencias estructurales.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Emilio Juárez</h3></div>
+    </div>
+    <!-- Tarjeta Equipo 4 -->
+    <div class="tarjeta-perfil tarjeta-mini reveal-anim delay-3">
+      <div class="perfil-imagen-wrapper">
+        <img src="assets/img/perfil.png" alt="Equipo">
+        <div class="perfil-overlay-cv">
+          <div class="cv-content"><p>Modelador BIM certificado experto en detección de interferencias estructurales.</p></div>
+        </div>
+      </div>
+      <div class="perfil-info-mini"><h3>Lucía Fuentes</h3></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SECCIÓN BANNER Y FORMULARIO DE CONTACTO -->
+<section class="nosotros-contacto-completa">
+
+  <!-- Bloque Superior: Banner Verde con imagen de fondo -->
+  <div class="nosotros-banner-cta">
+    <div class="banner-bg-img">
+      <img src="assets/img/banner_nosotros.png" alt="Arquitectura en Paralelo Proyectos">
+    </div>
+    <div class="banner-cta-content reveal-anim">
+      <h2>Dale vida a tus ideas con Arquitectura en Paralelo</h2>
+      <p>Transformamos espacios con visión y excelencia. Juntos daremos vida a tu siguiente proyecto.</p>
+      
+      <!-- NUEVO: Botón interno que redirige a Servicios -->
+      <a href="#servicios" class="btn-banner-servicios">
+        Nuestros servicios
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bloque Inferior: Formulario duplicado del Home con Copy Real -->
+  <div class="contact-section">
+    <div class="contact-container">
+      
+      <div class="contact-info-col">
+        <h2 class="contact-title reveal-anim">Hablemos de tu proyecto</h2>
+        <p class="contact-text reveal-anim delay-1">
+          El espacio que imaginas merece una ejecución sin sorpresas. Cuéntanos tu idea y te ayudamos a proyectar, optimizar y construir tu próximo espacio residencial con la precisión milimétrica de la metodología BIM.
+        </p>
+      </div>
+      
+      <div class="contact-form-col">
+        <form action="#" method="POST" class="main-form">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombres_n">Nombres <span class="required">*</span></label>
+              <input type="text" id="nombres_n" name="nombres" required>
+            </div>
+            <div class="form-group">
+              <label for="apellidos_n">Apellidos <span class="required">*</span></label>
+              <input type="text" id="apellidos_n" name="apellidos" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email_n">Correo electrónico <span class="required">*</span></label>
+              <input type="email" id="email_n" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono_n">Número telefónico <span class="required">*</span></label>
+              <input type="tel" id="telefono_n" name="telefono" required>
+            </div>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="servicio_n">Elige el servicio</label>
+            <div class="select-wrapper">
+              <select id="servicio_n" name="servicio">
+                <option value="" disabled selected hidden>Selecciona</option>
+                <option value="diseno">Proyecto y diseño arquitectónico</option>
+                <option value="render">Renderizado Hiperrealista</option>
+                <option value="gestion-bim">Coordinación y gestión BIM</option>
+                <option value="supervision">Supervisión y ejecución de obra</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="mensaje_n">Mensaje <span class="required">*</span></label>
+            <textarea id="mensaje_n" name="mensaje" rows="5" placeholder="Deja tu comentario o preguntas" required></textarea>
+          </div>
+          
+          <div class="form-submit-wrapper">
+            <button type="submit" class="btn-submit">
+              Enviar
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+</section>
+
+<!-- 4. BLOQUE FOOTER CORPORATIVO -->
+<footer class="main-footer">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo">
+    </div>
+    
+    <hr class="footer-divider">
+    
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="footer-icon">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="footer-icon">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="footer-icon">in</a>
+    </div>
+    
+    <div class="footer-contact">
+      <a href="mailto:contacto@arqparalelo.com">contacto@arqparalelo.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p class="footer-copyright">
+        Copyright &copy; Arquitectura En Paralelo. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- 5. ELEMENTOS FLOTANTES DE INTERACCIÓN SIMÉTRICA -->
+<!-- WhatsApp Flotante Izquierdo Limpio -->
+<div class="whatsapp-flotante">
+  <span class="whatsapp-texto">¿Tienes dudas? ¡Escríbenos!</span>
+  <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat de WhatsApp">
+    <img src="assets/icon/whatsapp-3.svg" alt="WhatsApp" class="whatsapp-icon-img">
+  </a>
+</div>
+
+<!-- Botón de retorno arriba izquierdo controlado por Scroll -->
+<button class="btn-scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
+
+<!-- VÍNCULO AL MOTOR JAVASCRIPT -->
+<script src="script.js"></script>
+</body>
+</html>

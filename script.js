@@ -400,3 +400,44 @@ window.addEventListener('scroll', function() {
     btnScroll.classList.remove('visible');
   }
 });
+
+/* ==========================================================================
+   LÓGICA INTERACTIVA PARA EL ACORDEÓN Y CARRUSELES DE SERVICIOS
+   ========================================================================== */
+
+// 1. Manejo del Despliegue Colapsable (Slide Up / Down)
+function toggleServicio(boton) {
+  const bloquePadre = boton.closest('.servicio-item-bloque');
+  const panelDetalle = bloquePadre.querySelector('.servicio-panel-detalle');
+  
+  // Si ya está activo, lo cerramos
+  if (bloquePadre.classList.contains('active')) {
+    bloquePadre.classList.remove('active');
+    panelDetalle.style.maxHeight = null;
+  } else {
+    // Cerramos cualquier otro panel abierto para mantener orden
+    document.querySelectorAll('.servicio-item-bloque').forEach(item => {
+      item.classList.remove('active');
+      item.querySelector('.servicio-panel-detalle').style.maxHeight = null;
+    });
+    
+    // Abrimos el panel actual calculando su altura matemática exacta en tiempo real
+    bloquePadre.classList.add('active');
+    panelDetalle.style.maxHeight = panelDetalle.scrollHeight + "px";
+  }
+}
+
+// 2. Control de los Carruseles Internos de los Paneles
+function cambiarSlide(dotSelector, indexDestino) {
+  const contenedorCarrusel = dotSelector.closest('.panel-carrusel-contenedor');
+  const slides = contenedorCarrusel.querySelectorAll('.slide-img');
+  const dots = contenedorCarrusel.querySelectorAll('.dot');
+  
+  // Removemos clases activas previas
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  // Encendemos el slide y el punto seleccionado
+  slides[indexDestino].classList.add('active');
+  dotSelector.classList.add('active');
+}
