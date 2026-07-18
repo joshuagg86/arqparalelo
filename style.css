@@ -2793,7 +2793,9 @@ body {
   transform: rotate(-135deg);
 }
 
-/* --- PANEL DETALLE COMPLETO (DESLIZABLE) --- */
+/* ==========================================================================
+   --- PANEL DETALLE COMPLETO (DESLIZABLE) ---
+   ========================================================================== */
 .servicio-panel-detalle {
   width: 100%;
   max-height: 0;
@@ -2803,7 +2805,7 @@ body {
   z-index: 1;
 }
 
-/* CAMBIO: Al estar activo el bloque, creamos una separación limpia con la tarjeta superior */
+/* Al estar activo el bloque, creamos una separación limpia con la tarjeta superior */
 .servicio-item-bloque.active .servicio-panel-detalle {
   margin-top: 20px; 
 }
@@ -2827,7 +2829,6 @@ body {
 .panel-carrusel-contenedor {
   position: relative;
   width: 100%;
-  /* Removemos el overflow e height de aquí para permitir que los puntos salgan */
 }
 
 .panel-carrusel-slides {
@@ -2897,7 +2898,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* --- RESPONSIVO --- */
+/* --- RESPONSIVO GENERAL Y FIX PARA CELULARES --- */
 @media (max-width: 992px) {
   .tarjeta-servicio-resumen {
     grid-template-columns: 1fr;
@@ -2915,12 +2916,29 @@ body {
     align-self: center; /* Se centra en pantallas móviles */
   }
   
+  /* FIX: Forzamos orden vertical estricto con Flexbox para que no se encime el texto */
   .panel-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: stretch;
   }
-  
+
   .panel-carrusel-contenedor {
-    height: 260px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .panel-carrusel-slides {
+    height: 250px; /* Alto controlado ideal para pantallas móviles */
+  }
+
+  /* Los dots se quedan estables y visibles debajo de la foto */
+  .carrusel-dots {
+    position: relative;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    justify-content: center;
   }
 }
