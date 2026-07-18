@@ -563,7 +563,7 @@ body {
   backface-visibility: hidden;
   box-sizing: border-box;
   /* LÍNEA 116 ORIGINAL: Cambia el radio aquí de forma manual si lo requieres */
-  border-radius: 85px !important; 
+  border-radius: 35px 0px 35px 0px !important; 
   overflow: hidden !important;
 }
 
@@ -583,7 +583,7 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.35); 
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.4) 100%); 
   z-index: 1;
 }
 
@@ -595,6 +595,7 @@ body {
   z-index: 2;
   margin: 0;
   line-height: 1.2;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .card-baja .card-front h3 {
@@ -604,8 +605,8 @@ body {
 /* IMÁGENES LOCALES */
 .foto-1 { background-image: url('assets/img/services-disenio.jpg'); }
 .foto-2 { background-image: url('assets/img/services-BIM.png'); }
-.foto-3 { background-image: url('assets/img/services-BIM.png'); }
-.foto-4 { background-image: url('assets/img/services-disenio.jpg'); }
+.foto-3 { background-image: url('assets/img/services-supervision.png'); }
+.foto-4 { background-image: url('assets/img/services-renderizado.jpg'); }
 
 /* --- PARTE TRASERA TRASLÚCIDA --- */
 .card-back {
@@ -1425,24 +1426,53 @@ body {
   text-align: right; /* Alineado a la derecha como en tu maqueta */
 }
 
-/* Botón de flecha para subir */
+/* ==========================================================================
+   BOTÓN FLOTANTE "SCROLL TO TOP" (ESQUINA INFERIOR IZQUIERDA)
+   ========================================================================== */
 .btn-scroll-top {
-  background-color: #1a231e;
-  border: none;
-  color: #ffffff;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  transition: background-color 0.3s ease;
+  position: fixed;
+  bottom: 30px;
+  left: 4vw; /* Alineado simétrico con el margen izquierdo del sitio */
+  background-color: #1a231e; /* Tu negro verdoso original[cite: 3] */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff; /*[cite: 3] */
+  width: 52px; /* Un poco más grande para que sea cómodo dar click flotando */
+  height: 52px;
+  border-radius: 14px; /* Combinando las esquinas curvas de tus botones principales */
+  cursor: pointer; /*[cite: 3] */
+  display: flex; /*[cite: 3] */
+  align-items: center; /*[cite: 3] */
+  justify-content: center; /*[cite: 3] */
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 9998; /* Un nivel abajo de WhatsApp, pero arriba del contenido */
+  
+  /* Inicialmente oculto para la animación controlada por JS */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .btn-scroll-top:hover {
-  background-color: #000000;
+  background-color: #536c5e; /* Cambia a tu verde institucional al pasar el cursor */
+  transform: translateY(-3px); /* Pequeño salto premium */
+  color: #ffffff;
+}
+
+/* Clase activa que inyectará JavaScript al bajar la pantalla */
+.btn-scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* RESPONSIVO: Ajuste idéntico a las coordenadas de WhatsApp en móviles */
+@media (max-width: 768px) {
+  .btn-scroll-top {
+    bottom: 20px;
+    left: 20px;
+    width: 46px;
+    height: 46px;
+  }
 }
 
 /* --- RESPONSIVO --- */
@@ -1748,12 +1778,147 @@ body {
 .preloader-video-wrapper video {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Encaja el video perfectamente en cualquier pantalla */
+  object-fit: contain; 
   background-color: #ffffff; 
 }
 
-/* Clase de salida lenta que activará JavaScript */
 .preloader-overlay.fade-out {
   opacity: 0;
   visibility: hidden;
+}
+
+/* ==========================================================================
+   ESTILOS ADICIONALES: FLECHAS DE NAVEGACIÓN COMPORTAMIENTO PREMIUM
+   ========================================================================== */
+.carrusel-proyectos-wrapper {
+  position: relative;
+}
+
+.carrusel-arrows {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4vw;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.arrow-btn {
+  pointer-events: auto; 
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #536c5e;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.85;
+}
+
+.arrow-btn:hover {
+  background-color: #3f5247;
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+.arrow-btn active {
+  transform: scale(0.95);
+}
+
+
+@media (max-width: 768px) {
+  .carrusel-arrows {
+    display: none;
+  }
+}
+/* ==========================================================================
+   ESTILOS PREMIUM: BOTÓN FLOTANTE DE WHATSAPP CON TEXTO COGNITIVO
+   ========================================================================== */
+/* ==========================================================================
+   ESTILOS PREMIUM: BOTÓN FLOTANTE DE WHATSAPP (CONSOLIDADO Y LIMPIO)
+   ========================================================================== */
+.whatsapp-flotante {
+  position: fixed;
+  bottom: 30px;
+  right: 4vw; /* Alineado con los márgenes de header y footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Separación entre el texto informativo y el ícono */
+  z-index: 9999; /* Por encima de todo el sitio */
+}
+
+/* El cuadro de diálogo flotante superior */
+.whatsapp-texto {
+  background-color: #ffffff;
+  color: #2d3748;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  pointer-events: none; /* No interfiere si intentan hacer click atrás */
+  animation: flotarTexto 3s ease-in-out infinite; /* Movimiento sutil orgánico */
+}
+
+/* Contenedor del enlace (Sin círculo verde ni fondos) */
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent; /* Eliminamos por completo el fondo verde */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1) rotate(8deg); /* Pequeño efecto dinámico al pasar el cursor */
+}
+
+/* Control y tamaño ampliado para tu imagen SVG local (.svg) */
+.whatsapp-icon-img {
+  width: 64px !important; /* Tamaño grande y prominente para el icono suelto */
+  height: 64px !important;
+  object-fit: contain !important;
+  display: block;
+  transform: none !important; /* Evita que herede transiciones extrañas del sitio */
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.15)); /* Sutil sombra para dar volumen */
+}
+
+/* ANIMACIÓN ORGÁNICA PARA LEVANTAR EL TEXTO */
+@keyframes flotarTexto {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* RESPONSIVO: Ajustes estéticos para pantallas móviles */
+@media (max-width: 768px) {
+  .whatsapp-flotante {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-icon-img {
+    width: 84px !important; /* Reducción de cortesía en móviles para no invadir pantalla */
+    height: 84px !important;
+  }
+  
+  .whatsapp-texto {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
 }

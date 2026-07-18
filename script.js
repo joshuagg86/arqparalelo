@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const track = document.querySelector('.carrusel-track');
   const originalCards = document.querySelectorAll('.proyecto-card');
   const dots = document.querySelectorAll('.dot');
+  const btnPrev = document.querySelector('.btn-prev');
+  const btnNext = document.querySelector('.btn-next');
   
   if (!container || !track || originalCards.length === 0) return;
 
@@ -17,26 +19,24 @@ document.addEventListener("DOMContentLoaded", function() {
   const allCards = track.querySelectorAll('.proyecto-card');
   const originalCount = originalCards.length;
   
-  let currentIndex = originalCount + 1; // Arrancamos en la tarjeta 2 real
+  let currentIndex = originalCount + 1; 
   let isDown = false;
   let startX;
   let scrollLeft;
   let isMoving = false;
+  
+  // VARIABLES PARA EL SISTEMA AUTO-PLAY
+  let autoplayInterval;
+  const autoplaySpeed = 2300; // 1 Segundo de intervalo por tarjeta
 
-  // CALIBRACIÓN DINÁMICA DE POSICIÓN (REPARADA PARA MÓVIL Y ESCRITORIO)
   function getPositionX(index) {
     const cardWidth = allCards[index].offsetWidth;
     const containerWidth = container.clientWidth;
-    
-    // Obtenemos dinámicamente los estilos reales configurados en tu CSS
     const trackStyles = window.getComputedStyle(track);
     const gap = parseInt(trackStyles.gap) || 40;
     const paddingLeft = parseInt(trackStyles.paddingLeft) || 40;
     
-    // Cálculo matemático basado en la posición física real del elemento en el riel
     const totalCardOffset = (index * (cardWidth + gap)) + paddingLeft;
-    
-    // Forzamos el centro exacto restando la mitad de la pantalla
     return totalCardOffset - (containerWidth / 2) + (cardWidth / 2);
   }
 
@@ -54,10 +54,67 @@ document.addEventListener("DOMContentLoaded", function() {
     currentIndex = index;
   }
 
-  // --- EVENTOS DE ESCRITORIO (MOUSE) ---
+  // --- MOTOR DE CONTROL AUTOMÁTICO (AUTOPLAY) ---
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(() => {
+      let targetIndex = currentIndex + 1;
+      
+      if (targetIndex >= originalCount * 2) {
+        jumpToCard(targetIndex - originalCount, false);
+        setTimeout(() => {
+          jumpToCard(currentIndex + 1, true);
+        }, 50);
+      } else {
+        jumpToCard(targetIndex, true);
+      }
+    }, autoplaySpeed);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+  }
+
+  // --- CONTROLES DE LAS FLECHAS LATERALES ---
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      stopAutoplay();
+      let targetIndex = currentIndex + 1;
+      if (targetIndex >= originalCount * 2) {
+        jumpToCard(targetIndex - originalCount, false);
+        setTimeout(() => jumpToCard(currentIndex + 1, true), 50);
+      } else {
+        jumpToCard(targetIndex, true);
+      }
+      startAutoplay();
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      stopAutoplay();
+      let targetIndex = currentIndex - 1;
+      if (targetIndex < originalCount) {
+        jumpToCard(targetIndex + originalCount, false);
+        setTimeout(() => jumpToCard(currentIndex - 1, true), 50);
+      } else {
+        jumpToCard(targetIndex, true);
+      }
+      startAutoplay();
+    });
+  }
+
+  // PAUSAR AL ENTRAR CON EL RATÓN, REANUDAR AL SALIR
+  container.addEventListener('mouseenter', stopAutoplay);
+  container.addEventListener('mouseleave', () => {
+    if (!isDown) startAutoplay();
+  });
+
+  // --- EVENTOS DE ESCRITORIO (MOUSE DRAG) ---
   container.addEventListener('mousedown', (e) => {
     isDown = true;
     isMoving = false;
+    stopAutoplay();
     container.style.scrollBehavior = 'auto';
     startX = e.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
@@ -67,12 +124,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!isDown) return;
     isDown = false;
     snapToNearest();
+    startAutoplay();
   });
 
   container.addEventListener('mouseup', () => {
     if (!isDown) return;
     isDown = false;
     if (isMoving) snapToNearest();
+    startAutoplay();
   });
 
   container.addEventListener('mousemove', (e) => {
@@ -84,10 +143,11 @@ document.addEventListener("DOMContentLoaded", function() {
     container.scrollLeft = scrollLeft - walk;
   });
 
-  // --- NUEVOS EVENTOS NATIVOS PARA MÓVIL (PANTALLA TÁCTIL) ---
+  // --- EVENTOS DE PANTALLA TÁCTIL (MÓVIL) ---
   container.addEventListener('touchstart', (e) => {
     isDown = true;
     isMoving = false;
+    stopAutoplay();
     container.style.scrollBehavior = 'auto';
     startX = e.touches[0].pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
@@ -97,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!isDown) return;
     isDown = false;
     snapToNearest();
+    startAutoplay();
   });
 
   container.addEventListener('touchmove', (e) => {
@@ -107,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function() {
     container.scrollLeft = scrollLeft - walk;
   }, { passive: true });
 
-  // REAJUSTE AUTOMÁTICO AL SOLTAR EL DEDO O EL MOUSE
   function snapToNearest() {
     const containerCenter = container.scrollLeft + (container.clientWidth / 2);
     let closestIndex = 0;
@@ -122,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // Control del bucle infinito invisible
     if (closestIndex < originalCount) {
       jumpToCard(closestIndex + originalCount, false);
     } else if (closestIndex >= originalCount * 2) {
@@ -136,30 +195,31 @@ document.addEventListener("DOMContentLoaded", function() {
   dots.forEach(dot => {
     dot.addEventListener('click', function(e) {
       e.preventDefault();
+      stopAutoplay();
       const dotIndex = parseInt(this.getAttribute('data-index'));
       jumpToCard(dotIndex + originalCount, true);
+      startAutoplay();
     });
   });
 
-  // Inicio seguro centrado con retardo leve para que el móvil calcule el viewport
+  // Inicialización controlada
   setTimeout(() => {
     jumpToCard(originalCount + 1, false);
+    startAutoplay(); 
   }, 300);
   
-// --- NUEVO EVENTO PARA TRACKPAD Y RUEDA DEL MOUSE ---
+  // EVENTO RUEDA / TRACKPAD
   let wheelCooldown = false;
-
   container.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaX) > 4 || Math.abs(e.deltaY) > 4) {
       e.preventDefault(); 
+      stopAutoplay();
 
       if (wheelCooldown) return; 
-
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
       if (Math.abs(delta) > 15) { 
         wheelCooldown = true;
-        
         if (delta > 0) {
           jumpToCard(currentIndex + 1, true);
         } else {
@@ -173,12 +233,12 @@ document.addEventListener("DOMContentLoaded", function() {
             jumpToCard(currentIndex - originalCount, false);
           }
           wheelCooldown = false;
+          startAutoplay();
         }, 800);
       }
     }
   }, { passive: false });
 
-  // Recalcular posición si el usuario llega a rotar la pantalla
   window.addEventListener('resize', () => {
     jumpToCard(currentIndex, false);
   });
@@ -260,23 +320,20 @@ document.addEventListener("DOMContentLoaded", function() {
   const elementsToReveal = document.querySelectorAll('.reveal-anim');
 
   const revealOptions = {
-    root: null,          // Usa el viewport del navegador
-    threshold: 0.12,     // Se activa cuando el 12% del elemento ya es visible
-    rootMargin: "0px 0px -50px 0px" // Se dispara un poquito antes de llegar para suavizar
+    root: null,
+    threshold: 0.12,
+    rootMargin: "0px 0px -50px 0px"
   };
 
   const revealObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Añadimos la clase que dispara la transición CSS
         entry.target.classList.add('animated');
-        // Dejamos de vigilarlo para que la animación solo ocurra la primera vez
         observer.unobserve(entry.target);
       }
     });
   }, revealOptions);
 
-  // Ponemos a vigilar a todos los elementos marcados
   elementsToReveal.forEach(element => {
     revealObserver.observe(element);
   });
@@ -296,29 +353,25 @@ window.addEventListener('scroll', function() {
 document.addEventListener("DOMContentLoaded", function() {
   const preloader = document.getElementById('custom-preloader');
   const videoPreloader = document.getElementById('preloader-video');
-  const videoHero = document.getElementById('hero-bg-video'); // Capturamos el video del fondo
+  const videoHero = document.getElementById('hero-bg-video');
 
   if (!preloader || !videoPreloader) return;
 
-  // Si el usuario ya vio la animación en esta sesión, liberamos el sitio de inmediato
   if (sessionStorage.getItem('preloaderVisto') === 'true') {
     preloader.style.display = 'none';
-    if (videoHero) videoHero.play(); // Si no hay preloader, el video del fondo corre directo
+    if (videoHero) videoHero.play();
     return;
   }
 
-  // Si es la primera vez, reproducimos el preloader
   videoPreloader.play().catch(error => {
     console.log("Play automático del preloader bloqueado, saltando al fade-out.");
     ejecutarSalida();
   });
 
-  // Cuando el video del preloader termina de forma natural...
   videoPreloader.addEventListener('ended', function() {
     ejecutarSalida();
   });
 
-  // Candado de seguridad (4 segundos máximo por si se traba el archivo)
   setTimeout(() => {
     if (!preloader.classList.contains('fade-out')) {
       ejecutarSalida();
@@ -329,9 +382,21 @@ document.addEventListener("DOMContentLoaded", function() {
     preloader.classList.add('fade-out');
     sessionStorage.setItem('preloaderVisto', 'true');
     
-    // ACCIÓN MÁGICA: Encendemos el video del Hero justo cuando la pantalla blanca se disuelve
     if (videoHero) {
       videoHero.play().catch(err => console.log("El navegador bloqueó el play del hero de forma automática."));
     }
+  }
+});
+
+// CONTROL DE VISIBILIDAD PARA EL BOTÓN FLOTANTE "SCROLL TO TOP"
+window.addEventListener('scroll', function() {
+  const btnScroll = document.querySelector('.btn-scroll-top');
+  if (!btnScroll) return;
+
+  // Si el usuario baja más de 400px (pasando la sección Hero), el botón se desvanece hacia adentro
+  if (window.scrollY > 400) {
+    btnScroll.classList.add('visible');
+  } else {
+    btnScroll.classList.remove('visible');
   }
 });
