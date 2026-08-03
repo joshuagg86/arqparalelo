@@ -2201,9 +2201,13 @@ body {
 .perfil-imagen-wrapper {
   position: relative;
   width: 100%;
-  height: 480px;             /* Altura fija ideal para las fotografías de perfil */
-  overflow: hidden;          /* Esconde el CV que está abajo esperando */
+  height: 480px;
+  overflow: hidden;
   background-color: #e2e8f0;
+
+  /* Quita el redondeo de las esquinas inferiores para que pegue recto con el verde */
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .perfil-imagen-wrapper img {
