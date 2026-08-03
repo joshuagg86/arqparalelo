@@ -2706,21 +2706,17 @@ body {
 }
 
 .servicio-item-bloque {
+  position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  border-radius: 28px; /* Radio uniforme para toda la tarjeta */
+  overflow: hidden;    /* Recorta cualquier elemento o foto que sobresalga de las esquinas */
 }
 
 /* --- TARJETA RESUMEN GRIS CLARO --- */
 .tarjeta-servicio-resumen {
-  background-color: #eef1f0;
-  border-radius: 35px;
-  padding: 35px 45px;
-  display: grid;
-  grid-template-columns: 140px 1.1fr 1.3fr;
-  align-items: center;
-  gap: 40px;
-  box-sizing: border-box;
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;    /* Mantiene redondeada la imagen de fondo */
   position: relative;
   z-index: 2;
 }
@@ -2747,18 +2743,25 @@ body {
 /* Caja de descripción y botón alineado */
 .servicio-desc-caja {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  width: 60%; 
 }
 
 .servicio-desc-caja p {
-  font-family: 'Futura Local', sans-serif;
-  font-weight: 400;
-  color: #4a5568;
-  font-size: 15px;
-  line-height: 1.5;
+  max-width: 380px;
   margin: 0;
+  text-align: right;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #ffffff;
+  flex-shrink: 1;
+}
+
+.servicio-desc-caja .btn-saber-mas {
+  flex-shrink: 0; /* Mantiene el tamaño original del botón */
+  white-space: nowrap;
 }
 
 /* CAMBIO: Forzamos al botón a alinearse abajo a la derecha de su contenedor */
@@ -2795,27 +2798,192 @@ body {
 }
 
 /* ==========================================================================
-   --- PANEL DETALLE COMPLETO (DESLIZABLE) ---
+   TARJETAS DE SERVICIOS: ANIMACIÓN INTEGRADA Y ELEGANTE
    ========================================================================== */
+.lista-servicios-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+.servicios-lista-container {
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.servicio-item-bloque {
+  position: relative;
+  width: 100%;
+}
+
+/* Ocultamos la solapa externa que daba problemas de bordes */
+.solapa-verde-peek {
+  display: none !important;
+}
+
+/* TARJETA PRINCIPAL CON BORDE VERDE INFERIOR INTEGRADO */
+.tarjeta-servicio-resumen {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 50px;
+  box-sizing: border-box;
+  border-radius: 28px;
+  overflow: hidden; /* Garantiza que la imagen y la barra respeten el curvado */
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffff;
+  
+  /* Transición suave para elevación y sombra */
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* LÍNEA VERDE ACCENTO EN EL BORDES INFERIOR (INTEGRADA) */
+.tarjeta-servicio-resumen::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 18px; /* Altura de la barra verde indicadora */
+  background-color: #536c5e;
+  transition: height 0.3s ease, background-color 0.3s ease;
+  z-index: 3;
+}
+
+/* EFECTO HOVER: Elevación sutil y resalte del acento verde */
+.servicio-item-bloque:hover .tarjeta-servicio-resumen {
+  transform: translateY(-5px); /* Eleva suavemente la tarjeta */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Otorga profundidad */
+}
+
+.servicio-item-bloque:hover .tarjeta-servicio-resumen::after {
+  height: 25px; /* La barra crece ligeramente de forma fluida */
+  background-color: #42594d;
+}
+
+/* CAPA OSCURA Y TEXTOS */
+.servicio-overlay-card {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.servicio-titulo-caja,
+.servicio-desc-caja {
+  position: relative;
+  z-index: 2;
+}
+
+.servicio-titulo-caja h3 {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  color: #ffffff !important;
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.servicio-desc-caja {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  width: 55%;
+}
+
+.servicio-desc-caja p {
+  max-width: 420px;
+  margin: 0;
+  text-align: right;
+  font-family: 'Futura Local', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.btn-saber-mas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ffffff !important;
+  background-color: #ffffff !important;
+  color: #536c5e !important;
+  padding: 10px 28px;
+  border-radius: 18px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.btn-saber-mas:hover {
+  background-color: #eef1f0 !important;
+  border-color: #eef1f0 !important;
+}
+
+/* 3. SOLAPA VERDE: Nace pegada debajo de la tarjeta */
+.solapa-verde-peek {
+  width: 94%;
+  height: 22px;
+  background-color: #536c5e;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin: -8px auto 0 auto; /* Se traslapa ligeramente con la tarjeta arriba */
+  position: relative;
+  z-index: 1; /* Por detrás de la tarjeta principal */
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+/* EFECTO HOVER: La pestaña verde baja de forma fluida */
+.servicio-item-bloque:hover .solapa-verde-peek {
+  transform: translateY(8px);
+  background-color: #42594d;
+}
+
+/* Ocultar la solapa cuando el panel esté abierto */
+.servicio-item-bloque.active .solapa-verde-peek {
+  display: none;
+}
+
+/* --- IMÁGENES DE FONDO --- */
+.servicio-bg-diseno { background-image: url('assets/img/services-disenio.jpg'); }
+.servicio-bg-bim { background-image: url('assets/img/services-BIM.png'); }
+.servicio-bg-capacitacion { background-image: url('assets/img/services-supervision.png'); }
+.servicio-bg-captura { background-image: url('assets/img/services-renderizado.jpg'); }
+
+/* --- PANEL DESPLEGABLE INTERNO --- */
 .servicio-panel-detalle {
   width: 100%;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 
-/* Al estar activo el bloque, creamos una separación limpia con la tarjeta superior */
 .servicio-item-bloque.active .servicio-panel-detalle {
   margin-top: 20px; 
 }
 
-/* La tarjeta verde ahora mantiene su propia estructura independiente y redondeada por completo */
 .panel-detalle-interno {
+  position: relative !important; /* Forzamos a que sea la referencia de posicionamiento */
   background-color: #536c5e;
-  border-radius: 35px; /* Bordes redondeados completos en las 4 esquinas */
-  padding: 45px;
+  border-radius: 35px;
+  padding: 55px 45px 45px 45px; /* Agregamos colchón arriba (55px) para respiración */
   box-sizing: border-box;
 }
 
@@ -2826,7 +2994,6 @@ body {
   align-items: center;
 }
 
-/* --- INTERIOR DEL CARRUSEL --- */
 .panel-carrusel-contenedor {
   position: relative;
   width: 100%;
@@ -2834,9 +3001,9 @@ body {
 
 .panel-carrusel-slides {
   width: 100%;
-  height: 340px; /* El alto fijo y el fondo ahora lo controla esta capa */
+  height: 340px;
   position: relative;
-  border-radius: 25px; /* El recorte redondeado se queda exclusivo en las fotos */
+  border-radius: 25px;
   overflow: hidden; 
   background-color: rgba(0, 0, 0, 0.05);
 }
@@ -2857,9 +3024,9 @@ body {
 
 .carrusel-dots {
   position: relative;
-  margin-top: 16px; /* Separación exacta de la parte inferior de la foto */
+  margin-top: 16px;
   display: flex;
-  justify-content: center; /* Centrados perfectamente debajo de la imagen */
+  justify-content: center;
   gap: 10px;
   z-index: 10;
 }
@@ -2868,16 +3035,15 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.35); /* Color base translúcido sobre el verde */
+  background-color: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .dot.active {
-  background-color: #ffffff; /* Blanco sólido para el elemento activo */
+  background-color: #ffffff;
 }
 
-/* --- TEXTOS INTERNOS --- */
 .panel-texto-content {
   color: #ffffff;
   font-family: 'Futura Local', sans-serif;
@@ -2890,34 +3056,30 @@ body {
   margin-bottom: 16px;
 }
 
-.panel-texto-content ul {
-  margin: 0 0 16px 20px;
-  padding: 0;
-}
-
-.panel-texto-content li {
-  margin-bottom: 10px;
-}
-
-/* --- RESPONSIVO GENERAL Y FIX PARA CELULARES --- */
+/* RESPONSIVO */
 @media (max-width: 992px) {
   .tarjeta-servicio-resumen {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 35px 25px;
+    min-height: auto;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
+    padding: 30px;
   }
-  
-  .servicio-icono-caja {
-    width: 120px;
-    margin: 0 auto;
+
+  .servicio-desc-caja {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .servicio-desc-caja p {
+    max-width: 100%;
+    text-align: left;
   }
   
   .btn-saber-mas {
-    align-self: center; /* Se centra en pantallas móviles */
+    align-self: flex-start;
   }
   
-  /* FIX: Forzamos orden vertical estricto con Flexbox para que no se encime el texto */
   .panel-grid {
     display: flex;
     flex-direction: column;
@@ -2925,21 +3087,575 @@ body {
     align-items: stretch;
   }
 
-  .panel-carrusel-contenedor {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
   .panel-carrusel-slides {
-    height: 250px; /* Alto controlado ideal para pantallas móviles */
+    height: 250px;
+  }
+}
+
+/* --- FLECHAS LATERALES DEL CARRUSEL DE SERVICIOS --- */
+.panel-carrusel-contenedor {
+  position: relative;
+  width: 100%;
+}
+
+.carrusel-flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.carrusel-flecha:hover {
+  background-color: #ffffff;
+  color: #536c5e;
+  border-color: #ffffff;
+}
+
+.carrusel-flecha.prev {
+  left: 12px;
+}
+
+.carrusel-flecha.next {
+  right: 12px;
+}
+
+/* --- CORRECCIÓN DE POSICIÓN PARA SLIDES Y DOTS DEL CARRUSEL --- */
+.panel-carrusel-contenedor {
+  position: relative;
+  width: 100%;
+}
+
+/* Forzamos a las imágenes a quedarse contenidas sin soltar elementos absolutos */
+.panel-carrusel-slides {
+  width: 100%;
+  height: 340px;
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden; 
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Alineación estricta para el contenedor de puntos */
+.panel-carrusel-contenedor .carrusel-dots {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  width: 100%;
+}
+
+/* Aislamiento de los dots para evitar herencias globales */
+.panel-carrusel-contenedor .dot {
+  position: static !important; /* Anula cualquier posición absoluta previa */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0;
+}
+
+.panel-carrusel-contenedor .dot.active {
+  background-color: #ffffff;
+  transform: scale(1.2);
+}
+
+/* --- CONTENIDO DERECHO DEL PANEL DESPLEGADO --- */
+.panel-texto-content {
+  color: #ffffff;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  padding-right: 20px; /* Margen de seguridad derecho */
+}
+
+/* BOTÓN DE CIERRE (X) EN LA ESQUINA SUPERIOR DERECHA */
+.btn-cerrar-panel {
+  position: absolute !important;
+  top: 25px !important;  /* Distancia fija desde el borde superior verde */
+  right: 25px !important; /* Distancia fija desde el borde derecho verde */
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 20; /* Asegura estar arriba de cualquier texto o foto */
+}
+
+.btn-cerrar-panel:hover {
+  background-color: #ffffff;
+  color: #536c5e;
+  transform: rotate(90deg);
+}
+
+/* TITULO Y LISTA DE BENEFICIOS */
+.panel-texto-content h3 {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  padding-right: 40px; /* Evita que el título choque con la X */
+}
+
+.panel-texto-content p {
+  margin-bottom: 18px;
+  opacity: 0.95;
+}
+
+/* LISTA CON CHECKMARKS / PUNTOS ELEGANTES */
+.panel-lista-beneficios {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel-lista-beneficios li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14.5px;
+  opacity: 0.9;
+}
+
+/* Punto / Guión estético personalizado */
+.panel-lista-beneficios li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   SECCIÓN: BANNER CTA EN SERVICIOS (FONDO CON OVERLAY VERDE)
+   ========================================================================== */
+.banner-cta-servicios {
+  position: relative;
+  width: 100%;
+  height: 420px; /* Altura compacta ideal para franja de impacto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Imagen de fondo */
+.banner-cta-bg {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  z-index: 1;
+}
+
+.banner-cta-bg img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+}
+
+/* Overlay verde translúcido estilo corporativo */
+.banner-cta-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(83, 108, 94, 0.85); /* Tinte verde con opacidad para contraste */
+  z-index: 2;
+}
+
+/* Contenido centralizado */
+.banner-cta-contenido {
+  position: relative; 
+  z-index: 3; 
+  color: #ffffff; 
+  text-align: center;
+  max-width: 900px; 
+  padding: 0 4vw; 
+  box-sizing: border-box;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 18px;
+}
+
+.banner-cta-contenido h2 {
+  font-family: 'Futura Local', sans-serif; 
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3.2rem); 
+  line-height: 1.2; 
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.banner-cta-contenido p {
+  font-family: 'Futura Local', sans-serif; 
+  font-weight: 400;
+  font-size: clamp(1rem, 1.4vw, 1.3rem); 
+  line-height: 1.5; 
+  opacity: 0.95; 
+  margin: 0 0 10px 0;
+}
+
+/* Botón Blanco tipo Píldora */
+.btn-banner-cotiza {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 12px;
+  background-color: #ffffff; 
+  color: #536c5e;
+  text-decoration: none; 
+  padding: 14px 36px; 
+  border-radius: 18px;
+  font-family: 'Futura Local', sans-serif; 
+  font-weight: 500; 
+  font-size: 15.5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.btn-banner-cotiza svg { 
+  transition: transform 0.3s ease; 
+}
+
+.btn-banner-cotiza:hover { 
+  background-color: #eef1f0; 
+  transform: translateY(-2px);
+}
+
+.btn-banner-cotiza:hover svg { 
+  transform: translate(2px, -2px); 
+}
+
+/* Responsivo para celulares */
+@media (max-width: 768px) {
+  .banner-cta-servicios {
+    height: auto;
+    padding: 70px 0;
   }
 
-  /* Los dots se quedan estables y visibles debajo de la foto */
-  .carrusel-dots {
-    position: relative;
-    margin-top: 12px;
-    margin-bottom: 5px;
+  .banner-cta-contenido h2 br,
+  .banner-cta-contenido p br {
+    display: none; /* En pantallas móviles permite fluidez de texto */
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN HERO PROYECTOS (CORREGIDA)
+   ========================================================================== */
+.proyectos-hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 6vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.proyectos-hero-background {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  z-index: 1;
+}
+
+.proyectos-hero-background img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Filtro oscuro más ligero para que la foto respire */
+.proyectos-hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* Reducido de 0.55 a 0.45 */
+  z-index: 2;
+}
+
+/* Contenedor del texto forzado al frente */
+.proyectos-hero-content {
+  position: relative;
+  z-index: 10 !important; /* Forzamos z-index por encima de todo */
+  color: #ffffff !important;
+  max-width: 750px;
+  text-align: left;
+  margin-top: 60px;
+}
+
+.proyectos-hero-title {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 2px;
+  margin: 0 0 15px 0;
+  line-height: 1.1;
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+}
+
+.proyectos-hero-subtitle {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.4;
+  color: #ffffff !important;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+@media (max-width: 768px) {
+  .proyectos-hero-section {
+    padding: 0 6vw;
     justify-content: center;
   }
+  
+  .proyectos-hero-content {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   REPARACIÓN DEFINITIVA DE TARJETAS DE EQUIPO Y COLABORADORES
+   ========================================================================== */
+
+/* 1. GRILLA DE DIRECCIÓN (2 TARJETAS GRANDES) */
+.grid-direccion {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+}
+
+/* 2. GRILLA DE COLABORADORES (2 COLUMNAS: 2 Y 2) */
+.grid-equipo-dos-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 850px;
+  margin: 30px auto 0 auto;
+}
+
+/* 3. GRILLA DE EQUIPO DE TRABAJO (3 TARJETAS CENTRADAS) */
+.grid-equipo-tres-centradas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 950px;
+  margin: 30px auto 0 auto;
+}
+
+/* 4. CONTROL DE TAMAÑO Y FORMA DE TARJETAS MINI */
+.grid-equipo-dos-cols .tarjeta-mini,
+.grid-equipo-tres-centradas .tarjeta-mini {
+  width: 100%;
+  max-width: 380px; /* Impide que la tarjeta se vuelva gigante de lado a lado */
+  margin: 0 auto;
+}
+
+/* Contenedor de la foto con altura fija */
+.perfil-imagen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px; /* Altura fija vertical elegante */
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+/* Ajuste de la foto de perfil */
+.perfil-imagen-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Centra la cara sin estirar ni deformar */
+  object-position: top center;
+  display: block;
+}
+
+/* CAPA OVERLAY VERDE AL PASAR EL CURSOR (HOVER) */
+.perfil-overlay-cv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(83, 108, 94, 0.95); /* Verde corporativo sólido para ocultar la foto */
+  color: #ffffff;
+  padding: 25px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.perfil-imagen-wrapper:hover .perfil-overlay-cv {
+  opacity: 1;
+}
+
+.cv-content {
+  max-height: 100%;
+  overflow-y: auto; /* Scroll interno si la semblanza es muy extensa */
+}
+
+.cv-content p {
+  font-family: 'Futura Local', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .grid-direccion,
+  .grid-equipo-dos-cols {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-equipo-tres-centradas {
+    flex-direction: column;
+  }
+}
+/* EQUIPO DE TRABAJO: 3 TARJETAS EN 1 SOLA FILA HORIZONTAL */
+.grid-equipo-tres-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en la misma fila */
+  gap: 25px;
+  max-width: 1050px;
+  margin: 30px auto 0 auto;
+}
+
+.grid-equipo-tres-cols .tarjeta-mini {
+  width: 100%;
+}
+
+/* Adaptación responsiva para móviles y tablets */
+@media (max-width: 992px) {
+  .grid-equipo-tres-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-equipo-tres-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   BOTÓN WHATSAPP EN FORMA DE PÍLDORA PEGADO A LA DERECHA
+   ========================================================================== */
+.whatsapp-pill-flotante {
+  position: fixed;
+  bottom: 35px;
+  right: 0; /* Pegado completamente a la derecha */
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #536c5e; /* Verde institucional corporativo */
+  color: #ffffff;
+  padding: 10px 24px 10px 16px;
+  border-top-left-radius: 35px; /* Bordes redondeados solo a la izquierda */
+  border-bottom-left-radius: 35px;
+  border-top-right-radius: 0;   /* Recto a la derecha para simular pegado */
+  border-bottom-right-radius: 0;
+  text-decoration: none;
+  box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-pill-flotante:hover {
+  background-color: #42594d; /* Verde institucional más oscuro al pasar el cursor */
+  transform: translateX(-5px); /* Leve deslizamiento hacia la izquierda al hacer hover */
+  box-shadow: -6px 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.whatsapp-pill-icon {
+  width: 28px;
+  height: 28px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.whatsapp-pill-text {
+  font-family: 'Futura Local', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Ajuste móvil para que no estorbe en pantallas pequeñas */
+@media (max-width: 600px) {
+  .whatsapp-pill-flotante {
+    bottom: 20px;
+    padding: 8px 18px 8px 12px;
+  }
+  .whatsapp-pill-text {
+    font-size: 13px;
+  }
+  .whatsapp-pill-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* REVISA O AGREGA ESTO EN style.css */
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Oculta solo el desbordamiento horizontal */
+  overflow-y: auto;   /* GARANTIZA el scroll vertical siempre */
 }

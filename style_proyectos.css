@@ -1,0 +1,676 @@
+/* ==========================================================================
+   SECCIÓN LISTADO DE PROYECTOS (ESTILO 2 COLUMNAS)
+   ========================================================================== */
+.lista-proyectos-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 60px 0 120px 0;
+  box-sizing: border-box;
+}
+
+.proyectos-container {
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.proyecto-tarjeta-item {
+  display: grid;
+  grid-template-columns: 320px 1fr; /* Columna izquierda fija para datos, derecha fluida para la foto */
+  gap: 50px;
+  align-items: center;
+}
+
+/* Columna de Texto */
+.proyecto-info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.proyecto-linea-decorativa {
+  width: 45px;
+  height: 2px;
+  background-color: #536c5e;
+  margin-bottom: 20px;
+}
+
+.proyecto-nombre {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+  color: #536c5e;
+  margin: 0 0 15px 0;
+  line-height: 1.1;
+}
+
+.proyecto-meta {
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.btn-proyecto-saber-mas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #536c5e;
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 18px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-proyecto-saber-mas svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-proyecto-saber-mas:hover {
+  background-color: #3f5247;
+}
+
+.btn-proyecto-saber-mas:hover svg {
+  transform: translateX(4px);
+}
+
+/* Columna de Fotografía */
+.proyecto-foto-col {
+  width: 100%;
+  cursor: pointer;
+}
+
+.proyecto-foto-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 35px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.proyecto-foto-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.proyecto-foto-wrapper:hover img {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   MODAL TIPO TARJETA FLOTANTE PERFECTO (SIN SALIDA DE SCROLL NI "X" MÓVIL)
+   ========================================================================== */
+.modal-proyecto-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background-color: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* MARCO ESTÁTICO DE LA TARJETA (RECORTA EL SCROLL Y MANTIENE LA X FIJA) */
+.modal-tarjeta-frame {
+  position: relative;
+  width: 90vw;
+  max-width: 1450px;
+  height: 75vh;
+  background-color: #ffffff;
+  border-radius: 35px; /* Aplica la curva perfecta */
+  overflow: hidden;    /* RECORTA STRICTAMENTE LA BARRA EN LAS ESQUINAS */
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+
+  /* Animación Zoom */
+  transform: scale(0.88);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-proyecto-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-proyecto-overlay.active .modal-tarjeta-frame {
+  transform: scale(1);
+}
+
+/* BOTÓN DE CIERRE ("X") 100% FIJO EN LA ESQUINA DEL MARCO */
+.btn-cerrar-modal-proyecto {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #536c5e;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100005; /* Siempre visible sobre el contenido que pasa por debajo */
+  transition: all 0.3s ease;
+}
+
+.btn-cerrar-modal-proyecto:hover {
+  background-color: #536c5e;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+/* PISTA DE SCROLL HORIZONTAL INTERNA */
+.lienzo-horizontal-container {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.lienzo-horizontal-container:active {
+  cursor: grabbing;
+}
+
+.lienzo-horizontal-track {
+  display: flex;
+  align-items: center;
+  padding: 40px 60px 45px 60px;
+  gap: 50px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* BLOQUES EDITORIALES */
+.item-editorial {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.bloque-ficha .editorial-info-principal {
+  width: 290px;
+  font-family: 'Futura Local', sans-serif;
+}
+
+.editorial-info-principal h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #536c5e;
+  margin: 0 0 8px 0;
+}
+
+.editorial-subtitulo {
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.editorial-ficha-tecnica p {
+  font-size: 13px;
+  color: #666666;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.editorial-ficha-tecnica strong {
+  color: #536c5e;
+}
+
+.editorial-texto-box {
+  width: 280px;
+  font-family: 'Futura Local', sans-serif;
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.editorial-foto-frame {
+  height: 280px;
+  width: 488px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+}
+
+.editorial-foto-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BARRA DE SCROLL EN VERDE CORPORATIVO PERFECTAMENTE CONTENIDA DENTRO DE LOS BORDES */
+.lienzo-horizontal-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.lienzo-horizontal-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  margin: 0 25px; /* Evita que la barra llegue a los bordes donde está la curva */
+}
+
+.lienzo-horizontal-container::-webkit-scrollbar-thumb {
+  background-color: #536c5e;
+  border-radius: 10px;
+}
+
+.lienzo-horizontal-container::-webkit-scrollbar-thumb:hover {
+  background-color: #3f5247;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .modal-tarjeta-frame {
+    width: 95vw;
+    height: 85vh;
+  }
+  .editorial-foto-frame {
+    height: 220px;
+    width: 384px;
+  }
+}
+
+/* ==========================================================================
+   ADAPTACIÓN RESPONSIVA MÓVIL (MANTIENE SCROLL HORIZONTAL EN EL MODAL)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* 1. SECCIÓN INTRODUCCIÓN */
+  .proyectos-intro-detalle {
+    padding: 50px 0;
+  }
+
+  .proyectos-intro-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .proyectos-intro-title {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+
+  /* 2. LISTA PRINCIPAL (1 COLUMNA) */
+  .lista-proyectos-section {
+    padding: 20px 0 80px 0;
+  }
+
+  .proyectos-container {
+    gap: 50px;
+  }
+
+  .proyecto-tarjeta-item {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .proyecto-info-col {
+    width: 100%;
+  }
+
+  .proyecto-foto-wrapper {
+    height: 260px;
+    border-radius: 25px;
+  }
+
+  /* 3. MODAL EDITORIAL EN MÓVIL (MANTIENE FLUJO HORIZONTAL) */
+  .modal-tarjeta-frame {
+    width: 92vw;
+    height: 80vh;
+    border-radius: 28px;
+  }
+
+  .lienzo-horizontal-container {
+    overflow-x: auto; /* Mantiene scroll horizontal */
+    overflow-y: hidden;
+  }
+
+  .lienzo-horizontal-track {
+    flex-direction: row; /* Fuerza alineación horizontal */
+    padding: 35px 30px 35px 30px;
+    gap: 35px;
+    height: 100%;
+  }
+
+  .item-editorial {
+    flex-direction: row; /* Texto e imagen lado a lado */
+    align-items: center;
+    gap: 25px;
+    height: 100%;
+  }
+
+  .bloque-ficha .editorial-info-principal,
+  .editorial-texto-box {
+    width: 240px; /* Ancho optimizado para pantallas táctiles angostas */
+    font-size: 13.5px;
+  }
+
+  .editorial-info-principal h2 {
+    font-size: 22px;
+  }
+
+  .editorial-foto-frame {
+    height: 200px;
+    width: 320px; /* Proporción 16:9 reducida para móvil */
+    min-width: 320px;
+    border-radius: 16px;
+  }
+
+  .btn-cerrar-modal-proyecto {
+    top: 15px;
+    right: 15px;
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Barra de scroll verde ajustada para móvil */
+  .lienzo-horizontal-container::-webkit-scrollbar {
+    height: 5px;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN: BANNER CONTACTO CON FORMULARIO
+   ========================================================================== */
+.contacto-banner-section {
+  position: relative;
+  width: 100%;
+  padding: 90px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.contacto-banner-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.contacto-banner-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Tinte verde corporativo sobre la imagen */
+.contacto-banner-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(83, 108, 94, 0.88);
+  z-index: 2;
+}
+
+.contacto-banner-container {
+  position: relative;
+  z-index: 3;
+  width: 90vw;
+  max-width: 1300px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+/* Columna de Texto */
+.contacto-info-col {
+  color: #ffffff;
+  font-family: 'Futura Local', sans-serif;
+}
+
+.contacto-info-col h2 {
+  font-size: clamp(2.2rem, 3.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 20px 0;
+}
+
+.contacto-info-col p {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0.95;
+  margin: 0;
+}
+
+/* Columna de Formulario */
+.form-contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field.full-width {
+  grid-column: span 2;
+}
+
+.form-field label {
+  font-family: 'Futura Local', sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.form-field label span {
+  color: #ff8a8a; /* Color rojo sutil para campos obligatorios */
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  color: #333333;
+  font-family: 'Futura Local', sans-serif;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Botón Outline Transparente */
+.btn-enviar-contacto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  padding: 12px 35px;
+  border-radius: 20px;
+  font-family: 'Futura Local', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.btn-enviar-contacto:hover {
+  background-color: #ffffff;
+  color: #536c5e;
+}
+
+/* Adaptación para celular */
+@media (max-width: 992px) {
+  .contacto-banner-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .form-contacto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full-width {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================================
+   ISOTIPO DE PROYECTO (LOGO CONCEPTUAL)
+   ========================================================================== */
+.proyecto-isotipo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px; /* Espaciado cómodo antes de la línea decorativa */
+  height: 55px; /* Altura ideal fijada para mantener uniformidad entre proyectos */
+}
+
+.proyecto-isotipo-img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  /* Transición sutil al interactuar con la tarjeta */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Efecto hover sutil al pasar sobre la tarjeta */
+.proyecto-tarjeta-item:hover .proyecto-isotipo-img {
+  transform: translateY(-2px);
+}
+
+/* REGLA PARA VIDEO DENTRO DEL RECORRIDO EDITORIAL */
+.editorial-foto-frame video.editorial-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Margen para que el Navbar fijo no tape la tarjeta al hacer scroll directo */
+.proyecto-tarjeta-item {
+  scroll-margin-top: 100px;
+}
+
+/* Debe permitir scroll vertical en la página principal */
+html, body {
+  overflow-x: hidden; /* Evita desbordes laterales */
+  overflow-y: auto;   /* Permite scroll vertical normal */
+}
+
+/* ==========================================================================
+   SECCIÓN INTRODUCCIÓN PROYECTOS (FONDO BLANCO A 2 COLUMNAS)
+   ========================================================================== */
+.proyectos-intro-detalle {
+  width: 100%;
+  background-color: #ffffff; /* Fondo blanco restaurado */
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.proyectos-intro-container {
+  width: 90vw;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas paralelas */
+  gap: 60px;
+  align-items: center;
+}
+
+/* Columna Izquierda: Imagen */
+.proyectos-intro-col-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Columna Derecha: Textos */
+.proyectos-intro-col-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.proyectos-intro-title {
+  font-family: 'Futura Local', sans-serif;
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: #536c5e; /* Verde corporativo de la marca */
+  line-height: 1.15;
+  margin-bottom: 25px;
+}
+
+.proyectos-intro-paragraph {
+  font-family: 'Futura Local', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a4a4a; /* Gris oscuro legible sobre blanco */
+  margin-bottom: 20px;
+}
+
+.proyectos-intro-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Adaptación para celular */
+@media (max-width: 768px) {
+  .proyectos-intro-container {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}

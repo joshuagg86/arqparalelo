@@ -29,10 +29,10 @@
       <div class="nav-links">
         <a href="index.html">Inicio</a>
         <a href="nosotros.html">Nosotros</a>
-        <a href="servicios.html" class="active">Servicios</a>
-        <a href="#">Proyectos</a>
-        <a href="#">Cotizador</a>
-        <a href="#">Blog</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="cotizador.html" class="active">Cotizador</a>
+        <a href="blog.html">Blog</a>
       </div>
       
       <div class="mobile-socials">
@@ -54,7 +54,7 @@
 <section class="servicios-hero-section">
   <div class="servicios-hero-background">
     <!-- Cargamos tu nueva imagen desde la carpeta img -->
-    <img src="assets/img/hero_servicios.png" alt="Diseño y modelado BIM - Arquitectura en Paralelo">
+    <img src="assets/img/hero_nosotros.png" alt="Diseño y modelado BIM - Arquitectura en Paralelo">
   </div>
   
   <div class="servicios-hero-content reveal-anim">
@@ -89,83 +89,46 @@
 <section class="lista-servicios-section">
   <div class="servicios-lista-container">
 
-    <!-- SERVICIO 1: PROYECTO Y DISEÑO -->
-    <div class="servicio-item-bloque">
-      <div class="tarjeta-servicio-resumen reveal-anim">
-        <div class="servicio-icono-caja">
-          <!-- Icono temporal SVG unificado -->
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h2m2 0h2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- SERVICIO 1: DISEÑO ARQUITECTÓNICO -->
+    <div id="diseno-arquitectonico" class="servicio-item-bloque">
+      
+      <!-- TARJETA FRONTAL (Con imagen de fondo) -->
+      <div class="tarjeta-servicio-resumen reveal-anim servicio-bg-diseno">
+        <div class="servicio-overlay-card"></div>
+        
         <div class="servicio-titulo-caja">
-          <h3>Proyecto y diseño arquitectónico:</h3>
+          <h3>Diseño Arquitectónico</h3>
         </div>
+        
         <div class="servicio-desc-caja">
-          <p>Desarrollo conceptual y soluciones espaciales a la medida, fusionando estética contemporánea y funcionalidad óptima.</p>
+          <p>Diseñamos espacios funcionales, estéticos y técnicamente viables mediante un proceso que integra creatividad, análisis y metodología BIM.</p>
           <button class="btn-saber-mas" onclick="toggleServicio(this)">
             <span>Saber más</span>
             <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
-      
-      <!-- Panel Detallado Oculto (Se expande con JS) -->
-      <div class="servicio-panel-detalle">
-        <div class="panel-detalle-interno">
-          <div class="panel-grid">
-            <!-- Carrusel del Servicio -->
-            <div class="panel-carrusel-contenedor">
-              <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Modelo BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Modelo BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Interferencias BIM" class="slide-img">
-              </div>
-              <div class="carrusel-dots">
-                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
-              </div>
-            </div>
-            <!-- Contenido del Servicio -->
-            <div class="panel-texto-content">
-              <p>Creamos proyectos residenciales de alta gama diseñados desde cero para adaptarse a tu estilo de vida y entorno. Nuestro enfoque integra criterios bioclimáticos, selección de materiales premium y optimización de flujos espaciales.</p>
-              <ul>
-                <li><strong>Anteproyecto arquitectónico:</strong> Modelado conceptual y zonificación de áreas.</li>
-                <li><strong>Proyecto ejecutivo completo:</strong> Planos de detalle estructural, acabados e ingenierías constructivas.</li>
-                <li><strong>Diseño de interiores integrado:</strong> Selección modular de mobiliario, iluminación arquitectónica y paletas cromáticas.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- SERVICIO 2: RENDERIZADO HIPERREALISTA -->
-    <div class="servicio-item-bloque">
-      <div class="tarjeta-servicio-resumen reveal-anim">
-        <div class="servicio-icono-caja">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h2m2 0h2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="servicio-titulo-caja">
-          <h3>Renderizado hiperrealista:</h3>
-        </div>
-        <div class="servicio-desc-caja">
-          <p>Visualización 3D avanzada con texturas, iluminación y atmósferas idénticas al resultado real de la obra.</p>
-          <button class="btn-saber-mas" onclick="toggleServicio(this)">
-            <span>Saber más</span>
-            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </div>
+      <!-- SOLAPA VERDE TRASERA (Se asoma abajo y se desplaza al hover) -->
+      <div class="solapa-verde-peek"></div>
       
+      <!-- PANEL VERDE EXPANDIBLE (Queda igual al abrir) -->
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
           <div class="panel-grid">
             <div class="panel-carrusel-contenedor">
               <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Modelo BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Modelo BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Interferencias BIM" class="slide-img">
+                <img src="assets/img/Carrusel_Celar.png" alt="Diseño Arquitectónico 1" class="slide-img active">
+                <img src="assets/img/Carrusel_Umbral.png" alt="Diseño Arquitectónico 2" class="slide-img">
+                <img src="assets/img/Carrusel_Retiro.png" alt="Diseño Arquitectónico 3" class="slide-img">
               </div>
+              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+
               <div class="carrusel-dots">
                 <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
                 <span class="dot" onclick="cambiarSlide(this, 1)"></span>
@@ -173,45 +136,54 @@
               </div>
             </div>
             <div class="panel-texto-content">
-              <p>Trasladamos los planos técnicos a imágenes fotorrealistas de alto impacto emocional. Esto permite a nuestros clientes validar texturas, evaluar la incidencia de la luz solar natural y tomar decisiones estéticas clave antes de colocar el primer ladrillo.</p>
-              <ul>
-                <li><strong>Renders exteriores diurnos y nocturnos:</strong> Visualización del comportamiento de fachadas en su entorno real.</li>
-                <li><strong>Infografías de interiores en alta definición:</strong> Detalle exacto de texturas, cancelerías y reflejos de materiales.</li>
-                <li><strong>Recorridos virtuales interactivos:</strong> Paseos en video digital a través de los espacios proyectados.</li>
-              </ul>
+              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <p>Diseñamos espacios funcionales, estéticos y técnicamente viables mediante un proceso que integra creatividad, análisis y metodología BIM. Desarrollamos proyectos desde el concepto arquitectónico hasta el proyecto ejecutivo y el acompañamiento en obra.</p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- SERVICIO 3: SUPERVISIÓN Y EJECUCIÓN -->
-    <div class="servicio-item-bloque">
-      <div class="tarjeta-servicio-resumen reveal-anim">
-        <div class="servicio-icono-caja">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h2m2 0h2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- SERVICIO 2: SERVICIOS BIM -->
+    <div id="capacitacion-bim" class="servicio-item-bloque">
+      <div class="tarjeta-servicio-resumen reveal-anim servicio-bg-bim">
+        <div class="servicio-overlay-card"></div>
         <div class="servicio-titulo-caja">
-          <h3>Supervisión y ejecución de obra:</h3>
+          <h3>Servicios BIM</h3>
         </div>
         <div class="servicio-desc-caja">
-          <p>Control técnico riguroso en campo, garantizando el cumplimiento de presupuestos, tiempos y calidades.</p>
+          <p>Implementamos soluciones BIM para optimizar el desarrollo de proyectos mediante modelado, coordinación interdisciplinaria y consultoría especializada.</p>
           <button class="btn-saber-mas" onclick="toggleServicio(this)">
             <span>Saber más</span>
             <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
+
+      <div class="solapa-verde-peek"></div>
       
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
           <div class="panel-grid">
             <div class="panel-carrusel-contenedor">
               <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Modelo BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Modelo BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Interferencias BIM" class="slide-img">
+                <img src="assets/img/Carrusel_Celar.png" alt="Servicios BIM 1" class="slide-img active">
+                <img src="assets/img/Carrusel_Umbral.png" alt="Servicios BIM 2" class="slide-img">
+                <img src="assets/img/Carrusel_Retiro.png" alt="Servicios BIM 3" class="slide-img">
               </div>
+              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+
               <div class="carrusel-dots">
                 <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
                 <span class="dot" onclick="cambiarSlide(this, 1)"></span>
@@ -219,45 +191,53 @@
               </div>
             </div>
             <div class="panel-texto-content">
-              <p>Llevamos la precisión del plano digital al terreno real. Dirigimos cuadrillas especializadas y gestionamos la proveeduría técnica bajo estrictos estándares normativos para mitigar cualquier riesgo constructivo.</p>
-              <ul>
-                <li><strong>Administración y control de obra:</strong> Gestión transparente de presupuestos por etapas y estimaciones.</li>
-                <li><strong>Supervisión técnica e institucional:</strong> Aseguramiento del cumplimiento estructural y gestiones municipales.</li>
-                <li><strong>Entrega llave en mano:</strong> Finalización limpia de acabados residenciales listos para habitar.</li>
-              </ul>
+              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <p>Implementamos soluciones BIM para optimizar el desarrollo de proyectos mediante modelado, coordinación interdisciplinaria, detección de interferencias, documentación y consultoría especializada, mejorando la calidad y el control durante todo el proceso.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SERVICIO 4: COORDINACIÓN Y GESTIÓN BIM -->
-    <div class="servicio-item-bloque">
-      <div class="tarjeta-servicio-resumen reveal-anim">
-        <div class="servicio-icono-caja">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h2m2 0h2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- SERVICIO 3: CAPACITACIÓN BIM -->
+    <div id="captura-digital" class="servicio-item-bloque">
+      <div class="tarjeta-servicio-resumen reveal-anim servicio-bg-capacitacion">
+        <div class="servicio-overlay-card"></div>
         <div class="servicio-titulo-caja">
-          <h3>Coordinación y gestión BIM:</h3>
+          <h3>Capacitación BIM</h3>
         </div>
         <div class="servicio-desc-caja">
-          <p>Modelado inteligente centralizado para prever interferencias, optimizar costos y acelerar tiempos de construcción.</p>
+          <p>Ofrecemos cursos de Revit y metodología BIM desarrollados a partir de nuestra experiencia en proyectos reales combinando teoría y práctica.</p>
           <button class="btn-saber-mas" onclick="toggleServicio(this)">
             <span>Saber más</span>
             <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
+
+      <div class="solapa-verde-peek"></div>
       
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
           <div class="panel-grid">
             <div class="panel-carrusel-contenedor">
               <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Modelo BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Modelo BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Interferencias BIM" class="slide-img">
+                <img src="assets/img/Carrusel_Celar.png" alt="Capacitación BIM 1" class="slide-img active">
+                <img src="assets/img/Carrusel_Umbral.png" alt="Capacitación BIM 2" class="slide-img">
+                <img src="assets/img/Carrusel_Retiro.png" alt="Capacitación BIM 3" class="slide-img">
               </div>
+              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+
               <div class="carrusel-dots">
                 <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
                 <span class="dot" onclick="cambiarSlide(this, 1)"></span>
@@ -265,21 +245,91 @@
               </div>
             </div>
             <div class="panel-texto-content">
-              <p>En Arquitectura en Paralelo, somos expertos en la implementación de la metodología BIM (Building Information Modeling), alineados con los estándares internacionales de la norma ISO 19650.</p>
-              <p>Nuestro enfoque incluye:</p>
-              <ul>
-                <li><strong>Soluciones integrales:</strong> Coordinamos proyectos ejecutivos que abarcan arquitectura, estructura e instalaciones.</li>
-                <li><strong>Optimización de flujos de trabajo:</strong> Detectamos conflictos desde las etapas iniciales para minimizar errores y retrasos.</li>
-                <li><strong>Servicios de gestión y auditoría:</strong> Garantizamos que los procesos se desarrollen con las mejores prácticas internacionales.</li>
-                <li><strong>Capacitación especializada:</strong> Ofrecemos cursos en herramientas como Revit, permitiendo a tu equipo aprovechar al máximo esta metodología.</li>
-              </ul>
-              <p>La metodología BIM permite a nuestros clientes reducir costos de obra, aumentar la precisión y mejorar la coordinación en todas las disciplinas involucradas. Este enfoque no solo optimiza recursos, sino que también acelera los tiempos de ejecución y asegura la calidad en los resultados finales.</p>
+              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <p>Ofrecemos cursos de Revit y metodología BIM desarrollados a partir de nuestra experiencia en proyectos reales de arquitectura, infraestructura y edificación. La formación combina teoría, práctica y aplicación profesional.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- SERVICIO 4: CAPTURA DIGITAL -->
+    <div id="servicios-bim" class="servicio-item-bloque">
+      <div class="tarjeta-servicio-resumen reveal-anim servicio-bg-captura">
+        <div class="servicio-overlay-card"></div>
+        <div class="servicio-titulo-caja">
+          <h3>Captura Digital</h3>
+        </div>
+        <div class="servicio-desc-caja">
+          <p>Realizamos levantamientos mediante escaneo láser, nube de puntos, fotogrametría con drones y procesos Scan to BIM para alta precisión.</p>
+          <button class="btn-saber-mas" onclick="toggleServicio(this)">
+            <span>Saber más</span>
+            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 5L5 19M5 19H14M5 19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="solapa-verde-peek"></div>
+      
+      <div class="servicio-panel-detalle">
+        <div class="panel-detalle-interno">
+          <div class="panel-grid">
+            <div class="panel-carrusel-contenedor">
+              <div class="panel-carrusel-slides">
+                <img src="assets/img/Carrusel_Celar.png" alt="Captura Digital 1" class="slide-img active">
+                <img src="assets/img/Carrusel_Umbral.png" alt="Captura Digital 2" class="slide-img">
+                <img src="assets/img/Carrusel_Retiro.png" alt="Captura Digital 3" class="slide-img">
+              </div>
+              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              </button>
+
+              <div class="carrusel-dots">
+                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
+                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
+                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
+              </div>
+            </div>
+            <div class="panel-texto-content">
+              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <p>Realizamos levantamientos mediante escaneo láser, nube de puntos, fotogrametría con drones y procesos Scan to BIM para documentar edificaciones existentes con alta precisión.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN BANNER CTA (DALE VIDA A TUS IDEAS) -->
+<section class="banner-cta-servicios">
+  <div class="banner-cta-bg">
+    <!-- Usamos la imagen de fondo del banner existente -->
+    <img src="assets/img/banner_nosotros.png" alt="Arquitectura en Paralelo Proyectos">
+  </div>
+  
+  <div class="banner-cta-contenido reveal-anim">
+    <h2>Dale vida a tus ideas con<br>Arquitectura en Paralelo</h2>
+    <p>Transformamos espacios con visión y excelencia.<br>Juntos daremos vida a tu siguiente proyecto.</p>
+    
+    <a href="#contacto" class="btn-banner-cotiza">
+      Cotiza tu proyecto aquí
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </section>
 
@@ -426,17 +476,15 @@
           </div>
         </div>
         
-        <div class="form-group full-width">
-          <label for="servicio_s">Elige el servicio</label>
-          <div class="select-wrapper">
-            <select id="servicio_s" name="servicio">
-              <option value="" disabled selected hidden>Selecciona</option>
-              <option value="diseno">Proyecto y diseño arquitectónico</option>
-              <option value="render">Renderizado Hiperrealista</option>
-              <option value="gestion-bim">Coordinación y gestión BIM</option>
-              <option value="supervision">Supervisión y ejecución de obra</option>
-            </select>
-          </div>
+        <div class="form-field full-width">
+          <label for="servicio">Elige el servicio</label>
+          <select id="servicio" name="servicio">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
+            <option value="Servicios BIM">Servicios BIM</option>
+            <option value="Capacitación BIM">Capacitación BIM</option>
+            <option value="Captura Digital">Captura Digital</option>
+          </select>
         </div>
         
         <div class="form-group full-width">
@@ -486,14 +534,20 @@
   </div>
 </footer>
 
-<!-- 4. ELEMENTOS FLOTANTES DE INTERACCIÓN SIMÉTRICA -->
-<!-- WhatsApp Flotante Derecho Limpio -->
-<div class="whatsapp-flotante">
-  <span class="whatsapp-texto">¿Tienes dudas? ¡Escríbenos!</span>
-  <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat de WhatsApp">
-    <img src="assets/icon/whatsapp-3.svg" alt="WhatsApp" class="whatsapp-icon-img">
-  </a>
-</div>
+<!-- BOTÓN FLOTANTE WHATSAPP PEGADO A LA DERECHA -->
+<a href="https://wa.me/5215665063857?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto." 
+   class="whatsapp-pill-flotante" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Habla con un especialista por WhatsApp">
+   
+  <!-- Ícono SVG de WhatsApp en blanco -->
+  <svg class="whatsapp-pill-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+  
+  <span class="whatsapp-pill-text">Habla con un especialista.</span>
+</a>
 
 <!-- Botón de retorno arriba izquierdo controlado por Scroll -->
 <button class="btn-scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>

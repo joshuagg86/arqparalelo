@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimación Paramétrica | Arquitectura en Paralelo</title>
+  
+  <!-- ESTILOS GENERALES -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ==========================================================================
+       ESTILOS DEL COTIZADOR / ESTIMADOR PARAMÉTRICO
+       ========================================================================== */
+    .cotizador-hero-section {
+    width: 100%;
+    min-height: auto;
+    background-color: #536c5e;
+    padding: 140px 4vw 80px 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+    .cotizador-header-intro {
+      text-align: center;
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+
+    .cotizador-header-intro h1 {
+      font-family: 'Futura Local', sans-serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 12px 0;
+    }
+
+    .cotizador-header-intro p {
+      font-family: 'Futura Local', sans-serif;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.95);
+      margin: 0;
+    }
+
+    .cotizador-layout-grid {
+      width: 90vw;
+      max-width: 1280px;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      box-sizing: border-box;
+    }
+
+    /* FORMULARIO IZQUIERDA */
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Futura Local', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 8px;
+    }
+
+    .form-group label svg {
+      width: 18px;
+      height: 18px;
+      color: #536c5e;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      font-family: 'Futura Local', sans-serif;
+      font-size: 14px;
+      color: #333333;
+      background-color: #fafafa;
+      outline: none;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-control:focus {
+      border-color: #536c5e;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(83, 108, 94, 0.12);
+    }
+
+    .service-mini-desc {
+      background: #f0f4f1;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #42594d;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    /* TARJETA DINÁMICA DERECHA */
+    .dynamic-card-column {
+      background: #f4f6f5;
+      border-radius: 20px;
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #e2e7e4;
+    }
+
+    .card-header-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card-icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #536c5e;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-service-title {
+      font-family: 'Futura Local', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #2c3a33;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .card-price-reference {
+      margin-bottom: 25px;
+    }
+
+    .card-price-reference .sub {
+      font-size: 12px;
+      color: #777777;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .card-price-reference .amount {
+      font-family: 'Futura Local', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #2c3a33;
+    }
+
+    .card-details-section h4 {
+      font-family: 'Futura Local', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #536c5e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 12px 0;
+    }
+
+    .deliverables-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+    }
+
+    .deliverables-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #444444;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .deliverables-list li svg {
+      width: 16px;
+      height: 16px;
+      color: #536c5e;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .card-disclaimer {
+      font-size: 12px;
+      color: #777777;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 15px;
+    }
+
+    /* BANNER DE RESULTADOS Y BOTONES */
+    .total-banner {
+      grid-column: span 2;
+      background: #536c5e;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .total-banner-label {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 5px;
+    }
+
+    .total-banner-amount {
+      font-family: 'Futura Local', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+    }
+
+    .action-buttons-grid {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .btn-action {
+      padding: 16px;
+      border-radius: 14px;
+      font-family: 'Futura Local', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 1.5px solid #536c5e;
+    }
+
+    .btn-action-outline {
+      background: #ffffff;
+      color: #536c5e;
+    }
+
+    .btn-action-outline:hover {
+      background: #f4f6f5;
+    }
+
+    .btn-action-solid {
+      background: #536c5e;
+      color: #ffffff;
+    }
+
+    .btn-action-solid:hover {
+      background: #42594d;
+    }
+
+    .disclaimer-footer-text {
+      grid-column: span 2;
+      text-align: center;
+      font-size: 13px;
+      color: #888888;
+      margin-top: -10px;
+    }
+
+    /* SECCIÓN DE REVIEWS (GOOGLE MAPS) CON CARRUSEL CONTINUO */
+    .google-reviews-section {
+      width: 100%;
+      background-color: #ffffff;
+      padding: 80px 4vw;
+      box-sizing: border-box;
+    }
+
+    .reviews-container-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .reviews-header h2 {
+      font-family: 'Futura Local', sans-serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      color: #333333;
+      margin: 0;
+    }
+
+    .google-badge-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    /* ANIMACIÓN DERECHA A IZQUIERDA EN BUCLE INFINITO */
+    .reviews-marquee-wrapper {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 10px 0 25px 0;
+    }
+
+    .reviews-marquee-track {
+      display: flex;
+      gap: 25px;
+      width: max-content;
+      animation: scrollInfinito 30s linear infinite;
+    }
+
+    .reviews-marquee-wrapper:hover .reviews-marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollInfinito {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .review-card-item {
+      background: #f8fafb;
+      border-radius: 18px;
+      padding: 25px;
+      width: 310px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      border: 1px solid #eaeaea;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .review-user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #536c5e;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .review-user-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333333;
+      margin: 0;
+    }
+
+    .review-stars {
+      color: #f4c430;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .review-comment {
+      font-size: 13.5px;
+      color: #555555;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .review-date {
+      font-size: 12px;
+      color: #999999;
+    }
+
+    .btn-google-maps-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #536c5e;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .btn-google-maps-link:hover {
+      color: #3a4c42;
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 992px) {
+      .cotizador-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .total-banner, .action-buttons-grid, .disclaimer-footer-text {
+        grid-column: span 1;
+      }
+      .action-buttons-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 1. NAVBAR FIJO CORPORATIVO -->
+<header class="main-header" id="navbar">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo" class="logo-light">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo" class="logo-dark">
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+    
+    <nav class="nav-menu" id="main-nav">
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="cotizador.html" class="active">Cotizador</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      
+      <div class="mobile-socials">
+        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+        <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+      </div>
+    </nav>
+    
+    <div class="social-icons-desktop">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+    </div>
+  </div>
+</header>
+
+<!-- 2. SECCIÓN PRINCIPAL DEL ESTIMADOR -->
+<section class="cotizador-hero-section">
+  
+  <div class="cotizador-header-intro reveal-anim">
+    <h1>¡Bienvenido!</h1>
+    <p>Esta herramienta te permite estimar un costo paramétrico aproximado para tu proyecto.</p>
+  </div>
+
+  <div class="cotizador-layout-grid reveal-anim delay-1">
+    
+    <!-- FORMULARIO DE SELECCIÓN -->
+    <div class="form-column">
+      <form id="cotizadorForm">
+        
+        <div class="form-group">
+          <label for="tipoProyecto">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Tipo de proyecto
+          </label>
+          <select id="tipoProyecto" name="tipo_proyecto" class="form-control">
+            <option value="" disabled selected>Selecciona una opción</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="region">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Región
+          </label>
+          <select id="region" name="region" class="form-control">
+            <option value="" disabled selected>Selecciona una opción</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tipoServicio">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Tipo de servicio
+          </label>
+          <select id="tipoServicio" name="tipo_servicio" class="form-control">
+            <option value="" disabled selected>Selecciona una opción</option>
+          </select>
+          <div id="serviceMiniDesc" class="service-mini-desc" style="display: none;"></div>
+        </div>
+
+        <div class="form-group" id="areaGroup">
+          <label for="area">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M9 9h6v6H9z"></path></svg>
+            Área en m² (Si aplica)
+          </label>
+          <input type="number" id="area" name="area_m2" class="form-control" min="0" max="10000" placeholder="Ejemplo: 120">
+        </div>
+
+      </form>
+    </div>
+
+    <!-- TARJETA DINÁMICA LATERAL -->
+    <div class="dynamic-card-column" id="dynamicCard">
+      <div>
+        <div class="card-header-info">
+          <div class="card-icon-badge">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h3 class="card-service-title" id="cardServiceTitle">PROYECTO EJECUTIVO (PE)</h3>
+        </div>
+
+        <div class="card-price-reference">
+          <span class="sub">Desde</span>
+          <span class="amount" id="cardPriceAmount">$135 MXN / m²</span>
+        </div>
+
+        <div class="card-details-section">
+          <h4>¿QUÉ INCLUYE?</h4>
+          <ul class="deliverables-list" id="cardDeliverables">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Planos arquitectónicos</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Cortes y fachadas</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Planos constructivos</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Cuadro de acabados</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Detalles constructivos generales</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Documentación lista para construcción</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-disclaimer" id="cardDisclaimerText">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span>La entrega y alcances finales pueden variar según las características del proyecto.</span>
+      </div>
+    </div>
+
+    <!-- BANNER DE RESULTADO INVERSIÓN ESTIMADA -->
+    <div class="total-banner">
+      <div class="total-banner-label">Inversión aproximada estimada (MXN):</div>
+      <div class="total-banner-amount" id="totalAmount">$0.00</div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div class="action-buttons-grid">
+      <button type="button" class="btn-action btn-action-outline" id="btnPresupuesto">¿Está fuera de tu presupuesto?</button>
+      <button type="button" class="btn-action btn-action-solid" id="btnInteresa">Me interesa este resultado</button>
+    </div>
+
+    <div class="disclaimer-footer-text">
+      Estimado paramétrico, sujeto a validación. Podemos adaptarnos a tus necesidades y presupuesto.
+    </div>
+
+  </div>
+</section>
+
+<!-- 3. SECCIÓN REVIEWS GOOGLE MAPS CON CARRUSEL INFINITO -->
+<section class="google-reviews-section">
+  <div class="reviews-container-inner">
+    
+    <div class="reviews-header">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="google-badge-top">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        Opiniones de Google Maps
+      </div>
+    </div>
+
+    <!-- ENVOLTORIO CON MOVIMIENTO CONTINUO DERECHA A IZQUIERDA -->
+    <div class="reviews-marquee-wrapper">
+      <div class="reviews-marquee-track">
+        
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">E</div>
+            <div>
+              <p class="review-user-name">Erick Eduardo Guzmán</p>
+              <span class="review-date">Hace 2 semanas</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Fue una experiencia increíble de principio a fin. Desde la primera cita entendieron perfecto lo que quería para mi espacio."</p>
+        </div>
+
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">Y</div>
+            <div>
+              <p class="review-user-name">Yered Yesue Hernández</p>
+              <span class="review-date">Hace 1 mes</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Excelente despacho. El uso de BIM y la coordinación con el equipo hizo que todo el proceso fuera muy profesional."</p>
+        </div>
+
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">A</div>
+            <div>
+              <p class="review-user-name">Alejandra López</p>
+              <span class="review-date">Hace 1 mes</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Muy profesionales, siempre atentos y resolviendo dudas. Nuestro proyecto quedó mejor de lo que imaginábamos."</p>
+        </div>
+
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">J</div>
+            <div>
+              <p class="review-user-name">José Manuel Rojas</p>
+              <span class="review-date">Hace 2 meses</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Gran equipo, innovadores y comprometidos. Totalmente recomendados para cualquier desarrollo arquitectónico."</p>
+        </div>
+
+        <!-- DUPLICACIÓN PARA BUCLE INFINITO CONTINUO -->
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">E</div>
+            <div>
+              <p class="review-user-name">Erick Eduardo Guzmán</p>
+              <span class="review-date">Hace 2 semanas</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Fue una experiencia increíble de principio a fin. Desde la primera cita entendieron perfecto lo que quería para mi espacio."</p>
+        </div>
+
+        <div class="review-card-item">
+          <div class="review-user-info">
+            <div class="review-avatar">Y</div>
+            <div>
+              <p class="review-user-name">Yered Yesue Hernández</p>
+              <span class="review-date">Hace 1 mes</span>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-comment">"Excelente despacho. El uso de BIM y la coordinación con el equipo hizo que todo el proceso fuera muy profesional."</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ENLACE OFICIAL A GOOGLE MAPS -->
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="https://maps.app.goo.gl/uWiuPQ23E9PZNe9V6" target="_blank" rel="noopener noreferrer" class="btn-google-maps-link">
+        Ver todas las opiniones en Google Maps
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- 4. FOOTER CORPORATIVO -->
+<footer class="main-footer">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo">
+    </div>
+    
+    <hr class="footer-divider">
+    
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="footer-icon" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="footer-icon" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="footer-icon" target="_blank">in</a>
+    </div>
+    
+    <div class="footer-contact">
+      <a href="mailto:contacto@arqparalelo.com">contacto@arqparalelo.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p class="footer-copyright">
+        Copyright &copy; Arquitectura En Paralelo. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- SCRIPTS DE CONFIGURACIÓN DE PRECIOS Y TARJETAS DINÁMICAS -->
+<script>
+  let tasaDeCambioUSDaMXN = 18.50;
+
+  const CONFIG = {
+    tiposProyecto: [
+      { value: 'Residencial', label: 'Residencial' },
+      { value: 'Comercial', label: 'Comercial' },
+      { value: 'Habitacional', label: 'Habitacional' },
+      { value: 'Otros', label: 'Otros' }
+    ],
+    regiones: [
+      { value: 'CDMX', label: 'CDMX' },
+      { value: 'EdoMex', label: 'Estado de México' },
+      { value: 'Resto MX', label: 'Resto de México' }
+    ],
+    servicios: [
+      {
+        value: 'Anteproyecto',
+        label: 'Anteproyecto',
+        descripcion: 'Da el primer paso para transformar tu idea en un proyecto arquitectónico. Definimos la distribución, imagen y funcionamiento de tu espacio antes de desarrollar los planos.',
+        precioMinimo: 5000,
+        unidad: 'm2',
+        precioRef: '$45 MXN / m²',
+        multiplicadores: { CDMX: 5.5, EdoMex: 4.5, 'Resto MX': 4.5 },
+        entregables: [
+          'Zonificación y esquemas funcionales',
+          'Planta arquitectónica de distribución',
+          'Visualización preliminar 3D',
+          'Criterios iniciales de diseño'
+        ],
+        disclaimer: 'Ideal para definir el alcance general antes de avanzar a la documentación técnica.'
+      },
+      {
+        value: 'Proyecto Ejecutivo',
+        label: 'Proyecto Ejecutivo (PE)',
+        descripcion: 'Desarrollamos la documentación técnica necesaria para construir con precisión, reducir imprevistos y facilitar la ejecución de la obra.',
+        precioMinimo: 8000,
+        unidad: 'm2',
+        precioRef: '$135 MXN / m²',
+        multiplicadores: { CDMX: 8.75, EdoMex: 6.5, 'Resto MX': 6.5 },
+        entregables: [
+          'Planos arquitectónicos detallados',
+          'Cortes y fachadas ejecutivas',
+          'Planos constructivos e instalaciones',
+          'Cuadro de acabados y especificaciones',
+          'Detalles constructivos generales',
+          'Documentación lista para construcción'
+        ],
+        disclaimer: 'La entrega y alcances finales pueden variar según las características del proyecto.'
+      },
+      {
+        value: 'Construcción',
+        label: 'Construcción',
+        descripcion: 'Convertimos el proyecto en una realidad mediante una ejecución ordenada, supervisada y enfocada en la calidad de cada detalle.',
+        precioMinimo: 50000,
+        unidad: 'm2',
+        precioRef: '$8,500 MXN / m²',
+        multiplicadores: { CDMX: 485.0, EdoMex: 485.0, 'Resto MX': 485.0 },
+        entregables: [
+          'Ejecución física de la obra',
+          'Administración y logística de insumos',
+          'Mano de obra especializada',
+          'Control de calidad y seguridad',
+          'Entrega del proyecto terminado'
+        ],
+        disclaimer: 'Sujeto a verificación física de sitio y estudio topográfico.'
+      },
+      {
+        value: 'Trámites normativos',
+        label: 'Trámites normativos',
+        descripcion: 'Te acompañamos en la gestión de permisos y documentación necesaria para que tu proyecto cumpla con la normativa vigente.',
+        precioMinimo: 12000,
+        unidad: 'fijo',
+        precioRef: '$12,000 MXN (Gestión Base)',
+        multiplicadores: { CDMX: 65.0, EdoMex: 65.0, 'Resto MX': 65.0 },
+        entregables: [
+          'Alineamiento y número oficial',
+          'Licencia de construcción o aviso',
+          'Dictamen de uso de suelo',
+          'Acompañamiento en ventanilla única'
+        ],
+        disclaimer: 'No incluye derechos gubernamentales ni pagos a terceros.'
+      },
+      {
+        value: 'Modelado BIM',
+        label: 'Modelado BIM',
+        descripcion: 'Desarrollamos un modelo digital inteligente que mejora la coordinación entre disciplinas, reduce errores y optimiza la construcción.',
+        precioMinimo: 6000,
+        unidad: 'm2',
+        precioRef: '$180 MXN / m²',
+        multiplicadores: { CDMX: 16.5, EdoMex: 14.0, 'Resto MX': 14.0 },
+        entregables: [
+          'Modelo arquitectónico 3D inteligente (Revit)',
+          'Cuantificación básica de elementos',
+          'Detección de interferencias inicial',
+          'Base digital para coordinación BIM'
+        ],
+        disclaimer: 'LOD 200 - 300 según requerimientos del cliente.'
+      },
+      {
+        value: 'Supervisión de obra',
+        label: 'Supervisión de obra',
+        descripcion: 'Verificamos que la construcción se ejecute conforme al proyecto, cuidando la calidad, los tiempos y el correcto desarrollo de la obra.',
+        precioMinimo: 10000,
+        unidad: 'porcentaje',
+        precioRef: '10% sobre costo ejecutivo',
+        multiplicadores: { CDMX: 0.10, EdoMex: 0.10, 'Resto MX': 0.08 },
+        entregables: [
+          'Visitas periódicas de inspección',
+          'Reportes fotográficos de avance',
+          'Control de apego a planos',
+          'Validación de estimaciones de contratistas'
+        ],
+        disclaimer: 'Honorarios por mes o porcentaje de avance acordado.'
+      }
+    ]
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarFormulario();
+    configurarEventListeners();
+  });
+
+  function inicializarFormulario() {
+    const selectProyecto = document.getElementById('tipoProyecto');
+    CONFIG.tiposProyecto.forEach(tipo => selectProyecto.add(new Option(tipo.label, tipo.value)));
+
+    const selectRegion = document.getElementById('region');
+    CONFIG.regiones.forEach(region => selectRegion.add(new Option(region.label, region.value)));
+
+    const selectServicio = document.getElementById('tipoServicio');
+    CONFIG.servicios.forEach(servicio => selectServicio.add(new Option(servicio.label, servicio.value)));
+  }
+
+  function actualizarTarjetaDinamica(servicio) {
+    if (!servicio) return;
+
+    document.getElementById('cardServiceTitle').textContent = servicio.label.toUpperCase();
+    document.getElementById('cardPriceAmount').textContent = servicio.precioRef;
+    
+    const deliverablesList = document.getElementById('cardDeliverables');
+    deliverablesList.innerHTML = '';
+    
+    servicio.entregables.forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> ${item}`;
+      deliverablesList.appendChild(li);
+    });
+
+    if (servicio.disclaimer) {
+      document.getElementById('cardDisclaimerText').querySelector('span').textContent = servicio.disclaimer;
+    }
+  }
+
+  function calcularTotal() {
+    const region = document.getElementById('region').value;
+    const tipoServicio = document.getElementById('tipoServicio').value;
+    const area = parseFloat(document.getElementById('area').value) || 0;
+
+    if (!region || !tipoServicio) {
+      actualizarTotal(0);
+      return;
+    }
+
+    const servicio = CONFIG.servicios.find(s => s.value === tipoServicio);
+    if (!servicio) {
+      actualizarTotal(0);
+      return;
+    }
+
+    let multiplicador = servicio.multiplicadores[region] || 1;
+    let precioBase = tasaDeCambioUSDaMXN * multiplicador;
+    let total = 0;
+
+    if (servicio.unidad === 'm2') {
+      total = precioBase * area;
+    } else {
+      total = precioBase;
+    }
+
+    // APLICACIÓN DE PRECIO MÍNIMO PARAMÉTRICO
+    if (total < servicio.precioMinimo && total > 0) {
+      total = servicio.precioMinimo;
+    }
+
+    actualizarTotal(total);
+  }
+
+  function actualizarTotal(total) {
+    const totalElement = document.getElementById('totalAmount');
+    const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 2 });
+    totalElement.textContent = formatter.format(total);
+  }
+
+  function configurarEventListeners() {
+    document.getElementById('tipoServicio').addEventListener('change', function() {
+      const servicioSeleccionado = CONFIG.servicios.find(s => s.value === this.value);
+      const miniDesc = document.getElementById('serviceMiniDesc');
+
+      if (servicioSeleccionado) {
+        miniDesc.textContent = servicioSeleccionado.descripcion;
+        miniDesc.style.display = 'block';
+        actualizarTarjetaDinamica(servicioSeleccionado);
+      } else {
+        miniDesc.style.display = 'none';
+      }
+      calcularTotal();
+    });
+
+    ['tipoProyecto', 'region', 'area'].forEach(id => {
+      document.getElementById(id).addEventListener(id === 'area' ? 'input' : 'change', calcularTotal);
+    });
+  }
+</script>
+
+<!-- BOTÓN FLOTANTE WHATSAPP PEGADO A LA DERECHA -->
+<a href="https://wa.me/5215665063857?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto." 
+   class="whatsapp-pill-flotante" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Habla con un especialista por WhatsApp">
+   
+  <!-- Ícono SVG de WhatsApp en blanco -->
+  <svg class="whatsapp-pill-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+  
+  <span class="whatsapp-pill-text">Habla con un especialista.</span>
+</a>
+
+</body>
+</html>

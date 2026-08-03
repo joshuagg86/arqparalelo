@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos | Arquitectura en Paralelo</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_proyectos.css">
+</head>
+
+<body>
+
+<!-- 1. NAVBAR FIJO ADAPTATIVO -->
+<header class="main-header" id="navbar">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo" class="logo-light">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo" class="logo-dark">
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+    
+    <nav class="nav-menu" id="main-nav">
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proyectos.html" class="active">Proyectos</a>
+        <a href="cotizador.html">Cotizador</a>
+        <a href="#">Blog</a>
+      </div>
+      
+      <div class="mobile-socials">
+        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+        <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+      </div>
+    </nav>
+    
+    <div class="social-icons-desktop">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+    </div>
+  </div>
+</header>
+
+<!-- 2. SECCIÓN HERO PROYECTOS -->
+<section class="proyectos-hero-section">
+  <div class="proyectos-hero-background">
+    <img src="assets/img/hero_nosotros.png" alt="Proyectos Arquitectura en Paralelo">
+  </div>
+  
+  <div class="proyectos-hero-content reveal-anim">
+    <h1 class="proyectos-hero-title">PROYECTOS</h1>
+    <p class="proyectos-hero-subtitle">
+      Cada proyecto es una oportunidad para innovar, crear y superar las expectativas de nuestros clientes.
+    </p>
+  </div>
+</section>
+
+<!-- 3. SECCIÓN INTRODUCCIÓN PROYECTOS -->
+<section class="proyectos-intro-detalle">
+  <div class="proyectos-intro-container">
+    
+    <div class="proyectos-intro-col-img reveal-anim">
+      <img src="assets/img/nosotros.png" alt="Arquitectura que cobra vida - Arquitectura en Paralelo">
+    </div>
+    
+    <div class="proyectos-intro-col-text">
+      <h2 class="proyectos-intro-title reveal-anim">Arquitectura que cobra vida</h2>
+      
+      <p class="proyectos-intro-paragraph reveal-anim delay-1">
+        Nuestro equipo convierte ideas en espacios funcionales, estéticos y sostenibles, integrando tecnología BIM en cada etapa del proceso para asegurar precisión, eficiencia y calidad.
+      </p>
+      
+      <p class="proyectos-intro-paragraph reveal-anim delay-2">
+        Aquí te presentamos algunos de nuestros trabajos más recientes, que reflejan nuestro compromiso con la excelencia y la satisfacción de nuestros clientes.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 4. SECCIÓN LISTADO DE PROYECTOS (TODAS LAS TARJETAS VAN AQUÍ DENTRO) -->
+<section class="lista-proyectos-section">
+  <div class="proyectos-container">
+
+    <!-- PROYECTO 1: CASA UMBRAL -->
+    <article id="tarjeta-casa-umbral" class="proyecto-tarjeta-item reveal-anim">
+      <div class="proyecto-info-col">
+        <div class="proyecto-isotipo-wrapper">
+          <img src="assets/img/casa umbral/isotipo_Casa_Umbral.png" alt="Isotipo Casa Umbral" class="proyecto-isotipo-img">
+        </div>
+
+        <div class="proyecto-linea-decorativa"></div>
+        <h3 class="proyecto-nombre">Casa Umbral</h3>
+        <p class="proyecto-meta">
+          2025<br>
+          Vivienda unifamiliar<br>
+          Ciudad de México (CDMX)
+        </p>
+        
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-casa-umbral')">
+          Saber más
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-casa-umbral')">
+        <div class="proyecto-foto-wrapper">
+          <img src="assets/img/casa umbral/cu_01.jpg" alt="Casa Umbral - Arquitectura en Paralelo">
+          <div class="proyecto-foto-overlay"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROYECTO 2: XOOK LU'UM – THE HOME OF SHADOWS -->
+    <article id="tarjeta-home-shadows"class="proyecto-tarjeta-item reveal-anim">
+      <div class="proyecto-info-col">
+        <div class="proyecto-isotipo-wrapper">
+          <img src="assets/img/shadows/isotopo_shadow.png" alt="Isotipo Xook Lu'um" class="proyecto-isotipo-img">
+        </div>
+
+        <div class="proyecto-linea-decorativa"></div>
+        <h3 class="proyecto-nombre">The Home Of Shadows</h3>
+        <p class="proyecto-meta">
+          2025<br>
+          Concurso Internacional (Buildner)<br>
+          Yucatán, México
+        </p>
+        
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-home-shadows')">
+          Saber más
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-home-shadows')">
+        <div class="proyecto-foto-wrapper">
+          <img src="assets/img/shadows/s_1.jpg" alt="The Home Of Shadows - Arquitectura en Paralelo">
+          <div class="proyecto-foto-overlay"></div>
+        </div>
+      </div>
+    </article>
+    <!-- PROYECTO 3: PABELLÓN TENSIÓN -->
+    <article id="tarjeta-pabellon-tension" class="proyecto-tarjeta-item reveal-anim">
+      <div class="proyecto-info-col">
+        <div class="proyecto-isotipo-wrapper">
+          <img src="assets/img/pabellon/isotipo_pabellon.png" alt="Isotipo Pabellón Tensión" class="proyecto-isotipo-img">
+        </div>
+
+        <div class="proyecto-linea-decorativa"></div>
+        <h3 class="proyecto-nombre">Pabellón Tensión</h3>
+        <p class="proyecto-meta">
+          2024<br>
+          Concurso Arquine | Mextrópoli<br>
+          Pabellón efímero
+        </p>
+        
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-pabellon-tension')">
+          Saber más
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-pabellon-tension')">
+        <div class="proyecto-foto-wrapper">
+          <img src="assets/img/pabellon/p_1.jpg" alt="Pabellón Tensión - Arquitectura en Paralelo">
+          <div class="proyecto-foto-overlay"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROYECTO 4: PAISAJE CONTENIDO (TERRAZA CONTENIDA) -->
+    <article id="tarjeta-paisaje-contenido"class="proyecto-tarjeta-item reveal-anim">
+      <div class="proyecto-info-col">
+        <div class="proyecto-isotipo-wrapper">
+          <img src="assets/img/paisaje/isotipo_paisaje.png" alt="Isotipo Paisaje Contenido" class="proyecto-isotipo-img">
+        </div>
+
+        <div class="proyecto-linea-decorativa"></div>
+        <h3 class="proyecto-nombre">Paisaje Contenido</h3>
+        <p class="proyecto-meta">
+          2026<br>
+          Remodelación de terraza residencial<br>
+          Ecatepec de Morelos, Edo. Méx.
+        </p>
+        
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-paisaje-contenido')">
+          Saber más
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-paisaje-contenido')">
+        <div class="proyecto-foto-wrapper">
+          <img src="assets/img/paisaje/p_1.jpg" alt="Paisaje Contenido - Arquitectura en Paralelo">
+          <div class="proyecto-foto-overlay"></div>
+        </div>
+      </div>
+    </article>
+
+  </div> <!-- FIN DE .proyectos-container -->
+</section> <!-- FIN DE .lista-proyectos-section -->
+
+
+<!-- ==========================================================================
+     MODALES DESPLEGABLES (VAN AFUERA DEL LISTADO)
+     ========================================================================== -->
+
+<!-- MODAL 1: CASA UMBRAL -->
+<div id="modal-casa-umbral" class="modal-proyecto-overlay" onclick="cerrarPorBackdrop(event, 'modal-casa-umbral')">
+  <div class="modal-tarjeta-frame">
+    <button class="btn-cerrar-modal-proyecto" onclick="cerrarModalProyecto('modal-casa-umbral')" aria-label="Cerrar proyecto">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="lienzo-horizontal-container" id="scroll-umbral">
+      <div class="lienzo-horizontal-track">
+        <div class="item-editorial bloque-ficha">
+          <div class="editorial-info-principal">
+            <h2>CASA UMBRAL</h2>
+            <p class="editorial-subtitulo">Un refugio donde la arquitectura se convierte en luz, naturaleza y privacidad.</p>
+            <div class="editorial-ficha-tecnica">
+              <p><strong>Año:</strong> 2025</p>
+              <p><strong>Diseño y construcción:</strong> ARQUITECTURA EN PARALELO</p>
+              <p><strong>Equipo de proyecto:</strong> Juan Carlos Muñoz Vargas, Abraham Hernández Márquez, Larissa Guzmán</p>
+              <p><strong>Ubicación:</strong> Ciudad de México (CDMX)</p>
+            </div>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_01.jpg" alt="Casa Umbral - Vista Principal">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>En contextos urbanos cada vez más densos, las viviendas suelen enfrentar desafíos recurrentes: espacios con poca iluminación natural, escasa ventilación y una limitada conexión con la naturaleza. Casa Umbral nace como una respuesta a estas problemáticas, transformando un terreno convencional en un hogar capaz de ofrecer bienestar, amplitud y tranquilidad.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_02.jpg" alt="Casa Umbral - Interior">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>El proyecto toma su nombre del concepto de umbral: ese espacio intermedio que conecta dos realidades. En Casa Umbral, la arquitectura actúa como un puente entre el exterior y el interior, entre la ciudad y el refugio, entre la vida cotidiana y los momentos de introspección.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_03.jpg" alt="Casa Umbral - Detalle LUZ">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>El corazón del proyecto es un jardín interior que articula la vida de la vivienda. Más que un elemento decorativo, este espacio verde introduce luz, ventilación y naturaleza al interior, estableciendo una conexión visual constante entre los diferentes ambientes.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_04.jpg" alt="Casa Umbral - Jardín Interior">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>La privacidad se resuelve mediante una envolvente arquitectónica que protege los espacios interiores. La celosía, inspirada en el lenguaje geométrico de Arquitectura en Paralelo, funciona como un filtro de luz y sombra que regula las visuales y aporta una expresión arquitectónica única.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_05.jpg" alt="Casa Umbral - Celosía">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Casa Umbral demuestra cómo la arquitectura puede ir más allá de la construcción de espacios para convertirse en una experiencia de habitar. Un hogar diseñado para vivir en armonía con la luz, la naturaleza y el tiempo.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/casa umbral/cu_06.jpg" alt="Casa Umbral - Cierre">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: THE HOME OF SHADOWS -->
+<div id="modal-home-shadows" class="modal-proyecto-overlay" onclick="cerrarPorBackdrop(event, 'modal-home-shadows')">
+  <div class="modal-tarjeta-frame">
+    <button class="btn-cerrar-modal-proyecto" onclick="cerrarModalProyecto('modal-home-shadows')" aria-label="Cerrar proyecto">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="lienzo-horizontal-container" id="scroll-shadows">
+      <div class="lienzo-horizontal-track">
+        <div class="item-editorial bloque-ficha">
+          <div class="editorial-info-principal">
+            <h2>XOOK LU'UM</h2>
+            <p class="editorial-subtitulo">The Home of Shadows: un instrumento arquitectónico que registra el tiempo mediante la luz y la sombra.</p>
+            <div class="editorial-ficha-tecnica">
+              <p><strong>Año:</strong> 2025</p>
+              <p><strong>Concurso:</strong> The Home of Shadows (Buildner)</p>
+              <p><strong>Diseño:</strong> ARQUITECTURA EN PARALELO</p>
+              <p><strong>Equipo:</strong> Juan Carlos Muñoz Vargas, Abraham Hernández Márquez, Raúl Hibran Ortiz Palafox, Larissa Guzmán</p>
+              <p><strong>Ubicación:</strong> Yucatán, México</p>
+            </div>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_1.jpg" alt="The Home Of Shadows - Portada">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Desarrollada para el concurso internacional organizada por Buildner, esta propuesta plantea un reto único: diseñar una vivienda habitable sin iluminación artificial, donde la arquitectura depende exclusivamente de la luz natural para definir la experiencia espacial.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_2.jpg" alt="The Home Of Shadows - Concepto">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Xook Lu'um proviene de raíces mayas y refiere a la observación de la tierra. Su geometría nace de la interacción de dos cuerpos principales que representan los ciclos del sol y la luna, generando patios y aperturas que transforman continuamente los interiores.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_3.jpg" alt="The Home Of Shadows - Geometría">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>La vivienda utiliza la sombra como un material de diseño que aporta atmósfera y privacidad. La disposición de volúmenes favorece la ventilación cruzada y crea espacios contemplativos vinculados al paisaje, reduciendo la dependencia de sistemas artificiales.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_4.jpg" alt="The Home Of Shadows - Patios e Iluminación">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>El proyecto refleja la filosofía de Arquitectura en Paralelo al integrar a arquitectos, estudiantes de arquitectura y diseñadores industriales, demostrando que la verdadera innovación surge cuando distintas perspectivas trabajan hacia un mismo objetivo.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_5.jpg" alt="The Home Of Shadows - Detalles Interiores">
+          </div>
+        </div>
+
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Xook Lu'um cuestiona la dependencia tecnológica y recupera los principios esenciales de la arquitectura: orientación, clima, materia, sombra y luz. Una experiencia profunda que utiliza los recursos naturales como los verdaderos protagonistas del espacio.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/shadows/s_6.jpg" alt="The Home Of Shadows - Vista Final">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 3: PABELLÓN TENSIÓN -->
+<div id="modal-pabellon-tension" class="modal-proyecto-overlay" onclick="cerrarPorBackdrop(event, 'modal-pabellon-tension')">
+  <div class="modal-tarjeta-frame">
+    <button class="btn-cerrar-modal-proyecto" onclick="cerrarModalProyecto('modal-pabellon-tension')" aria-label="Cerrar proyecto">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="lienzo-horizontal-container" id="scroll-pabellon">
+      <div class="lienzo-horizontal-track">
+
+        <!-- BLOQUE 1: FICHA TÉCNICA Y PORTADA -->
+        <div class="item-editorial bloque-ficha">
+          <div class="editorial-info-principal">
+            <h2>PABELLÓN TENSIÓN</h2>
+            <p class="editorial-subtitulo">Una estructura efímera que vuelve a tejer la ciudad y el espacio público.</p>
+            <div class="editorial-ficha-tecnica">
+              <p><strong>Año:</strong> 2024</p>
+              <p><strong>Concurso:</strong> Arquine | Mextrópoli</p>
+              <p><strong>Categoría:</strong> Pabellón efímero</p>
+              <p><strong>Proyecto:</strong> ARQUITECTURA EN PARALELO</p>
+              <p><strong>Equipo:</strong> Larissa Guzmán, Abraham Hernández Márquez, Raúl Hibran Ortiz Palafox, Juan Carlos Muñoz Vargas</p>
+              <p><strong>Colaboración:</strong> Brenda Danae Rodríguez Muñoz</p>
+            </div>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_1.jpg" alt="Pabellón Tensión - Vista Principal">
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: CONTEXTO Y REFLEXIÓN URBANA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Entre el ritmo acelerado y la privatización del espacio urbano, el encuentro comunitario se ha vuelto escaso. Tensión nace como una reflexión desarrollada para el Concurso Arquine | Mextrópoli, proponiendo recuperar el espacio público como un lugar de permanencia, contemplación y convivencia.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_2.jpg" alt="Pabellón Tensión - Contexto Urbano">
+          </div>
+        </div>
+
+        <!-- BLOQUE 3: CONCEPTO DE LA BRAZADA MEXICA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Inspirado en la brazada mexica —manto tradicional para cargar, proteger y transportar—, el proyecto reinterpreta el acto de tejer como un gesto arquitectónico que vincula la memoria cultural con la geometría contemporánea.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_3.jpg" alt="Pabellón Tensión - Concepto y Forma">
+          </div>
+        </div>
+
+        <!-- BLOQUE 4: MATERIALIDAD Y ESTRUCTURA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Cada polín de madera y cada cuerda de yute representan un vínculo. Individualmente son elementos simples, pero al trabajar en conjunto construyen una estructura autoportante que simboliza la fuerza de la colaboración y la importancia del tejido social.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_4.jpg" alt="Pabellón Tensión - Detalles de Madera y Yute">
+          </div>
+        </div>
+
+        <!-- BLOQUE 5: EXPERIENCIA PARA HABITAR -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Concebido como una experiencia para habitar más que un objeto para observar, su geometría permeable invita a cruzarlo, permanecer, descansar y compartir, transformando la interacción cotidiana con el entorno.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_5.jpg" alt="Pabellón Tensión - Interacción y Recorridos">
+          </div>
+        </div>
+
+        <!-- BLOQUE 6: LA SOMBRA COMO ENCUENTRO -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>La sombra deja de ser únicamente una protección solar para convertirse en un lugar de encuentro donde la arquitectura facilita nuevas relaciones de empatía entre las personas y la ciudad.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_6.jpg" alt="Pabellón Tensión - Juego de Luz y Sombra">
+          </div>
+        </div>
+
+        <!-- BLOQUE 7: ENSAMBLAJE Y TÉCNICA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>El proceso de ensamblaje mediante tensiones y equilibrio demuestra la capacidad técnica para crear pabellones de alto impacto visual con recursos eficientes y sustentables.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_7.jpg" alt="Pabellón Tensión - Estructura Autoportante">
+          </div>
+        </div>
+
+        <!-- BLOQUE 8: IDENTIDAD COLECTIVA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>El pabellón demuestra cómo la arquitectura efímera puede dejar una huella duradera en la memoria urbana cuando nace de la cultura, la identidad colectiva y el bien compartido.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_8.jpg" alt="Pabellón Tensión - Vista Nocturna / Atmósfera">
+          </div>
+        </div>
+
+        <!-- BLOQUE 9: LECCIÓN Y CIERRE -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Una propuesta que entiende el espacio público como un lienzo vivo y nos recuerda que las ciudades también se construyen a partir de los vínculos que somos capaces de crear.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/pabellon/p_9.jpg" alt="Pabellón Tensión - Cierre y Perspectiva">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 4: PAISAJE CONTENIDO (TERRAZA CONTENIDA) -->
+<div id="modal-paisaje-contenido" class="modal-proyecto-overlay" onclick="cerrarPorBackdrop(event, 'modal-paisaje-contenido')">
+  <div class="modal-tarjeta-frame">
+    <button class="btn-cerrar-modal-proyecto" onclick="cerrarModalProyecto('modal-paisaje-contenido')" aria-label="Cerrar proyecto">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="lienzo-horizontal-container" id="scroll-paisaje">
+      <div class="lienzo-horizontal-track">
+
+        <!-- BLOQUE 1: FICHA TÉCNICA Y PORTADA -->
+        <div class="item-editorial bloque-ficha">
+          <div class="editorial-info-principal">
+            <h2>PAISAJE CONTENIDO</h2>
+            <p class="editorial-subtitulo">Un refugio donde la arquitectura transforma un espacio residual en un oasis de bienestar.</p>
+            <div class="editorial-ficha-tecnica">
+              <p><strong>Año:</strong> 2026</p>
+              <p><strong>Tipo:</strong> Remodelación de terraza residencial</p>
+              <p><strong>Diseño:</strong> ARQUITECTURA EN PARALELO</p>
+              <p><strong>Equipo:</strong> Abraham Hernández Márquez, Juan Carlos Muñoz Vargas, Monserrat Arvizu Chaparro</p>
+              <p><strong>Colaboradores:</strong> Alejandra García</p>
+              <p><strong>Ubicación:</strong> Ecatepec de Morelos, Estado de México</p>
+            </div>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/paisaje/p_1.jpg" alt="Paisaje Contenido - Vista Principal">
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: RECORRIDO EN VIDEO DEL PROYECTO -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>En las ciudades densas, los espacios exteriores suelen perder la intimidad. Terraza Contenida transforma esa realidad elevando las visuales hacia el cielo para reconectar con la luz, el aire y la calma urbana.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <video autoplay loop muted playsinline class="editorial-video-element">
+              <source src="assets/img/paisaje/paisaje.mp4" type="video/mp4">
+              Tu navegador no soporta reproducción de video.
+            </video>
+          </div>
+        </div>
+
+        <!-- BLOQUE 3: INSPIRACIÓN Y PRIVACIDAD -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Inspirado en los principios de la arquitectura de Luis Barragán, el proyecto utiliza planos de color, muros y elementos filtrantes para construir intimidad sin perder la sensación de apertura ni la iluminación natural.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/paisaje/p_2.jpg" alt="Paisaje Contenido - Planos de Color y Luz">
+          </div>
+        </div>
+
+        <!-- BLOQUE 4: DISEÑO BIOFÍLICO Y AGUA -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Estrategias de diseño biofílico complementan la experiencia: un muro de agua atenúa el ruido de la ciudad aportando serenidad, mientras la vegetación estimula los sentidos con sus texturas y aromas.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/paisaje/p_3.jpg" alt="Paisaje Contenido - Muro de Agua y Vegetación">
+          </div>
+        </div>
+
+        <!-- BLOQUE 5: CALIDAD DE VIDA Y CIERRE -->
+        <div class="item-editorial bloque-par">
+          <div class="editorial-texto-box">
+            <p>Demuestra que las intervenciones de pequeña escala pueden transformar profundamente la calidad de vida, demostrando que el diseño bien pensado es, ante todo, una experiencia de bienestar cotidiano.</p>
+          </div>
+          <div class="editorial-foto-frame">
+            <img src="assets/img/paisaje/p_4.jpg" alt="Paisaje Contenido - Vista de Cierre">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. SECCIÓN FORMULARIO DE CONTACTO -->
+<section class="contacto-banner-section" id="contacto">
+  <div class="contacto-banner-bg">
+    <img src="assets/img/hero_proyectos.png" alt="Contacto Arquitectura en Paralelo">
+  </div>
+
+  <div class="contacto-banner-container">
+    <div class="contacto-info-col reveal-anim">
+      <h2>Dale vida a tus ideas con<br>Arquitectura en Paralelo</h2>
+      <p>Transformamos espacios con visión y excelencia.<br>Juntos haremos realidad tu siguiente proyecto.</p>
+    </div>
+
+    <div class="contacto-form-col reveal-anim delay-1">
+      <form id="proyectosContactoForm" class="form-contacto-grid">
+        <div class="form-field">
+          <label for="nombres">Nombres <span>*</span></label>
+          <input type="text" id="nombres" name="nombres" required>
+        </div>
+
+        <div class="form-field">
+          <label for="apellidos">Apellidos <span>*</span></label>
+          <input type="text" id="apellidos" name="apellidos" required>
+        </div>
+
+        <div class="form-field">
+          <label for="correo">Correo electrónico <span>*</span></label>
+          <input type="email" id="correo" name="correo" required>
+        </div>
+
+        <div class="form-field">
+          <label for="telefono">Número telefónico <span>*</span></label>
+          <input type="tel" id="telefono" name="telefono" required>
+        </div>
+
+        <div class="form-field full-width">
+            <label for="servicio">Elige el servicio</label>
+            <select id="servicio" name="servicio">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
+                <option value="Servicios BIM">Servicios BIM</option>
+                <option value="Capacitación BIM">Capacitación BIM</option>
+                <option value="Captura Digital">Captura Digital</option>
+            </select>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="mensaje">Mensaje <span>*</span></label>
+          <textarea id="mensaje" name="mensaje" rows="4" placeholder="Deja tu comentario o preguntas" required></textarea>
+        </div>
+
+        <div class="form-field full-width">
+          <button type="submit" class="btn-enviar-contacto">
+            Enviar
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FOOTER CORPORATIVO -->
+<footer class="main-footer">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo">
+    </div>
+    
+    <hr class="footer-divider">
+    
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="footer-icon" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="footer-icon" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="footer-icon" target="_blank">in</a>
+    </div>
+    
+    <div class="footer-contact">
+      <a href="mailto:contacto@arqparalelo.com">contacto@arqparalelo.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p class="footer-copyright">
+        Copyright &copy; Arquitectura En Paralelo. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- BOTÓN FLOTANTE WHATSAPP PEGADO A LA DERECHA -->
+<a href="https://wa.me/5215665063857?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto." 
+   class="whatsapp-pill-flotante" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Habla con un especialista por WhatsApp">
+   
+  <!-- Ícono SVG de WhatsApp en blanco -->
+  <svg class="whatsapp-pill-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+  
+  <span class="whatsapp-pill-text">Habla con un especialista.</span>
+</a>
+</body>
+</html>

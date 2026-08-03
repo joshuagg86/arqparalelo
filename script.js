@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const allCards = track.querySelectorAll('.proyecto-card');
   const originalCount = originalCards.length;
   
-  // CORRECCIÓN: Ajustado el índice base al inicio real de la cuadrícula
   let currentIndex = originalCount; 
   let isDown = false;
   let startX;
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
   let isMoving = false;
   let isScrollJumping = false; 
   
-  // VARIABLES PARA EL SISTEMA AUTO-PLAY
   let autoplayInterval;
   const autoplaySpeed = 4000; 
 
@@ -58,16 +56,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (dots[dotIndex]) dots[dotIndex].classList.add('active');
   }
 
-  // --- ESCUCHADOR MAESTRO DE SCROLL (CORREGIDO DE RAÍZ) ---
+  // --- ESCUCHADOR MAESTRO DE SCROLL ---
   container.addEventListener('scroll', () => {
     if (isDown || isScrollJumping) return;
 
     const currentScroll = container.scrollLeft;
-    // Límites matemáticos basados en índices reales comenzando desde 0
     const startLimit = getPositionX(originalCount - 1);
     const endLimit = getPositionX(originalCount * 2 - 1);
 
-    // CORRECCIÓN: Si toca el extremo derecho, se regresa de forma invisible al Casa Umbral real (índice originalCount)
     if (currentScroll >= endLimit + 10) {
       isScrollJumping = true;
       currentIndex = originalCount;
@@ -75,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
       container.scrollLeft = getPositionX(originalCount);
       requestAnimationFrame(() => { isScrollJumping = false; });
     } 
-    // Si toca el extremo izquierdo, salta de forma invisible al clon del final
     else if (currentScroll <= startLimit - 10) {
       isScrollJumping = true;
       currentIndex = (originalCount * 2) - 1;
@@ -85,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // --- MOTOR DE CONTROL AUTOMÁTICO (AUTOPLAY) ---
+  // --- MOTOR DE CONTROL AUTOMÁTICO (AUTOPLAY HOME) ---
   function startAutoplay() {
     stopAutoplay();
     autoplayInterval = setInterval(() => {
@@ -97,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (autoplayInterval) clearInterval(autoplayInterval);
   }
 
-  // --- CONTROLES DE LAS FLECHAS LATERALES ---
   if (btnNext) {
     btnNext.addEventListener('click', () => {
       stopAutoplay();
@@ -194,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function() {
     jumpToCard(closestIndex, true);
   }
 
-  // EVENTO PARA LOS DOTS
   dots.forEach(dot => {
     dot.addEventListener('click', function(e) {
       e.preventDefault();
@@ -205,13 +198,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // CORRECCIÓN: Inicialización limpia centrando la tarjeta 0 real (Casa Umbral)
   setTimeout(() => {
     jumpToCard(originalCount, false);
     startAutoplay(); 
   }, 200);
   
-  // EVENTO RUEDA / TRACKPAD
   let wheelCooldown = false;
   container.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaX) > 4 || Math.abs(e.deltaY) > 4) {
@@ -289,7 +280,6 @@ function loadWordPressBlogs() {
     });
 }
 
-// Carga de blogs de WordPress al procesar el DOM
 document.addEventListener("DOMContentLoaded", () => {
   loadWordPressBlogs();
 });
@@ -399,37 +389,240 @@ window.addEventListener('scroll', function() {
 });
 
 // ==========================================================================
-// CONTROL SIMPLIFICADO DE ACORDEÓN (VERSIÓN BLINDADA PARA LA JUNTA)
+// CONTROL DE ACORDEÓN SERVICIOS (DESPLEGAR Y CERRAR CON BOTÓN "SABER MÁS" O "X")
 // ==========================================================================
 function toggleServicio(button) {
-  // Localizamos únicamente el bloque donde se hizo click
   const bloque = button.closest('.servicio-item-bloque');
-  const detalle = bloque.querySelector('.servicio-panel-detalle');
+  if (!bloque) return;
   
-  if (!bloque || !detalle) return;
+  const detalle = bloque.querySelector('.servicio-panel-detalle');
+  if (!detalle) return;
 
-  // Si está abierto, lo cerramos
   if (bloque.classList.contains('active')) {
     bloque.classList.remove('active');
     detalle.style.maxHeight = '0px';
   } else {
-    // Si está cerrado, lo abrimos calculando su altura exacta
     bloque.classList.add('active');
     detalle.style.maxHeight = detalle.scrollHeight + "px";
   }
 }
 
-// CONTROL DE CAMBIO DE Renders INTERNOS
+// ==========================================================================
+// CONTROL DE CARRUSEL DE SERVICIOS (FLECHAS, DOTS Y AUTOPLAY 2s)
+// ==========================================================================
+let servicioIntervals = {}; 
+
 function cambiarSlide(dot, indexSlide) {
   const contenedor = dot.closest('.panel-carrusel-contenedor');
   if (!contenedor) return;
   
+  actualizarSlideContenedor(contenedor, indexSlide);
+  reiniciarAutoplayServicio(contenedor);
+}
+
+function cambiarSlideFlecha(btn, direccion) {
+  const contenedor = btn.closest('.panel-carrusel-contenedor');
+  if (!contenedor) return;
+  
+  const slides = contenedor.querySelectorAll('.slide-img');
+  let indexActivo = Array.from(slides).findIndex(img => img.classList.contains('active'));
+  
+  let nuevoIndex = indexActivo + direccion;
+  if (nuevoIndex < 0) nuevoIndex = slides.length - 1;
+  if (nuevoIndex >= slides.length) nuevoIndex = 0;
+  
+  actualizarSlideContenedor(contenedor, nuevoIndex);
+  reiniciarAutoplayServicio(contenedor);
+}
+
+function actualizarSlideContenedor(contenedor, index) {
   const slides = contenedor.querySelectorAll('.slide-img');
   const dots = contenedor.querySelectorAll('.dot');
   
   slides.forEach(img => img.classList.remove('active'));
   dots.forEach(d => d.classList.remove('active'));
   
-  if (slides[indexSlide]) slides[indexSlide].classList.add('active');
-  dot.classList.add('active');
+  if (slides[index]) slides[index].classList.add('active');
+  if (dots[index]) dots[index].classList.add('active');
 }
+
+function iniciarAutoplayServicios() {
+  const contenedores = document.querySelectorAll('.panel-carrusel-contenedor');
+  
+  contenedores.forEach((contenedor, i) => {
+    if (servicioIntervals[i]) clearInterval(servicioIntervals[i]);
+
+    servicioIntervals[i] = setInterval(() => {
+      const bloque = contenedor.closest('.servicio-item-bloque');
+      if (bloque && bloque.classList.contains('active')) {
+        const slides = contenedor.querySelectorAll('.slide-img');
+        let indexActivo = Array.from(slides).findIndex(img => img.classList.contains('active'));
+        let siguienteIndex = (indexActivo + 1) % slides.length;
+        
+        actualizarSlideContenedor(contenedor, siguienteIndex);
+      }
+    }, 2000); 
+
+    contenedor.addEventListener('mouseenter', () => clearInterval(servicioIntervals[i]));
+    contenedor.addEventListener('mouseleave', () => iniciarAutoplayServicios());
+  });
+}
+
+function reiniciarAutoplayServicio(contenedor) {
+  iniciarAutoplayServicios();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  iniciarAutoplayServicios();
+});
+
+// ==========================================================================
+// CONTROL DE MODAL DE PROYECTOS EXTENDIDO Y SU CARRUSEL DE 7 FOTOS
+// ==========================================================================
+function abrirModalProyecto(idModal) {
+  const modal = document.getElementById(idModal);
+  if (modal) {
+    modal.classList.add('active');
+    // Bloquea el scroll de la página mientras el modal está abierto
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function cerrarModalProyecto(idModal) {
+  const modal = document.getElementById(idModal);
+  if (modal) {
+    modal.classList.remove('active');
+    // LIBERA el scroll de la página al cerrar
+    document.body.style.overflow = '';
+  }
+}
+
+function cambiarSlideModal(idCarrusel, direccion) {
+  const contenedor = document.getElementById(idCarrusel);
+  if (!contenedor) return;
+
+  const slides = contenedor.querySelectorAll('.modal-slide-img');
+  const dots = contenedor.querySelectorAll('.dot-modal');
+  let indexActivo = Array.from(slides).findIndex(img => img.classList.contains('active'));
+
+  let nuevoIndex = indexActivo + direccion;
+  if (nuevoIndex < 0) nuevoIndex = slides.length - 1;
+  if (nuevoIndex >= slides.length) nuevoIndex = 0;
+
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+
+  if (slides[nuevoIndex]) slides[nuevoIndex].classList.add('active');
+  if (dots[nuevoIndex]) dots[nuevoIndex].classList.add('active');
+}
+
+function irASlideModal(idCarrusel, nuevoIndex) {
+  const contenedor = document.getElementById(idCarrusel);
+  if (!contenedor) return;
+
+  const slides = contenedor.querySelectorAll('.modal-slide-img');
+  const dots = contenedor.querySelectorAll('.dot-modal');
+
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+
+  if (slides[nuevoIndex]) slides[nuevoIndex].classList.add('active');
+  if (dots[nuevoIndex]) dots[nuevoIndex].classList.add('active');
+}
+
+// Cerrar al presionar la tecla ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modales = document.querySelectorAll('.modal-proyecto-overlay.active');
+    modales.forEach(modal => modal.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+});
+
+// ==========================================================================
+// DETECTOR DE PROYECTO DESDE OTRAS PÁGINAS (HOME / NOSOTROS)
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", function() {
+  // Revisa si la URL trae un hash (ej: proyectos.html#modal-casa-umbral)
+  const hash = window.location.hash;
+  
+  if (hash) {
+    // Quitamos el '#' para obtener solo el ID
+    const modalId = hash.replace('#', '');
+    const modalTarget = document.getElementById(modalId);
+    
+    // Si el modal existe en esta página, lo abrimos automáticamente
+    if (modalTarget) {
+      setTimeout(() => {
+        abrirModalProyecto(modalId);
+      }, 300); // Pequeño delay para asegurar que el DOM cargó perfecto
+    }
+  }
+});
+
+// CONVERTIDOR DE SCROLL VERTICAL A HORIZONTAL EN EL MODAL EDITORIAL
+document.addEventListener("DOMContentLoaded", function() {
+  const contenedorHorizontal = document.getElementById('scroll-umbral');
+  
+  if (!contenedorHorizontal) return;
+
+  contenedorHorizontal.addEventListener('wheel', (e) => {
+    // Si la rueda gira en vertical, la transformamos en desplazamiento X
+    if (e.deltaY !== 0) {
+      e.preventDefault();
+      contenedorHorizontal.scrollLeft += e.deltaY * 1.5; // Multiplicador de suavidad
+    }
+  }, { passive: false });
+});
+
+// CERRAR MODAL SI SE HACE CLIC EN EL FONDO (BACKDROP)
+function cerrarPorBackdrop(event, idModal) {
+  if (event.target.classList.contains('modal-proyecto-overlay')) {
+    cerrarModalProyecto(idModal);
+  }
+}
+
+// REGISTRO DE SCROLL HORIZONTAL PARA MODALES
+document.addEventListener("DOMContentLoaded", function() {
+  const modalesHorizontales = ['scroll-umbral', 'scroll-shadows', 'scroll-pabellon', 'scroll-paisaje'];
+
+  modalesHorizontales.forEach(id => {
+    const contenedor = document.getElementById(id);
+    if (contenedor) {
+      contenedor.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          contenedor.scrollLeft += e.deltaY * 1.5;
+        }
+      }, { passive: false });
+    }
+  });
+});
+
+// ASEGURAR QUE AL CARGAR LA PÁGINA EL SCROLL SIEMPRE ESTÉ LIBRE
+document.addEventListener("DOMContentLoaded", function() {
+  // Restablece el scroll del body por si venía bloqueado
+  document.body.style.overflow = '';
+  
+  // Si venimos con un hash (#tarjeta-...), hacemos el scroll suave
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  }
+});
+
+// SCROLL SUAVE AL DETECTAR ANCLA DE SERVICIO
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  }
+});
