@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Arquitectura en Paralelo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="blog_style.css">
+</head>
+<body class="blog-page">
+
+  <!-- HEADER OFICIAL (Idéntico a tus páginas internas) -->
+  <header class="main-header" id="navbar">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/img/logo-header.png" alt="Arquitectura en Paralelo" class="logo-light">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo" class="logo-dark">
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+    
+    <nav class="nav-menu" id="main-nav">
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="cotizador.html" class="active">Cotizador</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      
+      <div class="mobile-socials">
+        <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+        <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+        <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+      </div>
+    </nav>
+    
+    <div class="social-icons-desktop">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="social-link" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="social-link" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="social-link" target="_blank">in</a>
+    </div>
+  </div>
+</header>
+
+  <!-- HERO CABECERA DEL BLOG -->
+  <section class="blog-page-hero">
+    <div class="blog-hero-content">
+      <h1 class="blog-hero-title">Nuestro Blog</h1>
+      <p class="blog-hero-subtitle">Ideas, tendencias y la perspectiva arquitectónica detrás de cada espacio.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PRINCIPAL EN 2 COLUMNAS -->
+  <main class="blog-main-layout">
+    
+    <!-- COLUMNA IZQUIERDA: TARJETAS DE BLOG -->
+    <section class="blog-content-left">
+      <div id="blog-grid-page" class="blog-page-grid">
+        <div class="blog-loading">Cargando publicaciones...</div>
+      </div>
+    </section>
+
+    <!-- COLUMNA DERECHA: LÍNEA DE TIEMPO -->
+    <aside class="blog-sidebar-right">
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title">Línea de Tiempo</h3>
+        <p class="sidebar-desc">Explora el histórico de publicaciones y procesos constructivos.</p>
+        
+        <ul id="blog-timeline-list" class="blog-timeline">
+          <li class="timeline-loading">Generando historial...</li>
+        </ul>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="main-footer">
+  
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="assets/img/logo-aep.png" alt="Arquitectura en Paralelo">
+    </div>
+    
+    <hr class="footer-divider">
+    
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=61570769352204" class="footer-icon" target="_blank">f</a>
+      <a href="https://www.instagram.com/arqenparalelo" class="footer-icon" target="_blank">i</a>
+      <a href="https://www.linkedin.com/company/arqparalelo/" class="footer-icon" target="_blank">in</a>
+    </div>
+    
+    <div class="footer-contact">
+      <a href="mailto:contacto@arqparalelo.com">contacto@arqparalelo.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p class="footer-copyright">
+        Copyright &copy; Arquitectura En Paralelo. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+
+</footer>
+
+  <!-- SCRIPT BASE DE TU SITIO (Maneja el Navbar Scroll y Menú Móvil) -->
+  <script src="script.js"></script>
+  <!-- SCRIPT EXCLUSIVO DEL BLOG (Jala los datos de WordPress) -->
+  <script src="script-blog.js"></script>
+
+</body>
+</html>
