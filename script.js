@@ -202,40 +202,15 @@ document.addEventListener("DOMContentLoaded", function() {
     jumpToCard(originalCount, false);
     startAutoplay(); 
   }, 200);
-  
-  let wheelCooldown = false;
-  container.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > 4 || Math.abs(e.deltaY) > 4) {
-      e.preventDefault(); 
-      stopAutoplay();
-
-      if (wheelCooldown) return; 
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-
-      if (Math.abs(delta) > 15) { 
-        wheelCooldown = true;
-        if (delta > 0) {
-          jumpToCard(currentIndex + 1, true);
-        } else {
-          jumpToCard(currentIndex - 1, true);
-        }
-
-        setTimeout(() => {
-          wheelCooldown = false;
-          startAutoplay();
-        }, 600);
-      }
-    }
-  }, { passive: false });
 
   window.addEventListener('resize', () => {
     jumpToCard(currentIndex, false);
   });
 });
 
-// FUNCIÓN PARA NOTAS DE WORDPRESS DESDE LA REST API
+// FUNCIÓN PARA NOTAS DE WORDPRESS DESDE LA REST API (MANTENIENDO ESTILOS NATIVOS DE BOTÓN)
 function loadWordPressBlogs() {
-  const wpApiUrl = "https://www.arqparalelo.com/wp-json/wp/v2/posts?_embed&per_page=4";
+  const wpApiUrl = "https://blog.arqparalelo.com/wp-json/wp/v2/posts?_embed&per_page=4";
   const container = document.getElementById('blog-dynamic-container');
   
   if (!container) return;
@@ -259,14 +234,14 @@ function loadWordPressBlogs() {
         let excerptText = post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "");
         
         const cardHTML = `
-          <div class="blog-card " style="background-image: url('${imageUrl}');">
-            <a href="${post.link}" class="blog-card-arrow" target="_blank">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+          <div class="blog-card" style="background-image: url('${imageUrl}');">
+            <button type="button" onclick="abrirArticulo(${post.id})" class="blog-card-arrow" aria-label="Leer artículo">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
             <div class="blog-card-content">
               <h3 class="blog-card-title">${post.title.rendered}</h3>
               <p class="blog-card-excerpt">${excerptText}</p>
-              <a href="${post.link}" class="btn-blog-read" target="_blank">Leer más</a>
+              <button type="button" onclick="abrirArticulo(${post.id})" class="btn-blog-read">Leer más</button>
             </div>
           </div>
         `;
@@ -389,7 +364,7 @@ window.addEventListener('scroll', function() {
 });
 
 // ==========================================================================
-// CONTROL DE ACORDEÓN SERVICIOS (DESPLEGAR Y CERRAR CON BOTÓN "SABER MÁS" O "X")
+// CONTROL DE ACORDEÓN SERVICIOS
 // ==========================================================================
 function toggleServicio(button) {
   const bloque = button.closest('.servicio-item-bloque');
@@ -408,7 +383,7 @@ function toggleServicio(button) {
 }
 
 // ==========================================================================
-// CONTROL DE CARRUSEL DE SERVICIOS (FLECHAS, DOTS Y AUTOPLAY 2s)
+// CONTROL DE CARRUSEL DE SERVICIOS
 // ==========================================================================
 let servicioIntervals = {}; 
 
@@ -477,13 +452,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ==========================================================================
-// CONTROL DE MODAL DE PROYECTOS EXTENDIDO Y SU CARRUSEL DE 7 FOTOS
+// CONTROL DE MODAL DE PROYECTOS EXTENDIDO
 // ==========================================================================
 function abrirModalProyecto(idModal) {
   const modal = document.getElementById(idModal);
   if (modal) {
     modal.classList.add('active');
-    // Bloquea el scroll de la página mientras el modal está abierto
     document.body.style.overflow = 'hidden';
   }
 }
@@ -492,7 +466,6 @@ function cerrarModalProyecto(idModal) {
   const modal = document.getElementById(idModal);
   if (modal) {
     modal.classList.remove('active');
-    // LIBERA el scroll de la página al cerrar
     document.body.style.overflow = '';
   }
 }
@@ -530,62 +503,37 @@ function irASlideModal(idCarrusel, nuevoIndex) {
   if (dots[nuevoIndex]) dots[nuevoIndex].classList.add('active');
 }
 
-// Cerrar al presionar la tecla ESC
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     const modales = document.querySelectorAll('.modal-proyecto-overlay.active');
     modales.forEach(modal => modal.classList.remove('active'));
     document.body.style.overflow = '';
+    
+    cerrarArticulo();
   }
 });
 
-// ==========================================================================
-// DETECTOR DE PROYECTO DESDE OTRAS PÁGINAS (HOME / NOSOTROS)
-// ==========================================================================
 document.addEventListener("DOMContentLoaded", function() {
-  // Revisa si la URL trae un hash (ej: proyectos.html#modal-casa-umbral)
   const hash = window.location.hash;
-  
   if (hash) {
-    // Quitamos el '#' para obtener solo el ID
     const modalId = hash.replace('#', '');
     const modalTarget = document.getElementById(modalId);
-    
-    // Si el modal existe en esta página, lo abrimos automáticamente
     if (modalTarget) {
       setTimeout(() => {
         abrirModalProyecto(modalId);
-      }, 300); // Pequeño delay para asegurar que el DOM cargó perfecto
+      }, 300);
     }
   }
 });
 
-// CONVERTIDOR DE SCROLL VERTICAL A HORIZONTAL EN EL MODAL EDITORIAL
-document.addEventListener("DOMContentLoaded", function() {
-  const contenedorHorizontal = document.getElementById('scroll-umbral');
-  
-  if (!contenedorHorizontal) return;
-
-  contenedorHorizontal.addEventListener('wheel', (e) => {
-    // Si la rueda gira en vertical, la transformamos en desplazamiento X
-    if (e.deltaY !== 0) {
-      e.preventDefault();
-      contenedorHorizontal.scrollLeft += e.deltaY * 1.5; // Multiplicador de suavidad
-    }
-  }, { passive: false });
-});
-
-// CERRAR MODAL SI SE HACE CLIC EN EL FONDO (BACKDROP)
 function cerrarPorBackdrop(event, idModal) {
   if (event.target.classList.contains('modal-proyecto-overlay')) {
     cerrarModalProyecto(idModal);
   }
 }
 
-// REGISTRO DE SCROLL HORIZONTAL PARA MODALES
 document.addEventListener("DOMContentLoaded", function() {
   const modalesHorizontales = ['scroll-umbral', 'scroll-shadows', 'scroll-pabellon', 'scroll-paisaje'];
-
   modalesHorizontales.forEach(id => {
     const contenedor = document.getElementById(id);
     if (contenedor) {
@@ -599,12 +547,8 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// ASEGURAR QUE AL CARGAR LA PÁGINA EL SCROLL SIEMPRE ESTÉ LIBRE
 document.addEventListener("DOMContentLoaded", function() {
-  // Restablece el scroll del body por si venía bloqueado
   document.body.style.overflow = '';
-  
-  // Si venimos con un hash (#tarjeta-...), hacemos el scroll suave
   if (window.location.hash) {
     const target = document.querySelector(window.location.hash);
     if (target) {
@@ -615,14 +559,136 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// SCROLL SUAVE AL DETECTAR ANCLA DE SERVICIO
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.location.hash) {
-    const target = document.querySelector(window.location.hash);
-    if (target) {
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200);
-    }
-  }
+// ==========================================
+// MODAL LECTOR DINÁMICO DEL BLOG (CON ESTILOS INCLUIDOS PARA EL HOME)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  crearModalLector();
 });
+
+function crearModalLector() {
+  if (document.getElementById('blog-modal-reader')) return;
+
+  // Inyectar estilos CSS del modal directamente para que no pierda diseño en el Home
+  const estilosModal = document.createElement('style');
+  estilosModal.innerHTML = `
+    .blog-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .blog-modal-content {
+      background: #ffffff;
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .blog-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 32px;
+      cursor: pointer;
+      color: #333;
+      line-height: 1;
+    }
+    .blog-modal-banner {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .blog-modal-date {
+      font-size: 14px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .blog-modal-title {
+      font-size: 28px;
+      color: #1a1a1a;
+      margin: 10px 0 20px 0;
+      font-family: inherit;
+    }
+    .blog-modal-text {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #444;
+    }
+    .blog-modal-text p {
+      margin-bottom: 15px;
+    }
+  `;
+  document.head.appendChild(estilosModal);
+
+  // HTML del Modal
+  const modalHTML = `
+    <div id="blog-modal-reader" class="blog-modal-overlay" style="display: none;">
+      <div class="blog-modal-content">
+        <button class="blog-modal-close" onclick="cerrarArticulo()">&times;</button>
+        <div id="blog-modal-body">
+          <p style="text-align:center; padding: 40px;">Cargando contenido...</p>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+async function abrirArticulo(postId) {
+  const modal = document.getElementById('blog-modal-reader');
+  const body = document.getElementById('blog-modal-body');
+  
+  if (!modal) return;
+  
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  body.innerHTML = '<p style="text-align:center; padding: 40px; font-size:18px;">Cargando entrada...</p>';
+
+  try {
+    const respuesta = await fetch(`https://blog.arqparalelo.com/wp-json/wp/v2/posts/${postId}?_embed`);
+    const post = await respuesta.json();
+
+    let imagenUrl = '';
+    if (post._embedded && post._embedded['wp:featuredmedia']) {
+      imagenUrl = post._embedded['wp:featuredmedia'][0].source_url;
+    }
+
+    const fecha = new Date(post.date).toLocaleDateString('es-MX', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    body.innerHTML = `
+      ${imagenUrl ? `<img src="${imagenUrl}" class="blog-modal-banner" alt="${post.title.rendered}">` : ''}
+      <span class="blog-modal-date">${fecha}</span>
+      <h1 class="blog-modal-title">${post.title.rendered}</h1>
+      <div class="blog-modal-text">${post.content.rendered}</div>
+    `;
+
+  } catch (error) {
+    body.innerHTML = '<p style="text-align:center; color: red;">Error al abrir el artículo.</p>';
+  }
+}
+
+function cerrarArticulo() {
+  const modal = document.getElementById('blog-modal-reader');
+  if (modal) modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}

@@ -2,7 +2,7 @@
    INTEGRACIÓN HEADLESS CON LÍNEA DE TIEMPO DINÁMICA
    ========================================================================== */
 
-const WP_API_URL = 'https://www.arqparalelo.com/wp-json/wp/v2/posts?_embed&per_page=10';
+const WP_API_URL = 'https://blog.arqparalelo.com/wp-json/wp/v2/posts?_embed&per_page=10';
 
 document.addEventListener('DOMContentLoaded', () => {
   cargarBlogsPage();
@@ -111,7 +111,7 @@ async function abrirArticulo(postId) {
   body.innerHTML = '<p style="text-align:center; padding: 40px; font-size:18px;">Cargando entrada...</p>';
 
   try {
-    const respuesta = await fetch(`https://www.arqparalelo.com/wp-json/wp/v2/posts/${postId}?_embed`);
+    const respuesta = await fetch(`https://blog.arqparalelo.com/wp-json/wp/v2/posts/${postId}?_embed`);
     const post = await respuesta.json();
 
     let imagenUrl = '';

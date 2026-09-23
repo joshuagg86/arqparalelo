@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyectos | Arquitectura en Paralelo</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon_aep.png">
   
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style_proyectos.css">
@@ -91,30 +92,30 @@
 <section class="lista-proyectos-section">
   <div class="proyectos-container">
 
-    <!-- PROYECTO 1: CASA UMBRAL -->
-    <article id="tarjeta-casa-umbral" class="proyecto-tarjeta-item reveal-anim">
+    <!-- PROYECTO 1: PABELLÓN TENSIÓN -->
+    <article id="tarjeta-pabellon-tension" class="proyecto-tarjeta-item reveal-anim">
       <div class="proyecto-info-col">
         <div class="proyecto-isotipo-wrapper">
-          <img src="assets/img/casa umbral/isotipo_Casa_Umbral.png" alt="Isotipo Casa Umbral" class="proyecto-isotipo-img">
+          <img src="assets/img/pabellon/isotipo_pabellon.png" alt="Isotipo Pabellón Tensión" class="proyecto-isotipo-img">
         </div>
 
         <div class="proyecto-linea-decorativa"></div>
-        <h3 class="proyecto-nombre">Casa Umbral</h3>
+        <h3 class="proyecto-nombre">Pabellón Tensión</h3>
         <p class="proyecto-meta">
-          2025<br>
-          Vivienda unifamiliar<br>
-          Ciudad de México (CDMX)
+          2024<br>
+          Concurso Arquine | Mextrópoli<br>
+          Pabellón efímero
         </p>
         
-        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-casa-umbral')">
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-pabellon-tension')">
           Saber más
           <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
-      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-casa-umbral')">
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-pabellon-tension')">
         <div class="proyecto-foto-wrapper">
-          <img src="assets/img/casa umbral/cu_01.jpg" alt="Casa Umbral - Arquitectura en Paralelo">
+          <img src="assets/img/pabellon/p_1.jpg" alt="Pabellón Tensión - Arquitectura en Paralelo">
           <div class="proyecto-foto-overlay"></div>
         </div>
       </div>
@@ -148,30 +149,31 @@
         </div>
       </div>
     </article>
-    <!-- PROYECTO 3: PABELLÓN TENSIÓN -->
-    <article id="tarjeta-pabellon-tension" class="proyecto-tarjeta-item reveal-anim">
+
+    <!-- PROYECTO 3: CASA UMBRAL -->
+    <article id="tarjeta-casa-umbral" class="proyecto-tarjeta-item reveal-anim">
       <div class="proyecto-info-col">
         <div class="proyecto-isotipo-wrapper">
-          <img src="assets/img/pabellon/isotipo_pabellon.png" alt="Isotipo Pabellón Tensión" class="proyecto-isotipo-img">
+          <img src="assets/img/casa umbral/isotipo_Casa_Umbral.png" alt="Isotipo Casa Umbral" class="proyecto-isotipo-img">
         </div>
 
         <div class="proyecto-linea-decorativa"></div>
-        <h3 class="proyecto-nombre">Pabellón Tensión</h3>
+        <h3 class="proyecto-nombre">Casa Umbral</h3>
         <p class="proyecto-meta">
-          2024<br>
-          Concurso Arquine | Mextrópoli<br>
-          Pabellón efímero
+          2025<br>
+          Vivienda unifamiliar<br>
+          Ciudad de México (CDMX)
         </p>
         
-        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-pabellon-tension')">
+        <button class="btn-proyecto-saber-mas" onclick="abrirModalProyecto('modal-casa-umbral')">
           Saber más
           <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
-      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-pabellon-tension')">
+      <div class="proyecto-foto-col" onclick="abrirModalProyecto('modal-casa-umbral')">
         <div class="proyecto-foto-wrapper">
-          <img src="assets/img/pabellon/p_1.jpg" alt="Pabellón Tensión - Arquitectura en Paralelo">
+          <img src="assets/img/casa umbral/cu_01.jpg" alt="Casa Umbral - Arquitectura en Paralelo">
           <div class="proyecto-foto-overlay"></div>
         </div>
       </div>
@@ -567,7 +569,7 @@
     </div>
 
     <div class="contacto-form-col reveal-anim delay-1">
-      <form id="proyectosContactoForm" class="form-contacto-grid">
+      <form id="proyectosContactoForm" action="enviar.php" method="POST" class="form-contacto-grid">
         <div class="form-field">
           <label for="nombres">Nombres <span>*</span></label>
           <input type="text" id="nombres" name="nombres" required>
@@ -580,7 +582,7 @@
 
         <div class="form-field">
           <label for="correo">Correo electrónico <span>*</span></label>
-          <input type="email" id="correo" name="correo" required>
+          <input type="email" id="correo" name="email" required>
         </div>
 
         <div class="form-field">

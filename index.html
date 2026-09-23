@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arquitectura en Paralelo | Desarrollo Local</title>
+  <title>Arquitectura en Paralelo</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon_aep.png">
   
   <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
   <link rel="stylesheet" href="style.css">
@@ -125,7 +126,8 @@
 
   <div class="grid-servicios">
 
-    <div class="card-flip card-alta">
+    <!-- 1. ARRIBA IZQUIERDA: DISEÑO ARQUITECTÓNICO -->
+    <div class="card-flip">
       <div class="card-inner">
         <div class="card-front foto-1">
           <h3>Diseño<br>Arquitectónico</h3>
@@ -140,41 +142,8 @@
       </div>
     </div>
 
-    <div class="columna-centro">
-      
-      <div class="card-flip card-baja">
-        <div class="card-inner">
-          <div class="card-front foto-2">
-            <h3>Capacitación BIM</h3>
-          </div>
-          <div class="card-back">
-            <p>Ofrecemos cursos de Revit y metodología BIM desarrollados a partir de nuestra experiencia en proyectos reales de arquitectura, infraestructura y edificación. La formación combina teoría, práctica y aplicación profesional.</p>
-            <a href="servicios.html#capacitacion-bim" class="btn-servicios">
-              Ver más
-              <svg viewBox="0 0 24 24" width="14" height="14" class="arrow-svg"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card-flip card-baja">
-        <div class="card-inner">
-          <div class="card-front foto-3">
-            <h3>Captura Digital</h3>
-          </div>
-          <div class="card-back">
-            <p>Realizamos levantamientos mediante escaneo láser, nube de puntos, fotogrametría con drones y procesos Scan to BIM para documentar edificaciones existentes con alta precisión.</p>
-            <a href="servicios.html#captura-digital" class="btn-servicios">
-              Ver más
-              <svg viewBox="0 0 24 24" width="14" height="14" class="arrow-svg"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="card-flip card-alta">
+    <!-- 2. ARRIBA DERECHA: SERVICIOS BIM -->
+    <div class="card-flip">
       <div class="card-inner">
         <div class="card-front foto-4">
           <h3>Servicios BIM</h3>
@@ -183,6 +152,38 @@
           <p>Implementamos soluciones BIM para optimizar el desarrollo de proyectos mediante modelado, coordinación interdisciplinaria, detección de interferencias, documentación y consultoría especializada, mejorando la calidad y el control durante todo el proceso.</p>
           <a href="servicios.html#servicios-bim" class="btn-servicios">
             Ver más 
+            <svg viewBox="0 0 24 24" width="14" height="14" class="arrow-svg"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ABAJO IZQUIERDA: CAPACITACIÓN BIM -->
+    <div class="card-flip">
+      <div class="card-inner">
+        <div class="card-front foto-2">
+          <h3>Capacitación BIM</h3>
+        </div>
+        <div class="card-back">
+          <p>Ofrecemos cursos de Revit y metodología BIM desarrollados a partir de nuestra experiencia en proyectos reales de arquitectura, infraestructura y edificación. La formación combina teoría, práctica y aplicación profesional.</p>
+          <a href="servicios.html#capacitacion-bim" class="btn-servicios">
+            Ver más
+            <svg viewBox="0 0 24 24" width="14" height="14" class="arrow-svg"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ABAJO DERECHA: CAPTURA DIGITAL -->
+    <div class="card-flip">
+      <div class="card-inner">
+        <div class="card-front foto-3">
+          <h3>Captura Digital</h3>
+        </div>
+        <div class="card-back">
+          <p>Realizamos levantamientos mediante escaneo láser, nube de puntos, fotogrametría con drones y procesos Scan to BIM para documentar edificaciones existentes con alta precisión.</p>
+          <a href="servicios.html#captura-digital" class="btn-servicios">
+            Ver más
             <svg viewBox="0 0 24 24" width="14" height="14" class="arrow-svg"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -293,55 +294,55 @@
     </div>
     
     <div class="contact-form-col">
-      <form action="#" method="POST" class="main-form">
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombres">Nombres <span class="required">*</span></label>
-            <input type="text" id="nombres" name="nombres" required>
-          </div>
-          <div class="form-group">
-            <label for="apellidos">Apellidos <span class="required">*</span></label>
-            <input type="text" id="apellidos" name="apellidos" required>
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">Correo electrónico <span class="required">*</span></label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="telefono">Número telefónico <span class="required">*</span></label>
-            <input type="tel" id="telefono" name="telefono" required>
-          </div>
-        </div>
-        
-       <div class="form-field full-width">
-          <label for="servicio">Elige el servicio</label>
-          <select id="servicio" name="servicio">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
-            <option value="Servicios BIM">Servicios BIM</option>
-            <option value="Capacitación BIM">Capacitación BIM</option>
-            <option value="Captura Digital">Captura Digital</option>
-          </select>
-        </div>
-        
-        <div class="form-group full-width">
-          <label for="mensaje">Mensaje <span class="required">*</span></label>
-          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Deja tu comentario o preguntas" required></textarea>
-        </div>
-        
-        <div class="form-submit-wrapper">
-          <button type="submit" class="btn-submit">
-            Enviar
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        
-      </form>
+  <form action="enviar.php" method="POST" class="main-form">
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nombres">Nombres <span class="required">*</span></label>
+        <input type="text" id="nombres" name="nombres" required>
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos <span class="required">*</span></label>
+        <input type="text" id="apellidos" name="apellidos" required>
+      </div>
     </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Correo electrónico <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Número telefónico <span class="required">*</span></label>
+        <input type="tel" id="telefono" name="telefono" required>
+      </div>
+    </div>
+    
+   <div class="form-field full-width">
+      <label for="servicio">Elige el servicio</label>
+      <select id="servicio" name="servicio">
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
+        <option value="Servicios BIM">Servicios BIM</option>
+        <option value="Capacitación BIM">Capacitación BIM</option>
+        <option value="Captura Digital">Captura Digital</option>
+      </select>
+    </div>
+    
+    <div class="form-group full-width">
+      <label for="mensaje">Mensaje <span class="required">*</span></label>
+      <textarea id="mensaje" name="mensaje" rows="5" placeholder="Deja tu comentario o preguntas" required></textarea>
+    </div>
+    
+    <div class="form-submit-wrapper">
+      <button type="submit" class="btn-submit">
+        Enviar
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    
+  </form>
+</div>
     
   </div>
 </section>

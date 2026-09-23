@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Servicios | Arquitectura en Paralelo</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon_aep.png">
   
   <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
   <link rel="stylesheet" href="style.css">
@@ -50,11 +51,13 @@
   </div>
 </header>
 
-<!-- 2. SECCIÓN HERO SERVICIOS (CENTRADO VERTICAL E IMAGEN FLUIDA) -->
+<!-- 2. SECCIÓN HERO -->
 <section class="servicios-hero-section">
   <div class="servicios-hero-background">
-    <!-- Cargamos tu nueva imagen desde la carpeta img -->
-    <img src="assets/img/hero_servicios.jpg" alt="Diseño y modelado BIM - Arquitectura en Paralelo">
+    <video autoplay loop muted playsinline id="hero-servicios-video">
+      <source src="assets/img/hero_servicios.mp4" type="video/mp4">
+      Tu navegador no soporta reproducción de video.
+    </video>
   </div>
   
   <div class="servicios-hero-content reveal-anim">
@@ -115,33 +118,19 @@
       <!-- PANEL VERDE EXPANDIBLE (Queda igual al abrir) -->
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
+          <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          
           <div class="panel-grid">
-            <div class="panel-carrusel-contenedor">
-              <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Diseño Arquitectónico 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Diseño Arquitectónico 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Diseño Arquitectónico 3" class="slide-img">
-              </div>
-              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-
-              <div class="carrusel-dots">
-                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
-              </div>
+            <div class="panel-foto-estatica">
+              <img src="assets/img/Carrusel_Celar.png" alt="Diseño Arquitectónico">
             </div>
+            
             <div class="panel-texto-content">
-              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
               <p>Diseñamos espacios funcionales, estéticos y técnicamente viables mediante un proceso que integra creatividad, análisis y metodología BIM. Desarrollamos proyectos desde el concepto arquitectónico hasta el proyecto ejecutivo y el acompañamiento en obra.</p>
             </div>
           </div>
@@ -170,33 +159,19 @@
       
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
+          <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          
           <div class="panel-grid">
-            <div class="panel-carrusel-contenedor">
-              <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Servicios BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Servicios BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Servicios BIM 3" class="slide-img">
-              </div>
-              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-
-              <div class="carrusel-dots">
-                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
-              </div>
+            <div class="panel-foto-estatica">
+              <img src="assets/img/Carrusel_Umbral.png" alt="Servicios BIM">
             </div>
+            
             <div class="panel-texto-content">
-              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
               <p>Implementamos soluciones BIM para optimizar el desarrollo de proyectos mediante modelado, coordinación interdisciplinaria, detección de interferencias, documentación y consultoría especializada, mejorando la calidad y el control durante todo el proceso.</p>
             </div>
           </div>
@@ -224,33 +199,19 @@
       
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
+          <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          
           <div class="panel-grid">
-            <div class="panel-carrusel-contenedor">
-              <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Capacitación BIM 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Capacitación BIM 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Capacitación BIM 3" class="slide-img">
-              </div>
-              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-
-              <div class="carrusel-dots">
-                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
-              </div>
+            <div class="panel-foto-estatica">
+              <img src="assets/img/Carrusel_Retiro.png" alt="Capacitación BIM">
             </div>
+            
             <div class="panel-texto-content">
-              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
               <p>Ofrecemos cursos de Revit y metodología BIM desarrollados a partir de nuestra experiencia en proyectos reales de arquitectura, infraestructura y edificación. La formación combina teoría, práctica y aplicación profesional.</p>
             </div>
           </div>
@@ -278,33 +239,19 @@
       
       <div class="servicio-panel-detalle">
         <div class="panel-detalle-interno">
+          <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          
           <div class="panel-grid">
-            <div class="panel-carrusel-contenedor">
-              <div class="panel-carrusel-slides">
-                <img src="assets/img/Carrusel_Celar.png" alt="Captura Digital 1" class="slide-img active">
-                <img src="assets/img/Carrusel_Umbral.png" alt="Captura Digital 2" class="slide-img">
-                <img src="assets/img/Carrusel_Retiro.png" alt="Captura Digital 3" class="slide-img">
-              </div>
-              <button class="carrusel-flecha prev" onclick="cambiarSlideFlecha(this, -1)" aria-label="Anterior">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-              <button class="carrusel-flecha next" onclick="cambiarSlideFlecha(this, 1)" aria-label="Siguiente">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-              </button>
-
-              <div class="carrusel-dots">
-                <span class="dot active" onclick="cambiarSlide(this, 0)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 1)"></span>
-                <span class="dot" onclick="cambiarSlide(this, 2)"></span>
-              </div>
+            <div class="panel-foto-estatica">
+              <img src="assets/img/Carrusel_Celar.png" alt="Captura Digital">
             </div>
+            
             <div class="panel-texto-content">
-              <button class="btn-cerrar-panel" onclick="toggleServicio(this)" aria-label="Cerrar panel">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
               <p>Realizamos levantamientos mediante escaneo láser, nube de puntos, fotogrametría con drones y procesos Scan to BIM para documentar edificaciones existentes con alta precisión.</p>
             </div>
           </div>
@@ -452,55 +399,55 @@
     </div>
     
     <div class="contact-form-col">
-      <form action="#" method="POST" class="main-form">
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombres_s">Nombres <span class="required">*</span></label>
-            <input type="text" id="nombres_s" name="nombres" required>
-          </div>
-          <div class="form-group">
-            <label for="apellidos_s">Apellidos <span class="required">*</span></label>
-            <input type="text" id="apellidos_s" name="apellidos" required>
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email_s">Correo electrónico <span class="required">*</span></label>
-            <input type="email" id="email_s" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="telefono_s">Número telefónico <span class="required">*</span></label>
-            <input type="tel" id="telefono_s" name="telefono" required>
-          </div>
-        </div>
-        
-        <div class="form-field full-width">
-          <label for="servicio">Elige el servicio</label>
-          <select id="servicio" name="servicio">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
-            <option value="Servicios BIM">Servicios BIM</option>
-            <option value="Capacitación BIM">Capacitación BIM</option>
-            <option value="Captura Digital">Captura Digital</option>
-          </select>
-        </div>
-        
-        <div class="form-group full-width">
-          <label for="mensaje_s">Mensaje <span class="required">*</span></label>
-          <textarea id="mensaje_s" name="mensaje" rows="5" placeholder="Deja tu comentario o preguntas" required></textarea>
-        </div>
-        
-        <div class="form-submit-wrapper">
-          <button type="submit" class="btn-submit">
-            Enviar
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        
-      </form>
+  <form action="enviar.php" method="POST" class="main-form">
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nombres_s">Nombres <span class="required">*</span></label>
+        <input type="text" id="nombres_s" name="nombres" required>
+      </div>
+      <div class="form-group">
+        <label for="apellidos_s">Apellidos <span class="required">*</span></label>
+        <input type="text" id="apellidos_s" name="apellidos" required>
+      </div>
     </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email_s">Correo electrónico <span class="required">*</span></label>
+        <input type="email" id="email_s" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="telefono_s">Número telefónico <span class="required">*</span></label>
+        <input type="tel" id="telefono_s" name="telefono" required>
+      </div>
+    </div>
+    
+    <div class="form-field full-width">
+      <label for="servicio_s">Elige el servicio</label>
+      <select id="servicio_s" name="servicio">
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
+        <option value="Servicios BIM">Servicios BIM</option>
+        <option value="Capacitación BIM">Capacitación BIM</option>
+        <option value="Captura Digital">Captura Digital</option>
+      </select>
+    </div>
+    
+    <div class="form-group full-width">
+      <label for="mensaje_s">Mensaje <span class="required">*</span></label>
+      <textarea id="mensaje_s" name="mensaje" rows="5" placeholder="Deja tu comentario o preguntas" required></textarea>
+    </div>
+    
+    <div class="form-submit-wrapper">
+      <button type="submit" class="btn-submit">
+        Enviar
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    
+  </form>
+</div>
     
   </div>
 </section>

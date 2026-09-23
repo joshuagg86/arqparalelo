@@ -465,23 +465,21 @@ body {
 }
 
 /* ==========================================================================
-   12. CONTENEDOR GENERAL DE LA SECCIÓN DE SERVICIOS
+   12. CONTENEDOR GENERAL DE LA SECCIÓN DE SERVICIOS (GRILLA 2x2)
    ========================================================================== */
 .services-section {
   width: 100%;
-  background-color: #536c5e; /* Tu verde institucional unificado de fondo */
+  background-color: #536c5e;
   padding: 80px 0;
   box-sizing: border-box;
 }
 
-/* Barra superior para centrar el botón */
 .services-top-bar {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
 }
 
-/* El botón superior con borde fino */
 .btn-services-top {
   display: inline-flex;
   align-items: center;
@@ -493,7 +491,7 @@ body {
   padding: 12px 30px;
   border-radius: 14px;
   font-family: 'Futura Local', sans-serif;
-  font-weight: 400; /* Futura-Book-font.ttf */
+  font-weight: 400;
   font-size: 15px;
   transition: all 0.3s ease;
 }
@@ -511,40 +509,22 @@ body {
   transform: translate(2px, -2px);
 }
 
-/* --- DISEÑO DE LA REJILLA (GRID) ASIMÉTRICA --- */
+/* --- DISEÑO DE REJILLA 2x2 --- */
 .grid-servicios {
   display: grid;
-  grid-template-columns: 1fr 1.1fr 1fr;
-  gap: 24px;
-  width: 92vw;
-  max-width: 1800px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  width: 90vw;
+  max-width: 1300px;
   margin: 0 auto;
   box-sizing: border-box;
-}
-
-.columna-centro {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 }
 
 /* --- ESTRUCTURA FLIP CARD 3D --- */
 .card-flip {
   perspective: 1000px;
   width: 100%;
-}
-
-/* ALTURAS PROPORCIONALES */
-.card-alta {
-  height: 38vw; 
-  max-height: 800px; 
-  min-height: 480px; 
-}
-
-.card-baja {
-  height: calc(19vw - 12px); 
-  max-height: 388px; 
-  min-height: 228px;
+  height: 380px; /* Altura uniforme para las 4 tarjetas */
 }
 
 .card-inner {
@@ -567,9 +547,9 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   box-sizing: border-box;
-  /* LÍNEA 116 ORIGINAL: Cambia el radio aquí de forma manual si lo requieres */
-  border-radius: 35px 0px 35px 0px !important; 
+  border-radius: 28px !important; /* Esquinas redondeadas homogéneas */
   overflow: hidden !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 /* --- PARTE FRONTAL --- */
@@ -588,32 +568,28 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.4) 100%); 
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 100%); 
   z-index: 1;
 }
 
 .card-front h3 {
   font-family: 'Futura Local', sans-serif;
-  font-weight: 700; /* Carga FuturaPTBold.otf */
+  font-weight: 700;
   color: #ffffff;
-  font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
   z-index: 2;
   margin: 0;
   line-height: 1.2;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.card-baja .card-front h3 {
-  font-size: clamp(1.2rem, 1.9vw, 2rem);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
 /* IMÁGENES LOCALES */
 .foto-1 { background-image: url('assets/img/services-disenio.jpg'); }
-.foto-2 { background-image: url('assets/img/services-BIM.png'); }
-.foto-3 { background-image: url('assets/img/services-supervision.png'); }
-.foto-4 { background-image: url('assets/img/services-renderizado.jpg'); }
+.foto-2 { background-image: url('assets/img/services-capacitacion.jpg'); }
+.foto-3 { background-image: url('assets/img/services-captura.png'); }
+.foto-4 { background-image: url('assets/img/services-bim.png'); }
 
-/* --- PARTE TRASERA TRASLÚCIDA --- */
+/* --- PARTE TRASERA --- */
 .card-back {
   background-color: #42594d;
   transform: rotateY(180deg);
@@ -621,8 +597,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px;
-  
+  padding: 35px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -635,24 +610,52 @@ body {
 
 .card-back p {
   font-family: 'Futura Local', sans-serif;
-  font-weight: 400; /* Carga Futura-Book-font.ttf */
+  font-weight: 400;
   color: #e2e8f0;
-  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
-  line-height: 1.5;
+  font-size: 14.5px;
+  line-height: 1.6;
   margin-bottom: 24px;
-  max-width: 85%;
+  max-width: 90%;
 }
 
-@media (max-width: 1200px) {
-  .card-back p {
-    font-size: 13px;
-    margin-bottom: 15px;
+.btn-servicios {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-family: 'Futura Local', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+}
+
+.arrow-svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-servicios:hover {
+  background: #ffffff;
+  color: #42594d;
+}
+
+.btn-servicios:hover .arrow-svg {
+  transform: translate(2px, -2px);
+}
+
+/* --- RESPONSIVO PARA TABLETS Y MÓVILES --- */
+@media (max-width: 850px) {
+  .grid-servicios {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-  .card-baja .card-back p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden; 
+  .card-flip {
+    height: 300px;
   }
 }
 
@@ -906,9 +909,10 @@ body {
     padding: 0 20px;
   }
   .proyecto-card {
-    flex: 0 0 85vw;
-    min-width: auto;
-  }
+  flex: 0 0 70vw; 
+  max-width: 1200px;
+  min-width: 750px;
+}
   .proyecto-imagen-wrapper {
     height: 240px;
   }
@@ -1244,22 +1248,28 @@ body {
 /* Flecha superior derecha flotante */
 .blog-card-arrow {
   position: absolute;
-  top: 30px;
+  top: 24px;
   right: 24px;
-  background-color: #ffffff;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  background-color: #ffffff !important;
+  color: #536c5e; /* Verde corporativo en la flecha para contrastar perfecto sobre blanco */
+  width: 44px;
+  height: 44px;
+  border-radius: 14px; /* Bordes redondeados elegantes acorde a tu UI */
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
-  z-index: 2;
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-.blog-card:hover .blog-card-arrow {
-  transform: translate(3px, -3px);
+.blog-card:hover .blog-card-arrow,
+.blog-card-arrow:hover {
+  transform: translate(2px, -2px);
+  background-color: #536c5e !important;
+  color: #ffffff; /* Al hacer hover se invierte a fondo verde y flecha blanca */
 }
 
 .blog-card-title {
@@ -2515,6 +2525,7 @@ body {
   z-index: 1;
 }
 
+.servicios-hero-background video,
 .servicios-hero-background img {
   width: 100% !important;
   height: 100% !important;
@@ -2835,25 +2846,34 @@ body {
   display: none !important;
 }
 
-/* TARJETA PRINCIPAL CON BORDE VERDE INFERIOR INTEGRADO */
+/* TARJETA PRINCIPAL CON BORDE VERDE INFERIOR INTEGRADO (MITAD FOTO / MITAD VERDE SÓLIDO) */
 .tarjeta-servicio-resumen {
   position: relative;
   width: 100%;
   min-height: 220px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 35px 50px;
+  align-items: stretch;
+  padding: 0;
   box-sizing: border-box;
   border-radius: 28px;
-  overflow: hidden; /* Garantiza que la imagen y la barra respeten el curvado */
-  background-size: cover;
-  background-position: center;
-  background-color: #ffffff;
-  
-  /* Transición suave para elevación y sombra */
+  overflow: hidden;
+  background-color: #536c5e;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* LADO IZQUIERDO: CONTENEDOR DE LA IMAGEN DE FONDO (50%) */
+.tarjeta-servicio-resumen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
 }
 
 /* LÍNEA VERDE ACCENTO EN EL BORDES INFERIOR (INTEGRADA) */
@@ -2863,35 +2883,43 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 18px; /* Altura de la barra verde indicadora */
-  background-color: #536c5e;
+  height: 18px;
+  background-color: #42594d;
   transition: height 0.3s ease, background-color 0.3s ease;
-  z-index: 3;
+  z-index: 4;
 }
 
 /* EFECTO HOVER: Elevación sutil y resalte del acento verde */
 .servicio-item-bloque:hover .tarjeta-servicio-resumen {
-  transform: translateY(-5px); /* Eleva suavemente la tarjeta */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Otorga profundidad */
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .servicio-item-bloque:hover .tarjeta-servicio-resumen::after {
-  height: 25px; /* La barra crece ligeramente de forma fluida */
-  background-color: #42594d;
+  height: 25px;
+  background-color: #35473d;
 }
 
-/* CAPA OSCURA Y TEXTOS */
+/* CAPA OSCURA SOLO SOBRE LA FOTO (50% IZQUIERDO) */
 .servicio-overlay-card {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.38);
+  z-index: 2;
 }
 
-.servicio-titulo-caja,
-.servicio-desc-caja {
+/* COLUMNA IZQUIERDA: TÍTULO SOBRE LA FOTO */
+.servicio-titulo-caja {
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 35px 50px;
+  box-sizing: border-box;
 }
 
 .servicio-titulo-caja h3 {
@@ -2901,24 +2929,32 @@ body {
   font-size: clamp(1.6rem, 2.2vw, 2.2rem);
   margin: 0;
   line-height: 1.2;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
 }
 
+/* COLUMNA DERECHA: FONDO VERDE SÓLIDO Y TEXTO */
 .servicio-desc-caja {
+  position: relative;
+  z-index: 3;
+  width: 50%;
+  background-color: #536c5e;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: center;
   gap: 16px;
-  width: 55%;
+  padding: 35px 50px;
+  box-sizing: border-box;
 }
 
 .servicio-desc-caja p {
-  max-width: 420px;
+  max-width: 440px;
   margin: 0;
   text-align: right;
   font-family: 'Futura Local', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #ffffff;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #ffffff !important;
   opacity: 0.95;
 }
 
@@ -2942,6 +2978,7 @@ body {
 .btn-saber-mas:hover {
   background-color: #eef1f0 !important;
   border-color: #eef1f0 !important;
+  transform: translateY(-2px);
 }
 
 /* 3. SOLAPA VERDE: Nace pegada debajo de la tarjeta */
@@ -2951,9 +2988,9 @@ body {
   background-color: #536c5e;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  margin: -8px auto 0 auto; /* Se traslapa ligeramente con la tarjeta arriba */
+  margin: -8px auto 0 auto;
   position: relative;
-  z-index: 1; /* Por detrás de la tarjeta principal */
+  z-index: 1;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
 }
 
@@ -2968,11 +3005,18 @@ body {
   display: none;
 }
 
-/* --- IMÁGENES DE FONDO --- */
-.servicio-bg-diseno { background-image: url('assets/img/services-disenio.jpg'); }
-.servicio-bg-bim { background-image: url('assets/img/services-BIM.png'); }
-.servicio-bg-capacitacion { background-image: url('assets/img/services-supervision.png'); }
-.servicio-bg-captura { background-image: url('assets/img/services-renderizado.jpg'); }
+/* --- IMÁGENES ASIGNADAS AL 50% IZQUIERDO (::before) --- */
+.servicio-bg-diseno,
+.servicio-bg-bim,
+.servicio-bg-capacitacion,
+.servicio-bg-captura {
+  background-image: none !important;
+}
+
+.servicio-bg-diseno::before { background-image: url('assets/img/services-disenio.jpg') !important; }
+.servicio-bg-bim::before { background-image: url('assets/img/services-bim.png') !important; }
+.servicio-bg-capacitacion::before { background-image: url('assets/img/services-capacitacion.jpg') !important; }
+.servicio-bg-captura::before { background-image: url('assets/img/services-captura.png') !important; }
 
 /* --- PANEL DESPLEGABLE INTERNO --- */
 .servicio-panel-detalle {
@@ -2985,72 +3029,37 @@ body {
 }
 
 .servicio-item-bloque.active .servicio-panel-detalle {
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .panel-detalle-interno {
-  position: relative !important; /* Forzamos a que sea la referencia de posicionamiento */
+  position: relative !important;
   background-color: #536c5e;
   border-radius: 35px;
-  padding: 55px 45px 45px 45px; /* Agregamos colchón arriba (55px) para respiración */
+  padding: 0; 
+  overflow: hidden; 
   box-sizing: border-box;
 }
 
 .panel-grid {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 45px;
-  align-items: center;
+  align-items: stretch;
+  min-height: 380px;
 }
 
-.panel-carrusel-contenedor {
-  position: relative;
+.panel-foto-estatica {
   width: 100%;
-}
-
-.panel-carrusel-slides {
-  width: 100%;
-  height: 340px;
+  height: 100%;
+  min-height: 380px;
   position: relative;
-  border-radius: 25px;
-  overflow: hidden; 
-  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.slide-img {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+.panel-foto-estatica img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 1;
-}
-
-.slide-img.active {
-  opacity: 1;
-  z-index: 2;
-}
-
-.carrusel-dots {
-  position: relative;
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 10;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dot.active {
-  background-color: #ffffff;
+  display: block;
 }
 
 .panel-texto-content {
@@ -3059,10 +3068,39 @@ body {
   font-weight: 400;
   font-size: 15px;
   line-height: 1.6;
+  padding: 50px 60px 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .panel-texto-content p {
-  margin-bottom: 16px;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.btn-cerrar-panel {
+  position: absolute !important;
+  top: 25px !important;
+  right: 25px !important;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.btn-cerrar-panel:hover {
+  background-color: #ffffff;
+  color: #536c5e;
+  transform: rotate(90deg);
 }
 
 /* RESPONSIVO */
@@ -3070,14 +3108,30 @@ body {
   .tarjeta-servicio-resumen {
     min-height: auto;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: stretch;
+  }
+
+  .tarjeta-servicio-resumen::before,
+  .servicio-overlay-card,
+  .servicio-titulo-caja,
+  .servicio-desc-caja {
+    width: 100%;
+  }
+
+  .tarjeta-servicio-resumen::before,
+  .servicio-overlay-card {
+    height: 150px;
+  }
+
+  .servicio-titulo-caja {
+    height: 150px;
     padding: 30px;
   }
 
   .servicio-desc-caja {
     width: 100%;
     align-items: flex-start;
+    padding: 30px;
   }
 
   .servicio-desc-caja p {
@@ -3098,6 +3152,19 @@ body {
 
   .panel-carrusel-slides {
     height: 250px;
+  }
+  .panel-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .panel-foto-estatica {
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .panel-texto-content {
+    padding: 30px;
   }
 }
 
