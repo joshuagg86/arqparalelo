@@ -586,8 +586,8 @@ body {
 /* IMÁGENES LOCALES */
 .foto-1 { background-image: url('assets/img/services-disenio.jpg'); }
 .foto-2 { background-image: url('assets/img/services-capacitacion.jpg'); }
-.foto-3 { background-image: url('assets/img/services-captura.png'); }
-.foto-4 { background-image: url('assets/img/services-bim.png'); }
+.foto-3 { background-image: url('assets/img/services-captura.jpg'); }
+.foto-4 { background-image: url('assets/img/services-bim.jpg'); }
 
 /* --- PARTE TRASERA --- */
 .card-back {
@@ -3014,9 +3014,9 @@ body {
 }
 
 .servicio-bg-diseno::before { background-image: url('assets/img/services-disenio.jpg') !important; }
-.servicio-bg-bim::before { background-image: url('assets/img/services-bim.png') !important; }
+.servicio-bg-bim::before { background-image: url('assets/img/services-bim.jpg') !important; }
 .servicio-bg-capacitacion::before { background-image: url('assets/img/services-capacitacion.jpg') !important; }
-.servicio-bg-captura::before { background-image: url('assets/img/services-captura.png') !important; }
+.servicio-bg-captura::before { background-image: url('assets/img/services-captura.jpg') !important; }
 
 /* --- PANEL DESPLEGABLE INTERNO --- */
 .servicio-panel-detalle {
